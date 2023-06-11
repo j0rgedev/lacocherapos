@@ -1,13 +1,18 @@
 package db;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@Data
-@NoArgsConstructor
-public abstract class DatabaseConfig {
-    private final String url = Dotenv.load().get("DB_URL");
-    private final String user = Dotenv.load().get("DB_USER");
-    private final String password = Dotenv.load().get("DB_PASSWORD");
+public class DatabaseConfig {
+    
+    private static final String NAME = Dotenv.load().get("DB_NAME");
+    private static final String HOST = Dotenv.load().get("DB_HOST");
+    
+    @Getter
+    private static String url = "jdbc:mysql://"+HOST+"/"+NAME+"?sslMode=VERIFY_IDENTITY";
+    @Getter
+    private static String user = Dotenv.load().get("DB_USERNAME");
+    @Getter
+    private static String password = Dotenv.load().get("DB_PASSWORD");
+    
 }

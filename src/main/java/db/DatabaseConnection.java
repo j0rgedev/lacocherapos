@@ -1,27 +1,25 @@
 package db;
 
-import lombok.Data;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-@Data
-public class DatabaseConnection extends DatabaseConfig {
+public class DatabaseConnection {
 
     private Connection connection;
 
-    public DatabaseConnection() {
-        super();
-    }
+    public DatabaseConnection() {}
 
-    public boolean getConnection() {
+    public Connection getConnection() {
         try {
-            connection =  DriverManager.getConnection(getUrl(), getUser(), getPassword());
-            return true;
+            connection = DriverManager.getConnection(
+                    DatabaseConfig.getUrl(),
+                    DatabaseConfig.getUser(),
+                    DatabaseConfig.getPassword()
+            );
         } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
-            return false;
+            System.out.println(e.getMessage());
         }
+        return connection;
     }
 }
