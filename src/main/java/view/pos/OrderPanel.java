@@ -339,7 +339,7 @@ public class OrderPanel extends javax.swing.JPanel {
     public javax.swing.JButton btnDesserts;
     public javax.swing.JButton btnDrinks;
     public javax.swing.JButton btnHotDrinks;
-    private javax.swing.JButton btnNext;
+    public javax.swing.JButton btnNext;
     public javax.swing.JPanel cartPanel;
     public components.pos.TabbedPane categoriesTabbedPane;
     public javax.swing.JPanel drinkPanel;

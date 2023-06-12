@@ -18,6 +18,9 @@ import components.pos.DishPanel;
 import dao.impl.DishDAOImpl;
 import model.Category;
 import model.Dish;
+import model.OrderDish;
+import service.OrderInterface;
+import service.OrderManager;
 import view.pos.OrderPanel;
 
 public class OrderPanelController implements ActionListener {
@@ -95,9 +98,10 @@ public class OrderPanelController implements ActionListener {
         }
     }
 
-    private void loadProducts(List<Dish> products) {
+    // Function to load dishes into the dishes panel
+    private void loadProducts(List<Dish> dishes) {
         orderPanel.productsPanel.removeAll();
-        products.forEach((dish) -> {
+        dishes.forEach((dish) -> {
             DishPanel dishPanel = new DishPanel();
             dishPanel.lblName.setText(
                     "<html><body><p style='text-align:center; padding: 0 6px;'>" + dish.getName() + "</p></body></html>"
@@ -105,9 +109,25 @@ public class OrderPanelController implements ActionListener {
             orderPanel.productsPanel.add(dishPanel);
             orderPanel.productsPanel.revalidate();
             orderPanel.productsPanel.repaint();
+
+            // Action listeners to increase and reduce quantity
+            dishPanel.btnIncrease.addActionListener((ActionEvent e1) -> {
+                int quantity = Integer.parseInt(dishPanel.txtQuantity.getText());
+                dishPanel.txtQuantity.setText(String.valueOf(quantity + 1));
+            });
+
+            dishPanel.btnReduce.addActionListener((ActionEvent e1) -> {
+                int quantity = Integer.parseInt(dishPanel.txtQuantity.getText());
+                if (quantity > 1) {
+                    dishPanel.txtQuantity.setText(String.valueOf(quantity - 1));
+                }
+            });
+
+            // Action listener to add a dish to the order
             dishPanel.btnAdd.addActionListener((ActionEvent e1) -> {
-                System.out.println(dish.getName());
-                System.out.println(dishPanel.txtQuantity.getText());
+                OrderInterface orderInterface = OrderManager.getInstance();
+                int quantity = Integer.parseInt(dishPanel.txtQuantity.getText());
+                orderInterface.addDish(new OrderDish(dish, quantity, null));
             });
         });
     }

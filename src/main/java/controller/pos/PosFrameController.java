@@ -1,14 +1,10 @@
 package controller.pos;
 
 import java.awt.Color;
-import java.awt.Rectangle;
 
-import dao.impl.DishDAOImpl;
 import view.pos.PointOfSaleFrame;
 
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Timer;
@@ -25,6 +21,7 @@ public class PosFrameController implements ActionListener {
     public void init(){
         frameConfig();
         showTime();
+        pointOfSaleFrm.orderPanel.btnNext.addActionListener(this);
     }
 
     private void showTime() {
@@ -51,6 +48,5 @@ public class PosFrameController implements ActionListener {
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
-
     }
 }
