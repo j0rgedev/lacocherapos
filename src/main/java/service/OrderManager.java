@@ -32,6 +32,14 @@ public class OrderManager implements OrderInterface {
     }
 
     @Override
+    public OrderDish getDish(Dish dish) {
+        return orderDishes.stream()
+                .filter(orderDish -> orderDish.getDish().getId().equals(dish.getId()))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
     public List<OrderDish> getDishes() {
         return orderDishes;
     }

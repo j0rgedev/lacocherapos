@@ -11,7 +11,7 @@ La aplicación sigue el patrón de arquitectura de software Modelo-Vista-Control
 Java (versión 17 o superior)
 
 ## Vistas de la aplicación
-Quizás algunos diseños no concuerden con los realizados en la aplicación final, ya que se han realizado algunos cambios mínimos en el diseño de la aplicación, pero la idea general es la misma.
+Quizás algunos diseños no concuerden con los realizados en la aplicación final, ya que se han realizado algunos cambios mínimos en [pom.xml](pom.xml)el diseño de la aplicación, pero la idea general es la misma.
 
 ### Punto de venta
 ![](docs/images/pos-1.png "Toma de pedido")

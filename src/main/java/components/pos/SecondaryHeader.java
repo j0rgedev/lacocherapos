@@ -1,8 +1,8 @@
 package components.pos;
 
-public class PosHeader extends javax.swing.JPanel {
+public class SecondaryHeader extends javax.swing.JPanel {
 
-    public PosHeader() {
+    public SecondaryHeader() {
         initComponents();
     }
 
@@ -11,7 +11,7 @@ public class PosHeader extends javax.swing.JPanel {
     private void initComponents() {
 
         lblTime = new javax.swing.JLabel();
-        txtSearchText = new components.search.TextFieldAnimation();
+        lblPaymentTitle = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(45, 52, 63));
 
@@ -20,8 +20,10 @@ public class PosHeader extends javax.swing.JPanel {
         lblTime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblTime.setText("12/12/12 00:00:00");
 
-        txtSearchText.setForeground(new java.awt.Color(255, 255, 255));
-        txtSearchText.setFont(new java.awt.Font("Iceland", 0, 24)); // NOI18N
+        lblPaymentTitle.setFont(new java.awt.Font("Iceland", 0, 32)); // NOI18N
+        lblPaymentTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lblPaymentTitle.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblPaymentTitle.setText("MÉTODO DE PAGO ESCOGIDO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -29,8 +31,8 @@ public class PosHeader extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(txtSearchText, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
+                .addComponent(lblPaymentTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
                 .addComponent(lblTime)
                 .addGap(20, 20, 20))
         );
@@ -40,14 +42,14 @@ public class PosHeader extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTime, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSearchText, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16))
+                    .addComponent(lblPaymentTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel lblPaymentTitle;
     public javax.swing.JLabel lblTime;
-    public components.search.TextFieldAnimation txtSearchText;
     // End of variables declaration//GEN-END:variables
 }

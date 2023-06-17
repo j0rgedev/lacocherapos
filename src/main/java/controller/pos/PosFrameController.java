@@ -42,7 +42,9 @@ public class PosFrameController implements ActionListener {
     
     private void frameConfig(){
         pointOfSaleFrm.getContentPane().setBackground(Color.BLACK);
-        OrderPanelController orderPanelController = new OrderPanelController(pointOfSaleFrm.orderPanel);
+        CartPanelController cartPanelController = new CartPanelController(pointOfSaleFrm);
+        cartPanelController.init();
+        OrderPanelController orderPanelController = new OrderPanelController(pointOfSaleFrm, cartPanelController);
         orderPanelController.init();
     }
 

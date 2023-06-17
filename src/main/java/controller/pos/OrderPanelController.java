@@ -1,42 +1,39 @@
 package controller.pos;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
+import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import components.pos.DishPanel;
+import components.pos.Loading;
 import dao.impl.DishDAOImpl;
 import model.Category;
 import model.Dish;
 import model.OrderDish;
-import service.OrderInterface;
-import service.OrderManager;
 import view.pos.OrderPanel;
+import view.pos.PointOfSaleFrame;
 
 public class OrderPanelController implements ActionListener {
 
     private final OrderPanel orderPanel;
-    private final DishDAOImpl dishDAO;
-    private Map<Category, List<Dish>> productCache = new HashMap<>();
+    private DishDAOImpl dishDAO;
+    private final Map<Category, List<Dish>> productCache = new HashMap<>();
+    private final CartPanelController cartPanelController;
 
-    public OrderPanelController(OrderPanel orderPanel) {
-        this.orderPanel = orderPanel;
-        dishDAO = new DishDAOImpl();
+    public OrderPanelController(PointOfSaleFrame pointOfSaleFrame, CartPanelController cartPanelController) {
+        this.orderPanel = pointOfSaleFrame.orderPanel;
+        this.cartPanelController = cartPanelController;
     }
 
     public void init() {
         panelConfiguration();
         listeners();
+        dishDAO = new DishDAOImpl();
     }
 
     private void panelConfiguration() {
@@ -69,19 +66,6 @@ public class OrderPanelController implements ActionListener {
         orderPanel.btnBeer.addActionListener(this);
         orderPanel.btnDrinks.addActionListener(this);
         orderPanel.btnDesserts.addActionListener(this);
-
-        // Mouse listener when user double-clicks on any dish table row
-        orderPanel.tableDishes.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
-                    int selectedRow = orderPanel.tableDishes.getSelectedRow();
-                    if (selectedRow != -1) {
-                        // TODO: Add edit dish modal
-                    }
-                }
-            }
-        });
     }
 
     // Function to handle category buttons
@@ -91,10 +75,41 @@ public class OrderPanelController implements ActionListener {
             List<Dish> cachedProducts = productCache.get(category);
             loadProducts(cachedProducts);
         } else {
-            // If not, load the dishes from the database
-            List<Dish> dishList = dishDAO.getDishesByCategory(category.getId());
-            productCache.put(category, dishList);
-            loadProducts(dishList);
+            // Add loading panel to products panel while dishes are being fetched
+            orderPanel.productsPanel.removeAll();
+            Loading loadingPanel = new Loading();
+            orderPanel.productsPanel.setLayout(new GridBagLayout());
+            orderPanel.productsPanel.add(loadingPanel);
+            orderPanel.productsPanel.revalidate();
+            orderPanel.productsPanel.repaint();
+
+            // Background thread to fetch dishes
+            SwingWorker<List<Dish>, Void> worker = new SwingWorker<List<Dish>, Void>() {
+                // Function to fetch dishes in background
+                @Override
+                protected List<Dish> doInBackground() throws Exception {
+                    return dishDAO.getDishesByCategory(category.getId());
+                }
+
+                // Function to load dishes into the dishes panel when the background thread finishes
+                @Override
+                protected void done() {
+                    try {
+                        List<Dish> dishList = get();
+                        productCache.put(category, dishList);
+                        loadProducts(dishList);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    } finally {
+                        // Remove loading panel from products panel
+                        orderPanel.productsPanel.remove(loadingPanel);
+                        orderPanel.productsPanel.revalidate();
+                        orderPanel.productsPanel.repaint();
+                        orderPanel.productsPanel.setLayout(new GridLayout(0, 4, 12, 12));
+                    }
+                }
+            };
+            worker.execute();
         }
     }
 
@@ -102,6 +117,7 @@ public class OrderPanelController implements ActionListener {
     private void loadProducts(List<Dish> dishes) {
         orderPanel.productsPanel.removeAll();
         dishes.forEach((dish) -> {
+            // Create dish panel
             DishPanel dishPanel = new DishPanel();
             dishPanel.lblName.setText(
                     "<html><body><p style='text-align:center; padding: 0 6px;'>" + dish.getName() + "</p></body></html>"
@@ -125,9 +141,16 @@ public class OrderPanelController implements ActionListener {
 
             // Action listener to add a dish to the order
             dishPanel.btnAdd.addActionListener((ActionEvent e1) -> {
-                OrderInterface orderInterface = OrderManager.getInstance();
                 int quantity = Integer.parseInt(dishPanel.txtQuantity.getText());
-                orderInterface.addDish(new OrderDish(dish, quantity, null));
+                OrderDish orderDish = new OrderDish(dish, quantity, null);
+
+                // Add dish to cart panel
+                cartPanelController.addDish(orderDish);
+
+                // Disable dish panel buttons
+                dishPanel.btnIncrease.setEnabled(false);
+                dishPanel.btnReduce.setEnabled(false);
+                dishPanel.btnAdd.setEnabled(false);
             });
         });
     }
