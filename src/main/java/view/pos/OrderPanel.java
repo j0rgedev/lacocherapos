@@ -1,5 +1,7 @@
 package view.pos;
 
+import view.components.pos.TabbedPane;
+
 public class OrderPanel extends javax.swing.JPanel {
 
     public OrderPanel() {
@@ -10,7 +12,7 @@ public class OrderPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        categoriesTabbedPane = new components.pos.TabbedPane();
+        categoriesTabbedPane = new TabbedPane();
         foodPanel = new javax.swing.JPanel();
         btnCarta = new javax.swing.JButton();
         btnAntojitos = new javax.swing.JButton();
@@ -342,7 +344,7 @@ public class OrderPanel extends javax.swing.JPanel {
     public javax.swing.JButton btnHotDrinks;
     public javax.swing.JButton btnNext;
     public javax.swing.JPanel cartPanel;
-    public components.pos.TabbedPane categoriesTabbedPane;
+    public TabbedPane categoriesTabbedPane;
     public javax.swing.JPanel drinkPanel;
     public javax.swing.JPanel foodPanel;
     private javax.swing.JScrollPane jScrollPane1;

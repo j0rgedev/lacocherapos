@@ -1,5 +1,8 @@
 package view.pos;
 
+import view.components.pos.Header;
+import view.components.pos.SecondaryHeader;
+
 public class PointOfSaleFrame extends javax.swing.JFrame {
 
     public PointOfSaleFrame() {
@@ -12,8 +15,8 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         topPanel = new javax.swing.JPanel();
-        posHeader = new components.pos.Header();
-        posSecondaryHeader = new components.pos.SecondaryHeader();
+        posHeader = new Header();
+        posSecondaryHeader = new SecondaryHeader();
         mainPanel = new javax.swing.JPanel();
         orderPanel = new view.pos.OrderPanel();
 
@@ -52,8 +55,8 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel mainPanel;
     public view.pos.OrderPanel orderPanel;
-    public components.pos.Header posHeader;
-    public components.pos.SecondaryHeader posSecondaryHeader;
+    public Header posHeader;
+    public SecondaryHeader posSecondaryHeader;
     public javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
 }

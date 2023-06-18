@@ -9,12 +9,12 @@ import java.util.Map;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import components.pos.DishPanel;
-import components.pos.Loading;
-import dao.impl.DishDAOImpl;
-import model.Category;
-import model.Dish;
-import model.OrderDish;
+import view.components.pos.DishPanel;
+import view.components.pos.Loading;
+import model.dao.impl.DishDAOImpl;
+import model.models.Category;
+import model.models.Dish;
+import model.models.OrderDish;
 import view.pos.OrderPanel;
 import view.pos.PointOfSaleFrame;
 

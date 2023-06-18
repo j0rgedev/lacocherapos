@@ -1,6 +1,10 @@
 package view.login;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import view.components.PasswordField;
+import view.components.RoundPanel;
+import view.components.TextField;
+
 public class Login extends javax.swing.JFrame {
 
     public Login() {
@@ -13,12 +17,12 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         bgRoles = new javax.swing.ButtonGroup();
-        roundPanel1 = new components.RoundPanel();
-        roundPanel2 = new components.RoundPanel();
+        roundPanel1 = new RoundPanel();
+        roundPanel2 = new RoundPanel();
         lblTitle = new javax.swing.JLabel();
-        txtUser = new components.TextField();
+        txtUser = new TextField();
         btnLogin = new javax.swing.JButton();
-        txtPassword = new components.PasswordField();
+        txtPassword = new PasswordField();
         rbEmployee = new javax.swing.JRadioButton();
         rbAdmin = new javax.swing.JRadioButton();
 
@@ -137,9 +141,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitle;
     public javax.swing.JRadioButton rbAdmin;
     public javax.swing.JRadioButton rbEmployee;
-    private components.RoundPanel roundPanel1;
-    private components.RoundPanel roundPanel2;
-    public components.PasswordField txtPassword;
-    public components.TextField txtUser;
+    private RoundPanel roundPanel1;
+    private RoundPanel roundPanel2;
+    public PasswordField txtPassword;
+    public TextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

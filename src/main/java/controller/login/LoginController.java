@@ -1,9 +1,9 @@
 package controller.login;
 
-import components.alert.Alert;
-import components.alert.AlertController;
-import components.alert.AlertModel;
-import components.alert.ErrorType;
+import view.components.alert.Alert;
+import view.components.alert.AlertController;
+import view.components.alert.AlertModel;
+import view.components.alert.ErrorType;
 import view.login.Login;
 
 import java.awt.event.ActionListener;

@@ -1,10 +1,10 @@
 package controller.pos;
 
-import components.modal.CustomModalController;
-import components.modal.CustomModal;
-import model.OrderDish;
-import service.OrderInterface;
-import service.OrderManager;
+import view.components.modal.CustomModalController;
+import view.components.modal.CustomModal;
+import model.models.OrderDish;
+import model.service.OrderInterface;
+import model.service.OrderManager;
 import view.pos.OrderPanel;
 import view.pos.PointOfSaleFrame;
 
