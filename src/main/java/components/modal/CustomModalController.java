@@ -7,7 +7,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
@@ -25,10 +24,12 @@ public class CustomModalController extends JDialog implements ActionListener {
         this.jFrame = jFrame;
         this.customModal = customModal;
         init();
-        customModal.btnIncrementar.addActionListener(this);
-        customModal.btnReducir.addActionListener(this);
         customModal.btnEdit.addActionListener(this);
         customModal.btnCancel.addActionListener(this);
+        ClientInfoPanel clientInfoPanel = new ClientInfoPanel();
+        customModal.containerPanel.setPreferredSize(clientInfoPanel.getPreferredSize());
+        customModal.containerPanel.add(clientInfoPanel);
+        customModal.pack();
     }
 
     private void init() {
