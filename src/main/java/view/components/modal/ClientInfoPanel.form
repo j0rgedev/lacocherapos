@@ -42,7 +42,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="components.TextField" name="txtNames">
+    <Component class="view.components.TextField" name="txtNames">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="f0" green="f0" red="f0" type="rgb"/>
@@ -59,7 +59,7 @@
         <Property name="labelText" type="java.lang.String" value="Nombres"/>
       </Properties>
     </Component>
-    <Component class="components.TextField" name="txtLastNames">
+    <Component class="view.components.TextField" name="txtLastNames">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="f0" green="f0" red="f0" type="rgb"/>

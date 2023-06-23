@@ -1,26 +1,30 @@
 package controller.pos;
 
-import view.components.modal.CustomModalController;
+import model.models.Dish;
 import view.components.modal.CustomModal;
 import model.models.OrderDish;
 import model.service.OrderInterface;
 import model.service.OrderManager;
+import view.components.modal.EditDishModalController;
+import view.listeners.ModalListener;
 import view.pos.OrderPanel;
 import view.pos.PointOfSaleFrame;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class CartPanelController implements ActionListener {
+public class CartPanelController implements ActionListener, ModalListener {
 
     private final JFrame frame;
     private DefaultTableModel model;
     private final OrderPanel orderPanel;
+    private boolean hasProductsInCart = false;
     private final OrderInterface orderInterface = OrderManager.getInstance();
 
     public CartPanelController(PointOfSaleFrame frame) {
@@ -33,7 +37,8 @@ public class CartPanelController implements ActionListener {
     public void init() {
         listeners();
         model = (DefaultTableModel) orderPanel.tableDishes.getModel();
-        model.addRow(new Object[]{"1", "Hamburguesa de pollo"});
+        OrderDish testDish = new OrderDish(new Dish("1", "Dish 1", 10, "1"), 1, "No notes");
+        addDishToCart(testDish);
     }
 
     private void listeners() {
@@ -41,29 +46,52 @@ public class CartPanelController implements ActionListener {
 
         // Mouse listener when user double-clicks on any dish table row
         orderPanel.tableDishes.addMouseListener(new MouseAdapter() {
+            private int startX;
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                startX = e.getX();
+            }
+
+            // Swipe left to delete dish
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                int endX = e.getX();
+                int selectedRow = orderPanel.tableDishes.getSelectedRow();
+
+                if (startX - endX > 100 && selectedRow != -1) {
+                    // TODO: Add eliminate dish confirmation
+                }
+            }
+
+            // Double click to edit dish
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
                     int selectedRow = orderPanel.tableDishes.getSelectedRow();
                     if (selectedRow != -1) {
                         CustomModal modal = new CustomModal();
-                        CustomModalController customModalController = new CustomModalController(modal, frame);
-                        customModalController.showMessage();
+                        EditDishModalController editDishModalController = new EditDishModalController(modal, frame, CartPanelController.this);
                         OrderDish orderDish = getSelectedDish(selectedRow);
+                        editDishModalController.showModal();
+                        editDishModalController.setOrderDish(orderDish);
+                        orderPanel.tableDishes.clearSelection();
                     }
                 }
             }
         });
     }
 
+
     /*
     * Main method to add a dish to the cart
     * @param orderDish: the dish to be added to the cart
     */
-    public void addDish(OrderDish orderDish) {
+    public void addDishToCart(OrderDish orderDish) {
         if (!isDishAlreadyInCart(orderDish.getDish().getId())) {
             orderInterface.addDish(orderDish);
             refreshCart();
+            updateNextButtonState();
         }
     }
 
@@ -76,6 +104,11 @@ public class CartPanelController implements ActionListener {
             }
         }
         return false; // Dish is not in cart
+    }
+
+    protected void updateNextButtonState() {
+        hasProductsInCart = !orderInterface.getDishes().isEmpty();
+        orderPanel.btnNext.setEnabled(hasProductsInCart);
     }
 
     // Method to refresh the dishes table
@@ -101,4 +134,8 @@ public class CartPanelController implements ActionListener {
 
     }
 
+    @Override
+    public void onModalClose() {
+        refreshCart();
+    }
 }

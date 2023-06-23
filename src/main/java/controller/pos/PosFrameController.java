@@ -1,9 +1,11 @@
 package controller.pos;
 
-import java.awt.Color;
+import java.awt.*;
 
 import view.pos.PointOfSaleFrame;
 
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +15,7 @@ import java.util.TimerTask;
 public class PosFrameController implements ActionListener {
 
     private final PointOfSaleFrame pointOfSaleFrm;
+    private CartPanelController cartPanelController;
 
     public PosFrameController(PointOfSaleFrame puntoVenta) {
         this.pointOfSaleFrm = puntoVenta;
@@ -42,13 +45,39 @@ public class PosFrameController implements ActionListener {
     
     private void frameConfig(){
         pointOfSaleFrm.getContentPane().setBackground(Color.BLACK);
-        CartPanelController cartPanelController = new CartPanelController(pointOfSaleFrm);
+        // Initial panel: OrderPanel
+        cartPanelController = new CartPanelController(pointOfSaleFrm);
         cartPanelController.init();
         OrderPanelController orderPanelController = new OrderPanelController(pointOfSaleFrm, cartPanelController);
         orderPanelController.init();
     }
 
+    private void orderConfirmationPanelConfig(){
+        changeHeaderPanel("CONFIRMACIÓN DE ORDEN");
+
+        // Change panel
+        pointOfSaleFrm.orderConfirmationPanel.setVisible(true);
+        pointOfSaleFrm.orderPanel.setVisible(false);
+
+        // Table header configuration
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        renderer.setBorder(null);
+        renderer.setForeground(new Color(176,176,176));
+        renderer.setBackground(new Color(45,52,63));
+        pointOfSaleFrm.orderConfirmationPanel.orderTable.getTableHeader().setDefaultRenderer(renderer);
+        pointOfSaleFrm.orderConfirmationPanel.orderTable.getTableHeader().setPreferredSize(new Dimension(0, 50));
+    }
+
+    private void changeHeaderPanel(String panelTitle){
+        pointOfSaleFrm.posHeader.setVisible(false);
+        pointOfSaleFrm.posSecondaryHeader.setVisible(true);
+        pointOfSaleFrm.posSecondaryHeader.lblPaymentTitle.setText(panelTitle);
+    }
+
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
+        if(e.getSource() == pointOfSaleFrm.orderPanel.btnNext){
+            orderConfirmationPanelConfig();
+        }
     }
 }

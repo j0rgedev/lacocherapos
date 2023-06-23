@@ -10,7 +10,7 @@ public class CustomModal extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        background1 = new Background();
+        background1 = new view.components.modal.Background();
         lbIcon = new javax.swing.JLabel();
         containerPanel = new javax.swing.JPanel();
         btnCancel = new javax.swing.JButton();
@@ -82,7 +82,7 @@ public class CustomModal extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Background background1;
+    private view.components.modal.Background background1;
     public javax.swing.JButton btnCancel;
     public javax.swing.JButton btnEdit;
     public javax.swing.JPanel containerPanel;

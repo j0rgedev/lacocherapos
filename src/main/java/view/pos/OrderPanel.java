@@ -12,7 +12,7 @@ public class OrderPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        categoriesTabbedPane = new TabbedPane();
+        categoriesTabbedPane = new view.components.pos.TabbedPane();
         foodPanel = new javax.swing.JPanel();
         btnCarta = new javax.swing.JButton();
         btnAntojitos = new javax.swing.JButton();
@@ -219,7 +219,7 @@ public class OrderPanel extends javax.swing.JPanel {
         btnNext.setBackground(new java.awt.Color(66, 100, 250));
         btnNext.setFont(new java.awt.Font("Iceland", 1, 60)); // NOI18N
         btnNext.setForeground(new java.awt.Color(255, 255, 255));
-        btnNext.setText("Siguiente");
+        btnNext.setText("Guardar");
         btnNext.setBorder(null);
         btnNext.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNext.setEnabled(false);
@@ -344,7 +344,7 @@ public class OrderPanel extends javax.swing.JPanel {
     public javax.swing.JButton btnHotDrinks;
     public javax.swing.JButton btnNext;
     public javax.swing.JPanel cartPanel;
-    public TabbedPane categoriesTabbedPane;
+    public view.components.pos.TabbedPane categoriesTabbedPane;
     public javax.swing.JPanel drinkPanel;
     public javax.swing.JPanel foodPanel;
     private javax.swing.JScrollPane jScrollPane1;

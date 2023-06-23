@@ -20,7 +20,7 @@ public class SecondaryHeader extends javax.swing.JPanel {
         lblTime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblTime.setText("12/12/12 00:00:00");
 
-        lblPaymentTitle.setFont(new java.awt.Font("Iceland", 0, 32)); // NOI18N
+        lblPaymentTitle.setFont(new java.awt.Font("Iceland", 1, 50)); // NOI18N
         lblPaymentTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblPaymentTitle.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPaymentTitle.setText("MÉTODO DE PAGO ESCOGIDO");
@@ -32,7 +32,7 @@ public class SecondaryHeader extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(lblPaymentTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTime)
                 .addGap(20, 20, 20))
         );

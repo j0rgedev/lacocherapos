@@ -5,8 +5,6 @@
 
 package view.components.modal;
 
-import view.components.TextField;
-
 public class ClientInfoPanel extends javax.swing.JPanel {
 
     public ClientInfoPanel() {
@@ -17,8 +15,8 @@ public class ClientInfoPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtNames = new TextField();
-        txtLastNames = new TextField();
+        txtNames = new view.components.TextField();
+        txtLastNames = new view.components.TextField();
 
         setOpaque(false);
 
@@ -58,8 +56,8 @@ public class ClientInfoPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private TextField txtLastNames;
-    private TextField txtNames;
+    private view.components.TextField txtLastNames;
+    private view.components.TextField txtNames;
     // End of variables declaration//GEN-END:variables
 
 }

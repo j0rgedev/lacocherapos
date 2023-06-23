@@ -1,35 +1,34 @@
 package view.components.modal;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
+import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
+import view.listeners.ModalListener;
 
-public class CustomModalController extends JDialog implements ActionListener {
+public abstract class ModalController extends JDialog implements ActionListener {
 
     private Animator animator;
     private Glass glass;
     private boolean show;
-    private final CustomModal customModal;
+    protected final CustomModal customModal;
     private final JFrame jFrame;
+    private final ModalListener modalListener;
 
-    public CustomModalController(CustomModal customModal, JFrame jFrame) {
+    public ModalController(CustomModal customModal, JFrame jFrame, ModalListener modalListener) {
         super(jFrame, true);
         this.jFrame = jFrame;
         this.customModal = customModal;
+        this.modalListener = modalListener;
         init();
-        customModal.btnEdit.addActionListener(this);
-        customModal.btnCancel.addActionListener(this);
-        ClientInfoPanel clientInfoPanel = new ClientInfoPanel();
-        customModal.containerPanel.setPreferredSize(clientInfoPanel.getPreferredSize());
-        customModal.containerPanel.add(clientInfoPanel);
-        customModal.pack();
+        // General listeners
+        this.customModal.btnEdit.addActionListener(this);
+        this.customModal.btnCancel.addActionListener(this);
     }
 
     private void init() {
@@ -71,7 +70,7 @@ public class CustomModalController extends JDialog implements ActionListener {
         animator.start();
     }
 
-    public void showMessage() {
+    protected void setupModal() {
         jFrame.setGlassPane(glass);
         glass.setVisible(true);
         customModal.setLocationRelativeTo(jFrame);
@@ -79,13 +78,18 @@ public class CustomModalController extends JDialog implements ActionListener {
         customModal.setVisible(true);
     }
 
-    public void closeMessage() {
+
+    protected void closeMessage() {
         startAnimator(false);
+        modalListener.onModalClose();
     }
+
+    public abstract void showModal();
+    protected abstract void handleCustomModalAction(ActionEvent e);
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        handleCustomModalAction(e);
     }
-
 }

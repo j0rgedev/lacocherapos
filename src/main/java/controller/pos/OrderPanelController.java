@@ -145,7 +145,7 @@ public class OrderPanelController implements ActionListener {
                 OrderDish orderDish = new OrderDish(dish, quantity, null);
 
                 // Add dish to cart panel
-                cartPanelController.addDish(orderDish);
+                cartPanelController.addDishToCart(orderDish);
 
                 // Disable dish panel buttons
                 dishPanel.btnIncrease.setEnabled(false);

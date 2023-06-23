@@ -1,9 +1,9 @@
 package model.models;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 @AllArgsConstructor
 public class OrderDish {
     private Dish dish;

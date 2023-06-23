@@ -27,14 +27,25 @@ public class OrderManager implements OrderInterface {
     }
 
     @Override
-    public void removeDish(Dish dish) {
-        orderDishes.removeIf(orderDish -> orderDish.getDish().getId().equals(dish.getId()));
+    public void updateDish(OrderDish dish) {
+        orderDishes.stream()
+                .filter(orderDish -> orderDish.getDish().getId().equals(dish.getDish().getId()))
+                .findFirst()
+                .ifPresent(orderDish -> {
+                    orderDish.setQuantity(dish.getQuantity());
+                    orderDish.setNotes(dish.getNotes());
+                });
     }
 
     @Override
-    public OrderDish getDish(Dish dish) {
+    public void removeDish(OrderDish dish) {
+        orderDishes.removeIf(orderDish -> orderDish.getDish().getId().equals(dish.getDish().getId()));
+    }
+
+    @Override
+    public OrderDish getDish(OrderDish dish) {
         return orderDishes.stream()
-                .filter(orderDish -> orderDish.getDish().getId().equals(dish.getId()))
+                .filter(orderDish -> orderDish.getDish().getId().equals(dish.getDish().getId()))
                 .findFirst()
                 .orElse(null);
     }

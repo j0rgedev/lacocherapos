@@ -5,8 +5,6 @@
 
 package view.components.modal;
 
-import view.components.TextField;
-
 public class EditDishPanel extends javax.swing.JPanel {
 
     public EditDishPanel() {
@@ -21,7 +19,7 @@ public class EditDishPanel extends javax.swing.JPanel {
         btnDecrease = new javax.swing.JButton();
         txtQuantity = new javax.swing.JTextField();
         btnIncrease = new javax.swing.JButton();
-        txtDetails = new TextField();
+        txtNotes = new view.components.TextField();
 
         setOpaque(false);
 
@@ -50,11 +48,11 @@ public class EditDishPanel extends javax.swing.JPanel {
         btnIncrease.setBorder(null);
         btnIncrease.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        txtDetails.setBackground(new java.awt.Color(240, 240, 240));
-        txtDetails.setForeground(new java.awt.Color(0, 0, 0));
-        txtDetails.setCaretColor(new java.awt.Color(50, 50, 50));
-        txtDetails.setFont(new java.awt.Font("Iceland", 0, 22)); // NOI18N
-        txtDetails.setLabelText("Detalles");
+        txtNotes.setBackground(new java.awt.Color(240, 240, 240));
+        txtNotes.setForeground(new java.awt.Color(0, 0, 0));
+        txtNotes.setCaretColor(new java.awt.Color(50, 50, 50));
+        txtNotes.setFont(new java.awt.Font("Iceland", 0, 22)); // NOI18N
+        txtNotes.setLabelText("Detalles");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -71,7 +69,7 @@ public class EditDishPanel extends javax.swing.JPanel {
                         .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(btnIncrease, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -84,9 +82,9 @@ public class EditDishPanel extends javax.swing.JPanel {
                     .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDecrease, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnIncrease, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(txtDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(txtNotes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -95,7 +93,7 @@ public class EditDishPanel extends javax.swing.JPanel {
     public javax.swing.JButton btnDecrease;
     public javax.swing.JButton btnIncrease;
     public javax.swing.JLabel lbTitle;
-    private TextField txtDetails;
+    public view.components.TextField txtNotes;
     public javax.swing.JTextField txtQuantity;
     // End of variables declaration//GEN-END:variables
 

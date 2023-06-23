@@ -15,10 +15,11 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         topPanel = new javax.swing.JPanel();
-        posHeader = new Header();
-        posSecondaryHeader = new SecondaryHeader();
+        posHeader = new view.components.pos.Header();
+        posSecondaryHeader = new view.components.pos.SecondaryHeader();
         mainPanel = new javax.swing.JPanel();
         orderPanel = new view.pos.OrderPanel();
+        orderConfirmationPanel = new view.pos.OrderConfirmationPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -33,19 +34,20 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
 
         orderPanel.setForeground(new java.awt.Color(255, 255, 255));
         mainPanel.add(orderPanel, "card2");
+        mainPanel.add(orderConfirmationPanel, "card3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1191, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(6, 6, 6)
                 .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -54,9 +56,10 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel mainPanel;
+    public view.pos.OrderConfirmationPanel orderConfirmationPanel;
     public view.pos.OrderPanel orderPanel;
-    public Header posHeader;
-    public SecondaryHeader posSecondaryHeader;
+    public view.components.pos.Header posHeader;
+    public view.components.pos.SecondaryHeader posSecondaryHeader;
     public javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
 }
