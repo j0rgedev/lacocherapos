@@ -2,6 +2,13 @@ package controller.pos;
 
 import java.awt.*;
 
+import model.models.Client;
+import model.models.Order;
+import model.service.OrderInterface;
+import model.service.OrderManager;
+import view.components.modal.ClientInfoModalController;
+import view.components.modal.CustomModal;
+import view.listeners.ModalListener;
 import view.pos.PointOfSaleFrame;
 
 import javax.swing.border.LineBorder;
@@ -12,10 +19,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class PosFrameController implements ActionListener {
+public class PosFrameController implements ActionListener, ModalListener {
 
     private final PointOfSaleFrame pointOfSaleFrm;
     private CartPanelController cartPanelController;
+    private final OrderInterface orderInterface = OrderManager.getInstance();
 
     public PosFrameController(PointOfSaleFrame puntoVenta) {
         this.pointOfSaleFrm = puntoVenta;
@@ -58,6 +66,8 @@ public class PosFrameController implements ActionListener {
         // Change panel
         pointOfSaleFrm.orderConfirmationPanel.setVisible(true);
         pointOfSaleFrm.orderPanel.setVisible(false);
+        ConfirmationPanelController confirmationPanelController = new ConfirmationPanelController(pointOfSaleFrm.orderConfirmationPanel);
+        confirmationPanelController.init();
 
         // Table header configuration
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
@@ -77,7 +87,15 @@ public class PosFrameController implements ActionListener {
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
         if(e.getSource() == pointOfSaleFrm.orderPanel.btnNext){
+//            CustomModal modal = new CustomModal();
+//            ClientInfoModalController clientInfoModalController = new ClientInfoModalController(modal, pointOfSaleFrm, this);
+//            clientInfoModalController.showModal();
             orderConfirmationPanelConfig();
         }
+    }
+
+    @Override
+    public void onModalClose() {
+        orderConfirmationPanelConfig();
     }
 }

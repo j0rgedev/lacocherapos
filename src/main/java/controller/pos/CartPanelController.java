@@ -1,8 +1,9 @@
 package controller.pos;
 
+import model.models.CartDish;
+import model.models.Client;
 import model.models.Dish;
 import view.components.modal.CustomModal;
-import model.models.OrderDish;
 import model.service.OrderInterface;
 import model.service.OrderManager;
 import view.components.modal.EditDishModalController;
@@ -12,11 +13,11 @@ import view.pos.PointOfSaleFrame;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class CartPanelController implements ActionListener, ModalListener {
@@ -37,8 +38,8 @@ public class CartPanelController implements ActionListener, ModalListener {
     public void init() {
         listeners();
         model = (DefaultTableModel) orderPanel.tableDishes.getModel();
-        OrderDish testDish = new OrderDish(new Dish("1", "Dish 1", 10, "1"), 1, "No notes");
-        addDishToCart(testDish);
+//        addDishToCart(new CartDish(new Dish("1", "Hamburguesa", 100.0, "C01"), 1, "Sin cebolla"));
+//        orderInterface.setOrder(new model.models.Order(LocalDateTime.now(), 100.0, new Client("1", "Juan","Perez")));
     }
 
     private void listeners() {
@@ -60,7 +61,10 @@ public class CartPanelController implements ActionListener, ModalListener {
                 int selectedRow = orderPanel.tableDishes.getSelectedRow();
 
                 if (startX - endX > 100 && selectedRow != -1) {
-                    // TODO: Add eliminate dish confirmation
+                    CartDish cartDish = getSelectedDish(selectedRow);
+                    orderInterface.removeDish(cartDish);
+                    refreshCart();
+                    updateNextButtonState();
                 }
             }
 
@@ -72,9 +76,9 @@ public class CartPanelController implements ActionListener, ModalListener {
                     if (selectedRow != -1) {
                         CustomModal modal = new CustomModal();
                         EditDishModalController editDishModalController = new EditDishModalController(modal, frame, CartPanelController.this);
-                        OrderDish orderDish = getSelectedDish(selectedRow);
+                        CartDish cartDish = getSelectedDish(selectedRow);
+                        editDishModalController.setOrderDish(cartDish);
                         editDishModalController.showModal();
-                        editDishModalController.setOrderDish(orderDish);
                         orderPanel.tableDishes.clearSelection();
                     }
                 }
@@ -85,11 +89,11 @@ public class CartPanelController implements ActionListener, ModalListener {
 
     /*
     * Main method to add a dish to the cart
-    * @param orderDish: the dish to be added to the cart
+    * @param cartDish: the dish to be added to the cart
     */
-    public void addDishToCart(OrderDish orderDish) {
-        if (!isDishAlreadyInCart(orderDish.getDish().getId())) {
-            orderInterface.addDish(orderDish);
+    public void addDishToCart(CartDish cartDish) {
+        if (!isDishAlreadyInCart(cartDish.getDish().getId())) {
+            orderInterface.addDish(cartDish);
             refreshCart();
             updateNextButtonState();
         }
@@ -97,9 +101,9 @@ public class CartPanelController implements ActionListener, ModalListener {
 
     // Method to check if a dish is already in the cart
     private boolean isDishAlreadyInCart(String dishId) {
-        List<OrderDish> orderDishes = orderInterface.getDishes();
-        for (OrderDish orderDish : orderDishes) {
-            if (orderDish.getDish().getId().equals(dishId)) {
+        List<CartDish> cartDishes = orderInterface.getDishes();
+        for (CartDish cartDish : cartDishes) {
+            if (cartDish.getDish().getId().equals(dishId)) {
                 return true; // Dish is already in cart
             }
         }
@@ -114,17 +118,17 @@ public class CartPanelController implements ActionListener, ModalListener {
     // Method to refresh the dishes table
     private void refreshCart() {
         model.setRowCount(0);
-        List<OrderDish> orderDishes = orderInterface.getDishes();
-        for (OrderDish orderDish : orderDishes) {
-            model.addRow(new Object[]{orderDish.getQuantity(), orderDish.getDish().getName()});
+        List<CartDish> cartDishes = orderInterface.getDishes();
+        for (CartDish cartDish : cartDishes) {
+            model.addRow(new Object[]{cartDish.getQuantity(), cartDish.getDish().getName()});
         }
     }
 
     // Method to get the selected dish from the dishes table
-    private OrderDish getSelectedDish(int selectedRow) {
-        List<OrderDish> orderDishes = orderInterface.getDishes();
-        if(selectedRow >= 0 && selectedRow < orderDishes.size()) {
-            return orderDishes.get(selectedRow);
+    private CartDish getSelectedDish(int selectedRow) {
+        List<CartDish> cartDishes = orderInterface.getDishes();
+        if(selectedRow >= 0 && selectedRow < cartDishes.size()) {
+            return cartDishes.get(selectedRow);
         }
         return null;
     }

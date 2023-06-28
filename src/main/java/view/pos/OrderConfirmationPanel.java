@@ -35,7 +35,7 @@ public class OrderConfirmationPanel extends javax.swing.JPanel {
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(45, 52, 63)));
 
         orderTable.setBackground(new java.awt.Color(45, 52, 63));
-        orderTable.setFont(new java.awt.Font("Iceland", 0, 28)); // NOI18N
+        orderTable.setFont(new java.awt.Font("Iceland", 0, 32)); // NOI18N
         orderTable.setForeground(new java.awt.Color(255, 255, 255));
         orderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -54,6 +54,7 @@ public class OrderConfirmationPanel extends javax.swing.JPanel {
             }
         });
         orderTable.setFocusable(false);
+        orderTable.setRowHeight(40);
         orderTable.setRowSelectionAllowed(false);
         orderTable.getTableHeader().setResizingAllowed(false);
         orderTable.getTableHeader().setReorderingAllowed(false);
@@ -62,6 +63,7 @@ public class OrderConfirmationPanel extends javax.swing.JPanel {
             orderTable.getColumnModel().getColumn(0).setPreferredWidth(20);
             orderTable.getColumnModel().getColumn(1).setPreferredWidth(180);
             orderTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            orderTable.getColumnModel().getColumn(3).setPreferredWidth(50);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -85,7 +87,7 @@ public class OrderConfirmationPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTitle)
                     .addComponent(lblClientInfo))
-                .addGap(24, 24, 24)
+                .addGap(40, 40, 40)
                 .addComponent(jScrollPane1)
                 .addGap(22, 22, 22))
         );
@@ -113,7 +115,7 @@ public class OrderConfirmationPanel extends javax.swing.JPanel {
     public javax.swing.JLabel lblClientInfo;
     private javax.swing.JLabel lblTitle;
     public javax.swing.JTable orderTable;
-    private view.pos.TotalOrderPanel totalOrderPanel1;
+    public view.pos.TotalOrderPanel totalOrderPanel1;
     // End of variables declaration//GEN-END:variables
 
 }

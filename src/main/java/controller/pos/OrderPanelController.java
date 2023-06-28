@@ -14,7 +14,7 @@ import view.components.pos.Loading;
 import model.dao.impl.DishDAOImpl;
 import model.models.Category;
 import model.models.Dish;
-import model.models.OrderDish;
+import model.models.CartDish;
 import view.pos.OrderPanel;
 import view.pos.PointOfSaleFrame;
 
@@ -142,15 +142,15 @@ public class OrderPanelController implements ActionListener {
             // Action listener to add a dish to the order
             dishPanel.btnAdd.addActionListener((ActionEvent e1) -> {
                 int quantity = Integer.parseInt(dishPanel.txtQuantity.getText());
-                OrderDish orderDish = new OrderDish(dish, quantity, null);
+                CartDish cartDish = new CartDish(dish, quantity, null);
 
                 // Add dish to cart panel
-                cartPanelController.addDishToCart(orderDish);
+                cartPanelController.addDishToCart(cartDish);
 
                 // Disable dish panel buttons
-                dishPanel.btnIncrease.setEnabled(false);
-                dishPanel.btnReduce.setEnabled(false);
-                dishPanel.btnAdd.setEnabled(false);
+//                dishPanel.btnIncrease.setEnabled(false);
+//                dishPanel.btnReduce.setEnabled(false);
+//                dishPanel.btnAdd.setEnabled(false);
             });
         });
     }

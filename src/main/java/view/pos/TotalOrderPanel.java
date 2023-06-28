@@ -63,7 +63,7 @@ public class TotalOrderPanel extends javax.swing.JPanel {
         lblTotalPrice.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTotalPrice.setText("S/. 00.00");
 
-        btnEdit.setBackground(new java.awt.Color(73, 73, 73));
+        btnEdit.setBackground(new java.awt.Color(55, 55, 55));
         btnEdit.setFont(new java.awt.Font("Iceland", 1, 48)); // NOI18N
         btnEdit.setForeground(new java.awt.Color(255, 255, 255));
         btnEdit.setText("Editar");
@@ -141,14 +141,14 @@ public class TotalOrderPanel extends javax.swing.JPanel {
     public javax.swing.JButton btnCancel;
     public javax.swing.JButton btnEdit;
     public javax.swing.JButton btnPay;
-    private javax.swing.JLabel lblBasePrice;
-    private javax.swing.JLabel lblDiscountPrice;
+    public javax.swing.JLabel lblBasePrice;
+    public javax.swing.JLabel lblDiscountPrice;
     private javax.swing.JLabel lblDiscounts;
     private javax.swing.JLabel lblIgv;
-    private javax.swing.JLabel lblIgvPrice;
+    public javax.swing.JLabel lblIgvPrice;
     private javax.swing.JLabel lblTB;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JLabel lblTotalPrice;
+    public javax.swing.JLabel lblTotalPrice;
     // End of variables declaration//GEN-END:variables
 
 }

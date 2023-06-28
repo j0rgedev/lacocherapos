@@ -18,6 +18,7 @@ public class CustomModal extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
+        setModal(true);
         setUndecorated(true);
 
         background1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -27,7 +28,7 @@ public class CustomModal extends javax.swing.JDialog {
         containerPanel.setOpaque(false);
         containerPanel.setLayout(new java.awt.CardLayout());
 
-        btnCancel.setBackground(new java.awt.Color(73, 73, 73));
+        btnCancel.setBackground(new java.awt.Color(55, 55, 55));
         btnCancel.setFont(new java.awt.Font("Iceland", 0, 32)); // NOI18N
         btnCancel.setForeground(java.awt.Color.white);
         btnCancel.setText("CANCELAR");
@@ -37,7 +38,7 @@ public class CustomModal extends javax.swing.JDialog {
         btnEdit.setBackground(new java.awt.Color(44, 205, 70));
         btnEdit.setFont(new java.awt.Font("Iceland", 0, 32)); // NOI18N
         btnEdit.setForeground(java.awt.Color.white);
-        btnEdit.setText("EDITAR");
+        btnEdit.setText("GUARDAR");
         btnEdit.setBorderPainted(false);
         btnEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 

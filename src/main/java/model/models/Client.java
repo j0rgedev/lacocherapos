@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class OrderDish {
-    private Dish dish;
-    private int quantity;
-    private String notes;
+public class Client {
+    private String dni;
+    private String name;
+    private String lastName;
 }

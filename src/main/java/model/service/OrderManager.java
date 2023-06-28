@@ -1,17 +1,22 @@
 package model.service;
 
-import model.models.Dish;
-import model.models.OrderDish;
+import lombok.Getter;
+import lombok.Setter;
+import model.models.CartDish;
+import model.models.Order;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class OrderManager implements OrderInterface {
     private static OrderManager instance;
-    private final List<OrderDish> orderDishes;
+    private final List<CartDish> cartDishes;
+    private Order order;
 
     private OrderManager() {
-        orderDishes = new ArrayList<>();
+        cartDishes = new ArrayList<>();
+        order = new Order();
     }
 
     public static OrderManager getInstance() {
@@ -22,13 +27,13 @@ public class OrderManager implements OrderInterface {
     }
 
     @Override
-    public void addDish(OrderDish orderDish) {
-        orderDishes.add(orderDish);
+    public void addDish(CartDish cartDish) {
+        cartDishes.add(cartDish);
     }
 
     @Override
-    public void updateDish(OrderDish dish) {
-        orderDishes.stream()
+    public void updateDish(CartDish dish) {
+        cartDishes.stream()
                 .filter(orderDish -> orderDish.getDish().getId().equals(dish.getDish().getId()))
                 .findFirst()
                 .ifPresent(orderDish -> {
@@ -38,34 +43,54 @@ public class OrderManager implements OrderInterface {
     }
 
     @Override
-    public void removeDish(OrderDish dish) {
-        orderDishes.removeIf(orderDish -> orderDish.getDish().getId().equals(dish.getDish().getId()));
+    public void removeDish(CartDish dish) {
+        cartDishes.removeIf(orderDish -> orderDish.getDish().getId().equals(dish.getDish().getId()));
     }
 
     @Override
-    public OrderDish getDish(OrderDish dish) {
-        return orderDishes.stream()
+    public CartDish getDish(CartDish dish) {
+        return cartDishes.stream()
                 .filter(orderDish -> orderDish.getDish().getId().equals(dish.getDish().getId()))
                 .findFirst()
                 .orElse(null);
     }
 
     @Override
-    public List<OrderDish> getDishes() {
-        return orderDishes;
+    public List<CartDish> getDishes() {
+        return cartDishes;
     }
 
     @Override
-    public double calculateSubtotal() {
+    public double getTotal() {
         double subtotal = 0.0;
-        for (OrderDish orderDish : orderDishes) {
-            subtotal += orderDish.getDish().getPrice() * orderDish.getQuantity();
+        for (CartDish cartDish : cartDishes) {
+            subtotal += cartDish.getDish().getPrice() * cartDish.getQuantity();
         }
         return subtotal;
     }
 
     @Override
+    public double getSubtotal() {
+        return getTotal() - getIgv();
+    }
+
+    @Override
+    public double getIgv() {
+        return getTotal() * 0.18;
+    }
+
+    @Override
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    @Override
+    public Order getOrder() {
+        return order;
+    }
+
+    @Override
     public void clearOrder() {
-        orderDishes.clear();
+        cartDishes.clear();
     }
 }

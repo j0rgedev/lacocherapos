@@ -6,7 +6,11 @@ import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import model.service.OrderInterface;
+import model.service.OrderManager;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import view.listeners.ModalListener;
@@ -19,6 +23,7 @@ public abstract class ModalController extends JDialog implements ActionListener 
     protected final CustomModal customModal;
     private final JFrame jFrame;
     private final ModalListener modalListener;
+    protected final OrderInterface orderInterface = OrderManager.getInstance();
 
     public ModalController(CustomModal customModal, JFrame jFrame, ModalListener modalListener) {
         super(jFrame, true);
@@ -46,7 +51,7 @@ public abstract class ModalController extends JDialog implements ActionListener 
             @Override
             public void end() {
                 if (!show) {
-                    dispose();
+                    customModal.dispose();
                     glass.setVisible(false);
                 }
             }
@@ -56,6 +61,8 @@ public abstract class ModalController extends JDialog implements ActionListener 
         animator.setDeceleration(.5f);
         customModal.setOpacity(0f);
         glass = new Glass();
+        glass.setEnabled(false);
+        glass.setFocusable(false);
     }
 
     private void startAnimator(boolean show) {
@@ -70,7 +77,10 @@ public abstract class ModalController extends JDialog implements ActionListener 
         animator.start();
     }
 
-    protected void setupModal() {
+    protected void setupModal(JPanel panel) {
+        customModal.containerPanel.setPreferredSize(panel.getPreferredSize());
+        customModal.containerPanel.add(panel);
+        customModal.pack();
         jFrame.setGlassPane(glass);
         glass.setVisible(true);
         customModal.setLocationRelativeTo(jFrame);
@@ -79,7 +89,7 @@ public abstract class ModalController extends JDialog implements ActionListener 
     }
 
 
-    protected void closeMessage() {
+    public void closeMessage() {
         startAnimator(false);
         modalListener.onModalClose();
     }
@@ -91,5 +101,9 @@ public abstract class ModalController extends JDialog implements ActionListener 
     @Override
     public void actionPerformed(ActionEvent e) {
         handleCustomModalAction(e);
+
+        if (e.getSource() == customModal.btnCancel) {
+            closeMessage();
+        }
     }
 }

@@ -1,6 +1,6 @@
 package view.components.modal;
 
-import model.models.OrderDish;
+import model.models.CartDish;
 import model.service.OrderInterface;
 import model.service.OrderManager;
 import view.listeners.ModalListener;
@@ -11,36 +11,31 @@ import java.awt.event.ActionEvent;
 public class EditDishModalController extends ModalController{
 
     private EditDishPanel editDishPanel;
-    private OrderDish orderDish;
+    public CartDish cartDish;
     private static int quantity;
 
-    private final OrderInterface orderInterface = OrderManager.getInstance();
 
     public EditDishModalController(CustomModal customModal, JFrame jFrame, ModalListener modalListener) {
         super(customModal, jFrame, modalListener);
+        editDishPanel = new EditDishPanel();
     }
 
-    public void setOrderDish(OrderDish orderDish) {
-        this.orderDish = orderDish;
+    public void setOrderDish(CartDish cartDish) {
+        this.cartDish = cartDish;
         // Set title, quantity and notes
-        editDishPanel.lbTitle.setText(orderDish.getDish().getName());
-        quantity = orderDish.getQuantity();
+        editDishPanel.lbTitle.setText(cartDish.getDish().getName());
+        quantity = cartDish.getQuantity();
         editDishPanel.txtQuantity.setText(String.valueOf(quantity));
-        if(orderDish.getNotes()!=null){
-            editDishPanel.txtNotes.setText(orderDish.getNotes());
-        }
+        if(cartDish.getNotes()!=null) editDishPanel.txtNotes.setText(cartDish.getNotes());
+
     }
 
     @Override
     public void showModal() {
-        setupModal();
-        editDishPanel = new EditDishPanel();
-        customModal.containerPanel.setPreferredSize(editDishPanel.getPreferredSize());
-        customModal.containerPanel.add(editDishPanel);
-        customModal.pack();
-        // Custom listeners
         editDishPanel.btnDecrease.addActionListener(this);
         editDishPanel.btnIncrease.addActionListener(this);
+        setupModal(editDishPanel);
+        // Custom listeners
     }
 
     @Override
@@ -53,6 +48,7 @@ public class EditDishModalController extends ModalController{
 
         // Decrease quantity
         if (e.getSource() == editDishPanel.btnDecrease){
+            System.out.println("Decrease");
             if (quantity > 1) {
                 quantity--;
                 editDishPanel.txtQuantity.setText(String.valueOf(quantity));
@@ -61,12 +57,12 @@ public class EditDishModalController extends ModalController{
 
         // Edit dish
         if(e.getSource()==customModal.btnEdit){
-            orderDish.setQuantity(quantity);
+            cartDish.setQuantity(quantity);
             String notes = editDishPanel.txtNotes.getText();
             if(!notes.isEmpty()){
-                orderDish.setNotes(notes);
+                cartDish.setNotes(notes);
             }
-            orderInterface.updateDish(orderDish);
+            orderInterface.updateDish(cartDish);
             closeMessage();
         }
     }

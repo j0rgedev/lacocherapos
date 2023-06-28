@@ -219,7 +219,7 @@ public class OrderPanel extends javax.swing.JPanel {
         btnNext.setBackground(new java.awt.Color(66, 100, 250));
         btnNext.setFont(new java.awt.Font("Iceland", 1, 60)); // NOI18N
         btnNext.setForeground(new java.awt.Color(255, 255, 255));
-        btnNext.setText("Guardar");
+        btnNext.setText("Siguiente");
         btnNext.setBorder(null);
         btnNext.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNext.setEnabled(false);
