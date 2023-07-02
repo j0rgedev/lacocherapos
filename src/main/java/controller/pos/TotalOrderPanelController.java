@@ -2,13 +2,14 @@ package controller.pos;
 
 import model.service.OrderInterface;
 import model.service.OrderManager;
+import view.pos.PaymentMethodsPanel;
 import view.pos.TotalOrderPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 
-public class TotalOrderPanelController implements ActionListener {
+public class TotalOrderPanelController extends AbstractController implements ActionListener {
 
     private final TotalOrderPanel totalOrderPanel;
     private final OrderInterface orderInterface = OrderManager.getInstance();
@@ -17,7 +18,8 @@ public class TotalOrderPanelController implements ActionListener {
         this.totalOrderPanel = totalOrderPanel;
     }
 
-    public void init(){
+    @Override
+    protected void init(){
         totalOrderPanel.btnPay.addActionListener(this);
         totalOrderPanel.btnEdit.addActionListener(this);
         totalOrderPanel.btnCancel.addActionListener(this);
@@ -36,8 +38,16 @@ public class TotalOrderPanelController implements ActionListener {
         totalOrderPanel.lblTotalPrice.setText(decimalFormat.format(totalPrice));
     }
 
+    public void setMainButtonText(String text){
+        totalOrderPanel.btnPay.setText(text);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource() == totalOrderPanel.btnPay){
+            PaymentMethodsPanel paymentMethodsPanel = pointOfSaleFrm.paymentMethodsPanel1;
+            PaymentMethodsPanelController paymentMethodsPanelController = new PaymentMethodsPanelController(paymentMethodsPanel);
+            changePanel(paymentMethodsPanel, paymentMethodsPanelController);
+        }
     }
 }

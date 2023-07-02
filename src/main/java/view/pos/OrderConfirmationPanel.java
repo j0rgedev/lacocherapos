@@ -22,6 +22,8 @@ public class OrderConfirmationPanel extends javax.swing.JPanel {
         orderTable = new javax.swing.JTable();
         totalOrderPanel1 = new view.pos.TotalOrderPanel();
 
+        setBackground(new java.awt.Color(0, 0, 0));
+
         jPanel1.setBackground(new java.awt.Color(45, 52, 63));
 
         lblTitle.setFont(new java.awt.Font("Iceland", 1, 36)); // NOI18N

@@ -1,20 +1,19 @@
 package controller.pos;
 
-import model.service.OrderInterface;
-import model.service.OrderManager;
 import view.pos.OrderConfirmationPanel;
+import view.pos.PointOfSaleFrame;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ConfirmationPanelController implements ActionListener {
+public class ConfirmationPanelController extends AbstractController implements ActionListener {
 
     private final OrderConfirmationPanel orderConfirmationPanel;
     private final TotalOrderPanelController totalOrderPanelController;
-    private final OrderInterface orderInterface = OrderManager.getInstance();
     private DefaultTableModel tableModel;
 
     public ConfirmationPanelController(OrderConfirmationPanel orderConfirmationPanel) {
@@ -22,8 +21,17 @@ public class ConfirmationPanelController implements ActionListener {
         this.totalOrderPanelController = new TotalOrderPanelController(orderConfirmationPanel.totalOrderPanel1);
     }
 
-    public void init() {
+    @Override
+    protected void init() {
         tableModel = (DefaultTableModel) orderConfirmationPanel.orderTable.getModel();
+
+        // Table header configuration
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        renderer.setBorder(null);
+        renderer.setForeground(new Color(176, 176, 176));
+        renderer.setBackground(new Color(45, 52, 63));
+        orderConfirmationPanel.orderTable.getTableHeader().setDefaultRenderer(renderer);
+        orderConfirmationPanel.orderTable.getTableHeader().setPreferredSize(new Dimension(0, 50));
 
         // Align table content to left
         DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
@@ -55,6 +63,5 @@ public class ConfirmationPanelController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
     }
 }

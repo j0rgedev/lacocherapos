@@ -4,10 +4,9 @@ import model.models.CartDish;
 import model.models.Client;
 import model.models.Dish;
 import view.components.modal.CustomModal;
-import model.service.OrderInterface;
-import model.service.OrderManager;
 import view.components.modal.EditDishModalController;
 import view.listeners.ModalListener;
+import view.pos.OrderConfirmationPanel;
 import view.pos.OrderPanel;
 import view.pos.PointOfSaleFrame;
 
@@ -20,26 +19,23 @@ import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class CartPanelController implements ActionListener, ModalListener {
+public class CartPanelController extends AbstractController implements ActionListener, ModalListener {
 
     private final JFrame frame;
     private DefaultTableModel model;
     private final OrderPanel orderPanel;
-    private boolean hasProductsInCart = false;
-    private final OrderInterface orderInterface = OrderManager.getInstance();
 
     public CartPanelController(PointOfSaleFrame frame) {
         this.frame = frame;
         this.orderPanel = frame.orderPanel;
     }
 
-    // Method to initialize the cart panel
-    // YOU'D BETTER CALL THIS METHOD TO INITIALIZE THE CART PANEL
-    public void init() {
+    @Override
+    protected void init() {
         listeners();
         model = (DefaultTableModel) orderPanel.tableDishes.getModel();
-//        addDishToCart(new CartDish(new Dish("1", "Hamburguesa", 100.0, "C01"), 1, "Sin cebolla"));
-//        orderInterface.setOrder(new model.models.Order(LocalDateTime.now(), 100.0, new Client("1", "Juan","Perez")));
+        addDishToCart(new CartDish(new Dish("1", "Hamburguesa", 100.0, "C01"), 1, "Sin cebolla"));
+        orderInterface.setOrder(new model.models.Order(LocalDateTime.now(), 100.0, new Client("1", "Juan","Perez")));
     }
 
     private void listeners() {
@@ -111,7 +107,7 @@ public class CartPanelController implements ActionListener, ModalListener {
     }
 
     protected void updateNextButtonState() {
-        hasProductsInCart = !orderInterface.getDishes().isEmpty();
+        boolean hasProductsInCart = !orderInterface.getDishes().isEmpty();
         orderPanel.btnNext.setEnabled(hasProductsInCart);
     }
 
@@ -135,7 +131,11 @@ public class CartPanelController implements ActionListener, ModalListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if (e.getSource() == orderPanel.btnNext) {
+            OrderConfirmationPanel orderConfirmationPanel = pointOfSaleFrm.orderConfirmationPanel;
+            ConfirmationPanelController confirmationPanelController = new ConfirmationPanelController(orderConfirmationPanel);
+            changePanel(pointOfSaleFrm.orderConfirmationPanel,confirmationPanelController);
+        }
     }
 
     @Override

@@ -5,9 +5,18 @@ import view.components.pos.SecondaryHeader;
 
 public class PointOfSaleFrame extends javax.swing.JFrame {
 
-    public PointOfSaleFrame() {
+    private static PointOfSaleFrame instance;
+
+    private PointOfSaleFrame() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
+    }
+
+    public static PointOfSaleFrame getInstance() {
+        if (instance == null) {
+            instance = new PointOfSaleFrame();
+        }
+        return instance;
     }
 
     @SuppressWarnings("unchecked")
@@ -20,21 +29,32 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         orderPanel = new view.pos.OrderPanel();
         orderConfirmationPanel = new view.pos.OrderConfirmationPanel();
+        paymentMethodsPanel1 = new view.pos.PaymentMethodsPanel();
+        cashPanel1 = new view.pos.CashPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
 
         topPanel.setBackground(new java.awt.Color(45, 52, 63));
         topPanel.setLayout(new java.awt.CardLayout());
-        topPanel.add(posHeader, "header1");
-        topPanel.add(posSecondaryHeader, "header2");
+        topPanel.add(posHeader, "mainHeader");
+        topPanel.add(posSecondaryHeader, "secondaryHeader");
 
         mainPanel.setBackground(new java.awt.Color(0, 0, 0));
         mainPanel.setLayout(new java.awt.CardLayout());
 
         orderPanel.setForeground(new java.awt.Color(255, 255, 255));
-        mainPanel.add(orderPanel, "card2");
-        mainPanel.add(orderConfirmationPanel, "card3");
+        orderPanel.setName("orderPanel"); // NOI18N
+        mainPanel.add(orderPanel, "orderPanel");
+
+        orderConfirmationPanel.setName("orderConfirmationPanel"); // NOI18N
+        mainPanel.add(orderConfirmationPanel, "orderConfirmationPanel");
+
+        paymentMethodsPanel1.setName("paymentMethodsPanel"); // NOI18N
+        mainPanel.add(paymentMethodsPanel1, "paymentMethodsPanel");
+
+        cashPanel1.setName("cashPanel"); // NOI18N
+        mainPanel.add(cashPanel1, "cashPanel");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -55,9 +75,11 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public view.pos.CashPanel cashPanel1;
     public javax.swing.JPanel mainPanel;
     public view.pos.OrderConfirmationPanel orderConfirmationPanel;
     public view.pos.OrderPanel orderPanel;
+    public view.pos.PaymentMethodsPanel paymentMethodsPanel1;
     public view.components.pos.Header posHeader;
     public view.components.pos.SecondaryHeader posSecondaryHeader;
     public javax.swing.JPanel topPanel;

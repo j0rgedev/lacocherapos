@@ -2,37 +2,25 @@ package controller.pos;
 
 import java.awt.*;
 
-import model.models.Client;
-import model.models.Order;
-import model.service.OrderInterface;
-import model.service.OrderManager;
-import view.components.modal.ClientInfoModalController;
-import view.components.modal.CustomModal;
 import view.listeners.ModalListener;
+import view.pos.OrderConfirmationPanel;
 import view.pos.PointOfSaleFrame;
 
-import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class PosFrameController implements ActionListener, ModalListener {
-
-    private final PointOfSaleFrame pointOfSaleFrm;
-    private CartPanelController cartPanelController;
-    private final OrderInterface orderInterface = OrderManager.getInstance();
+public class PosFrameController extends AbstractController implements ActionListener, ModalListener {
 
     public PosFrameController(PointOfSaleFrame puntoVenta) {
-        this.pointOfSaleFrm = puntoVenta;
     }
 
-    public void init(){
+    @Override
+    public void init() {
         frameConfig();
         showTime();
-        pointOfSaleFrm.orderPanel.btnNext.addActionListener(this);
     }
 
     private void showTime() {
@@ -50,52 +38,25 @@ public class PosFrameController implements ActionListener, ModalListener {
             }
         }, 0, 1000);
     }
-    
-    private void frameConfig(){
+
+    private void frameConfig() {
         pointOfSaleFrm.getContentPane().setBackground(Color.BLACK);
-        // Initial panel: OrderPanel
-        cartPanelController = new CartPanelController(pointOfSaleFrm);
+        // Initial panel: OrderPanel and CartPanel
+        CartPanelController cartPanelController = new CartPanelController(pointOfSaleFrm);
         cartPanelController.init();
         OrderPanelController orderPanelController = new OrderPanelController(pointOfSaleFrm, cartPanelController);
         orderPanelController.init();
     }
 
-    private void orderConfirmationPanelConfig(){
-        changeHeaderPanel("CONFIRMACIÓN DE ORDEN");
-
-        // Change panel
-        pointOfSaleFrm.orderConfirmationPanel.setVisible(true);
-        pointOfSaleFrm.orderPanel.setVisible(false);
-        ConfirmationPanelController confirmationPanelController = new ConfirmationPanelController(pointOfSaleFrm.orderConfirmationPanel);
-        confirmationPanelController.init();
-
-        // Table header configuration
-        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
-        renderer.setBorder(null);
-        renderer.setForeground(new Color(176,176,176));
-        renderer.setBackground(new Color(45,52,63));
-        pointOfSaleFrm.orderConfirmationPanel.orderTable.getTableHeader().setDefaultRenderer(renderer);
-        pointOfSaleFrm.orderConfirmationPanel.orderTable.getTableHeader().setPreferredSize(new Dimension(0, 50));
-    }
-
-    private void changeHeaderPanel(String panelTitle){
-        pointOfSaleFrm.posHeader.setVisible(false);
-        pointOfSaleFrm.posSecondaryHeader.setVisible(true);
-        pointOfSaleFrm.posSecondaryHeader.lblPaymentTitle.setText(panelTitle);
-    }
-
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
-        if(e.getSource() == pointOfSaleFrm.orderPanel.btnNext){
-//            CustomModal modal = new CustomModal();
-//            ClientInfoModalController clientInfoModalController = new ClientInfoModalController(modal, pointOfSaleFrm, this);
-//            clientInfoModalController.showModal();
-            orderConfirmationPanelConfig();
-        }
     }
 
     @Override
     public void onModalClose() {
-        orderConfirmationPanelConfig();
+        OrderConfirmationPanel orderConfirmationPanel = pointOfSaleFrm.orderConfirmationPanel;
+        ConfirmationPanelController confirmationPanelController = new ConfirmationPanelController(orderConfirmationPanel);
+        changePanel(orderConfirmationPanel, confirmationPanelController);
+        changeHeaderPanel("CONFIRMACIÓN DE ORDEN", false);
     }
 }
