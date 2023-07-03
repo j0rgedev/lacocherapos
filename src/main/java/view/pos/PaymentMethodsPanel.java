@@ -24,21 +24,18 @@ public class PaymentMethodsPanel extends javax.swing.JPanel {
         btnCash.setBackground(new java.awt.Color(21, 22, 26));
         btnCash.setFont(new java.awt.Font("Iceland", 0, 36)); // NOI18N
         btnCash.setForeground(new java.awt.Color(240, 240, 240));
-        btnCash.setText("EFECTIVO");
         btnCash.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCash.setPreferredSize(new java.awt.Dimension(260, 260));
 
         btnCard.setBackground(new java.awt.Color(21, 22, 26));
         btnCard.setFont(new java.awt.Font("Iceland", 0, 36)); // NOI18N
         btnCard.setForeground(new java.awt.Color(240, 240, 240));
-        btnCard.setText("TARJETA");
         btnCard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCard.setPreferredSize(new java.awt.Dimension(260, 260));
 
         btnYape.setBackground(new java.awt.Color(21, 22, 26));
         btnYape.setFont(new java.awt.Font("Iceland", 0, 36)); // NOI18N
         btnYape.setForeground(new java.awt.Color(240, 240, 240));
-        btnYape.setText("YAPE/PLIN");
         btnYape.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnYape.setPreferredSize(new java.awt.Dimension(260, 260));
 

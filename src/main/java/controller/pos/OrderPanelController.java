@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import view.components.pos.DishPanel;
 import view.components.pos.Loading;
 import model.dao.impl.DishDAOImpl;
@@ -25,7 +26,8 @@ public class OrderPanelController extends AbstractController implements ActionLi
     private final Map<Category, List<Dish>> productCache = new HashMap<>();
     private final CartPanelController cartPanelController;
 
-    public OrderPanelController(CartPanelController cartPanelController) {
+    public OrderPanelController(PointOfSaleFrame pointOfSaleFrame, CartPanelController cartPanelController) {
+        super(pointOfSaleFrame);
         this.orderPanel = pointOfSaleFrm.orderPanel;
         this.cartPanelController = cartPanelController;
     }
@@ -38,6 +40,24 @@ public class OrderPanelController extends AbstractController implements ActionLi
     }
 
     private void panelConfiguration() {
+        // Set category buttons icons
+        int height = 125;
+        int width = orderPanel.btnCarta.getWidth() - 40;
+        FlatSVGIcon menuIcon = new FlatSVGIcon("icons/menu.svg", width, height);
+        FlatSVGIcon snacksIcon = new FlatSVGIcon("icons/snacks.svg", width, height);
+        FlatSVGIcon hotDrinksIcon = new FlatSVGIcon("icons/hot-drinks.svg", width, height);
+        FlatSVGIcon coldDrinksIcon = new FlatSVGIcon("icons/cold-drinks.svg", width, height);
+        FlatSVGIcon beerIcon = new FlatSVGIcon("icons/beer.svg", width, height);
+        FlatSVGIcon drinksIcon = new FlatSVGIcon("icons/drinks.svg", width, height);
+        FlatSVGIcon dessertsIcon = new FlatSVGIcon("icons/desserts.svg", width, height);
+        orderPanel.btnCarta.setIcon(menuIcon);
+        orderPanel.btnAntojitos.setIcon(snacksIcon);
+        orderPanel.btnHotDrinks.setIcon(hotDrinksIcon);
+        orderPanel.btnColdDrinks.setIcon(coldDrinksIcon);
+        orderPanel.btnBeer.setIcon(beerIcon);
+        orderPanel.btnDrinks.setIcon(drinksIcon);
+        orderPanel.btnDesserts.setIcon(dessertsIcon);
+
         // Remove all borders from dishes table
         orderPanel.scrollPaneDishes.setViewportBorder(null);
         orderPanel.scrollPaneDishes.setBorder(BorderFactory.createLineBorder(new Color(240, 240, 240)));

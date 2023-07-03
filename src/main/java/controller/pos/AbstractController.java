@@ -10,8 +10,12 @@ import java.awt.event.ActionListener;
 
 public abstract class AbstractController implements ActionListener {
 
-    protected PointOfSaleFrame pointOfSaleFrm = PointOfSaleFrame.getInstance();
+    protected PointOfSaleFrame pointOfSaleFrm;
     protected OrderInterface orderInterface = OrderManager.getInstance();
+
+    public AbstractController(PointOfSaleFrame pointOfSaleFrm) {
+        this.pointOfSaleFrm = pointOfSaleFrm;
+    }
 
     protected abstract void init();
 

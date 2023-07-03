@@ -26,7 +26,8 @@ public class CartPanelController extends AbstractController implements ActionLis
     private DefaultTableModel model;
     private final OrderPanel orderPanel;
 
-    public CartPanelController() {
+    public CartPanelController(PointOfSaleFrame pointOfSaleFrm) {
+        super(pointOfSaleFrm);
         this.orderPanel = pointOfSaleFrm.orderPanel;
     }
 
@@ -135,6 +136,10 @@ public class CartPanelController extends AbstractController implements ActionLis
             CustomModal modal = new CustomModal();
             ClientInfoModalController clientInfoModalController = new ClientInfoModalController(modal, pointOfSaleFrm, CartPanelController.this);
             clientInfoModalController.showModal();
+//            OrderConfirmationPanel orderConfirmationPanel = pointOfSaleFrm.orderConfirmationPanel;
+//            ConfirmationPanelController confirmationPanelController = new ConfirmationPanelController(pointOfSaleFrm, orderConfirmationPanel);
+//            changePanel(orderConfirmationPanel, confirmationPanelController);
+//            changeHeaderPanel("CONFIRMACIÓN DE ORDEN", false);
         }
     }
 
@@ -146,7 +151,7 @@ public class CartPanelController extends AbstractController implements ActionLis
     @Override
     public void onClientInfoModalClose() {
         OrderConfirmationPanel orderConfirmationPanel = pointOfSaleFrm.orderConfirmationPanel;
-        ConfirmationPanelController confirmationPanelController = new ConfirmationPanelController(orderConfirmationPanel);
+        ConfirmationPanelController confirmationPanelController = new ConfirmationPanelController(pointOfSaleFrm, orderConfirmationPanel);
         changePanel(orderConfirmationPanel, confirmationPanelController);
         changeHeaderPanel("CONFIRMACIÓN DE ORDEN", false);
     }

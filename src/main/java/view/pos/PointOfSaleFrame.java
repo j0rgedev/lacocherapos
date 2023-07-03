@@ -4,19 +4,9 @@ import view.components.pos.Header;
 import view.components.pos.SecondaryHeader;
 
 public class PointOfSaleFrame extends javax.swing.JFrame {
-
-    private static PointOfSaleFrame instance;
-
-    private PointOfSaleFrame() {
+    public PointOfSaleFrame() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
-    }
-
-    public static PointOfSaleFrame getInstance() {
-        if (instance == null) {
-            instance = new PointOfSaleFrame();
-        }
-        return instance;
     }
 
     @SuppressWarnings("unchecked")

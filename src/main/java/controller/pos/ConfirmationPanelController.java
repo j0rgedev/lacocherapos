@@ -17,9 +17,10 @@ public class ConfirmationPanelController extends AbstractController implements A
     private final TotalOrderPanelController totalOrderPanelController;
     private DefaultTableModel tableModel;
 
-    public ConfirmationPanelController(OrderConfirmationPanel orderConfirmationPanel) {
+    public ConfirmationPanelController(PointOfSaleFrame pointOfSaleFrame,OrderConfirmationPanel orderConfirmationPanel) {
+        super(pointOfSaleFrame);
         this.orderConfirmationPanel = orderConfirmationPanel;
-        this.totalOrderPanelController = new TotalOrderPanelController(orderConfirmationPanel.totalOrderPanel1, PanelType.CONFIRMATION_PANEL);
+        this.totalOrderPanelController = new TotalOrderPanelController(pointOfSaleFrm, orderConfirmationPanel.totalOrderPanel1, PanelType.CONFIRMATION_PANEL);
     }
 
     @Override

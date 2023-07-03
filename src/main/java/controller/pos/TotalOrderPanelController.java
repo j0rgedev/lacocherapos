@@ -9,6 +9,7 @@ import model.models.Payment;
 import model.utils.CodeGenerator;
 import view.pos.FinishedOrderPanel;
 import view.pos.PaymentMethodsPanel;
+import view.pos.PointOfSaleFrame;
 import view.pos.TotalOrderPanel;
 
 import javax.swing.*;
@@ -23,7 +24,8 @@ public class TotalOrderPanelController extends AbstractController implements Act
     private final TotalOrderPanel totalOrderPanel;
     private final PanelType panelType;
 
-    public TotalOrderPanelController(TotalOrderPanel totalOrderPanel, PanelType panelType) {
+    public TotalOrderPanelController(PointOfSaleFrame pointOfSaleFrame, TotalOrderPanel totalOrderPanel, PanelType panelType) {
+        super(pointOfSaleFrame);
         this.totalOrderPanel = totalOrderPanel;
         this.panelType = panelType;
     }
@@ -57,7 +59,7 @@ public class TotalOrderPanelController extends AbstractController implements Act
         if(e.getSource() == totalOrderPanel.btnPay){
             if(panelType == PanelType.CONFIRMATION_PANEL){
                 PaymentMethodsPanel paymentMethodsPanel = pointOfSaleFrm.paymentMethodsPanel1;
-                PaymentMethodsPanelController paymentMethodsPanelController = new PaymentMethodsPanelController(paymentMethodsPanel);
+                PaymentMethodsPanelController paymentMethodsPanelController = new PaymentMethodsPanelController(pointOfSaleFrm, paymentMethodsPanel);
                 changePanel(paymentMethodsPanel, paymentMethodsPanelController);
                 changeHeaderPanel("MÉTODOS DE PAGO", false);
             }
@@ -91,7 +93,7 @@ public class TotalOrderPanelController extends AbstractController implements Act
                         timer.stop();
                         totalOrderPanel.btnPay.setText("Procesando...");
                         FinishedOrderPanel finishedOrderPanel = pointOfSaleFrm.finishedOrderPanel1;
-                        FinishedOrderPanelController finishedOrderPanelController = new FinishedOrderPanelController(finishedOrderPanel);
+                        FinishedOrderPanelController finishedOrderPanelController = new FinishedOrderPanelController(pointOfSaleFrm,finishedOrderPanel);
                         changePanel(finishedOrderPanel, finishedOrderPanelController);
                         changeHeaderPanel("PEDIDO FINALIZADO", false);
                     });

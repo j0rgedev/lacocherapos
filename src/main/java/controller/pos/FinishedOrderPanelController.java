@@ -1,6 +1,7 @@
 package controller.pos;
 
 import view.pos.FinishedOrderPanel;
+import view.pos.PointOfSaleFrame;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +11,8 @@ public class FinishedOrderPanelController extends AbstractController implements 
 
     private final FinishedOrderPanel finishedOrderPanel;
 
-    public FinishedOrderPanelController(FinishedOrderPanel finishedOrderPanel) {
+    public FinishedOrderPanelController(PointOfSaleFrame pointOfSaleFrame, FinishedOrderPanel finishedOrderPanel) {
+        super(pointOfSaleFrame);
         this.finishedOrderPanel = finishedOrderPanel;
     }
 

@@ -8,9 +8,9 @@ public class LaCocheraPosApplication {
             // Frame theme
             FlatDarculaLaf.setup();
             // POS view
-            PointOfSaleFrame pointOfSaleFrame = PointOfSaleFrame.getInstance();
+            PointOfSaleFrame pointOfSaleFrame = new PointOfSaleFrame();
             // POS controller
-            PosFrameController posFrameController = new PosFrameController();
+            PosFrameController posFrameController = new PosFrameController(pointOfSaleFrame);
             posFrameController.init();
             pointOfSaleFrame.setVisible(true);
         }

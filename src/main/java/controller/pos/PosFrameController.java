@@ -1,5 +1,7 @@
 package controller.pos;
 
+import view.pos.PointOfSaleFrame;
+
 import java.awt.*;
 
 import java.awt.event.ActionListener;
@@ -10,7 +12,9 @@ import java.util.TimerTask;
 
 public class PosFrameController extends AbstractController implements ActionListener {
 
-    public PosFrameController() {}
+    public PosFrameController(PointOfSaleFrame pointOfSaleFrm) {
+        super(pointOfSaleFrm);
+    }
 
     @Override
     public void init() {
@@ -37,9 +41,9 @@ public class PosFrameController extends AbstractController implements ActionList
     private void frameConfig() {
         pointOfSaleFrm.getContentPane().setBackground(Color.BLACK);
         // Initial panel: OrderPanel and CartPanel
-        CartPanelController cartPanelController = new CartPanelController();
+        CartPanelController cartPanelController = new CartPanelController(pointOfSaleFrm);
         cartPanelController.init();
-        OrderPanelController orderPanelController = new OrderPanelController(cartPanelController);
+        OrderPanelController orderPanelController = new OrderPanelController(pointOfSaleFrm, cartPanelController);
         orderPanelController.init();
     }
 

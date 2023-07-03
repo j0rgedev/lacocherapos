@@ -43,9 +43,7 @@ public class OrderPanel extends javax.swing.JPanel {
         btnCarta.setBackground(new java.awt.Color(255, 140, 72));
         btnCarta.setFont(new java.awt.Font("Iceland", 1, 24)); // NOI18N
         btnCarta.setForeground(new java.awt.Color(0, 0, 0));
-        btnCarta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/carta.png"))); // NOI18N
         btnCarta.setText("Carta");
-        btnCarta.setBorder(null);
         btnCarta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCarta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCarta.setInheritsPopupMenu(true);
@@ -54,9 +52,7 @@ public class OrderPanel extends javax.swing.JPanel {
         btnAntojitos.setBackground(new java.awt.Color(58, 236, 215));
         btnAntojitos.setFont(new java.awt.Font("Iceland", 1, 24)); // NOI18N
         btnAntojitos.setForeground(new java.awt.Color(0, 0, 0));
-        btnAntojitos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/antojitos.png"))); // NOI18N
         btnAntojitos.setText("Antojitos");
-        btnAntojitos.setBorder(null);
         btnAntojitos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAntojitos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAntojitos.setInheritsPopupMenu(true);
@@ -91,9 +87,7 @@ public class OrderPanel extends javax.swing.JPanel {
         btnHotDrinks.setBackground(new java.awt.Color(255, 72, 72));
         btnHotDrinks.setFont(new java.awt.Font("Iceland", 1, 24)); // NOI18N
         btnHotDrinks.setForeground(new java.awt.Color(0, 0, 0));
-        btnHotDrinks.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/bebidas-calientes.png"))); // NOI18N
         btnHotDrinks.setText("Calientes");
-        btnHotDrinks.setBorder(null);
         btnHotDrinks.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHotDrinks.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnHotDrinks.setInheritsPopupMenu(true);
@@ -102,9 +96,7 @@ public class OrderPanel extends javax.swing.JPanel {
         btnColdDrinks.setBackground(new java.awt.Color(196, 237, 234));
         btnColdDrinks.setFont(new java.awt.Font("Iceland", 1, 24)); // NOI18N
         btnColdDrinks.setForeground(new java.awt.Color(0, 0, 0));
-        btnColdDrinks.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/bebidas-frias.png"))); // NOI18N
         btnColdDrinks.setText("Frías");
-        btnColdDrinks.setBorder(null);
         btnColdDrinks.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnColdDrinks.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnColdDrinks.setInheritsPopupMenu(true);
@@ -139,9 +131,7 @@ public class OrderPanel extends javax.swing.JPanel {
         btnBeer.setBackground(new java.awt.Color(248, 216, 50));
         btnBeer.setFont(new java.awt.Font("Iceland", 1, 24)); // NOI18N
         btnBeer.setForeground(new java.awt.Color(0, 0, 0));
-        btnBeer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cervezas.png"))); // NOI18N
         btnBeer.setText("Cervezas");
-        btnBeer.setBorder(null);
         btnBeer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBeer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnBeer.setInheritsPopupMenu(true);
@@ -150,9 +140,7 @@ public class OrderPanel extends javax.swing.JPanel {
         btnDrinks.setBackground(new java.awt.Color(80, 240, 144));
         btnDrinks.setFont(new java.awt.Font("Iceland", 1, 24)); // NOI18N
         btnDrinks.setForeground(new java.awt.Color(0, 0, 0));
-        btnDrinks.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/tragos.png"))); // NOI18N
         btnDrinks.setText("Tragos");
-        btnDrinks.setBorder(null);
         btnDrinks.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDrinks.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnDrinks.setInheritsPopupMenu(true);
@@ -187,9 +175,7 @@ public class OrderPanel extends javax.swing.JPanel {
         btnDesserts.setBackground(new java.awt.Color(115, 58, 236));
         btnDesserts.setFont(new java.awt.Font("Iceland", 1, 24)); // NOI18N
         btnDesserts.setForeground(new java.awt.Color(0, 0, 0));
-        btnDesserts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/postres.png"))); // NOI18N
         btnDesserts.setText("Postres");
-        btnDesserts.setBorder(null);
         btnDesserts.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDesserts.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnDesserts.setInheritsPopupMenu(true);
