@@ -11,7 +11,7 @@ public class CustomModal extends javax.swing.JDialog {
     private void initComponents() {
 
         background1 = new view.components.modal.Background();
-        lbIcon = new javax.swing.JLabel();
+        lblIcon = new javax.swing.JLabel();
         containerPanel = new javax.swing.JPanel();
         btnCancel = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
@@ -23,7 +23,8 @@ public class CustomModal extends javax.swing.JDialog {
 
         background1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        lbIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIcon.setForeground(new java.awt.Color(0, 0, 0));
+        lblIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         containerPanel.setOpaque(false);
         containerPanel.setLayout(new java.awt.CardLayout());
@@ -46,7 +47,7 @@ public class CustomModal extends javax.swing.JDialog {
         background1.setLayout(background1Layout);
         background1Layout.setHorizontalGroup(
             background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(background1Layout.createSequentialGroup()
                 .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
@@ -56,7 +57,7 @@ public class CustomModal extends javax.swing.JDialog {
         background1Layout.setVerticalGroup(
             background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(background1Layout.createSequentialGroup()
-                .addComponent(lbIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(containerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
                 .addGap(15, 15, 15)
@@ -87,6 +88,6 @@ public class CustomModal extends javax.swing.JDialog {
     public javax.swing.JButton btnCancel;
     public javax.swing.JButton btnEdit;
     public javax.swing.JPanel containerPanel;
-    private javax.swing.JLabel lbIcon;
+    public javax.swing.JLabel lblIcon;
     // End of variables declaration//GEN-END:variables
 }

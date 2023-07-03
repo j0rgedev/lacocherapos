@@ -33,7 +33,7 @@ public class FinishedOrderPanel extends javax.swing.JPanel {
         lblTitle.setText("Número de pedido");
 
         btnNewOrder.setBackground(new java.awt.Color(66, 100, 250));
-        btnNewOrder.setFont(new java.awt.Font("Iceland", 1, 60)); // NOI18N
+        btnNewOrder.setFont(new java.awt.Font("Iceland", 1, 70)); // NOI18N
         btnNewOrder.setForeground(new java.awt.Color(255, 255, 255));
         btnNewOrder.setText("Nuevo Pedido");
         btnNewOrder.setBorder(null);
@@ -53,13 +53,14 @@ public class FinishedOrderPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(svgImage, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                .addContainerGap(73, Short.MAX_VALUE)
+                .addComponent(svgImage, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(lblOrderId)
-                .addGap(126, 126, 126)
-                .addComponent(btnNewOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(btnNewOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

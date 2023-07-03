@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import model.service.OrderInterface;
 import model.service.OrderManager;
 import org.jdesktop.animation.timing.Animator;
@@ -77,7 +78,8 @@ public abstract class ModalController extends JDialog implements ActionListener 
         animator.start();
     }
 
-    protected void setupModal(JPanel panel) {
+    protected void setupModal(JPanel panel, String path) {
+        setModalIcon(path);
         customModal.containerPanel.setPreferredSize(panel.getPreferredSize());
         customModal.containerPanel.add(panel);
         customModal.pack();
@@ -88,6 +90,11 @@ public abstract class ModalController extends JDialog implements ActionListener 
         customModal.setVisible(true);
     }
 
+    protected void setModalIcon(String path) {
+        int dimension = (int) (customModal.lblIcon.getHeight() / 1.5);
+        FlatSVGIcon icon = new FlatSVGIcon(path, dimension, dimension);
+        customModal.lblIcon.setIcon(icon);
+    }
 
     public void closeMessage() {
         startAnimator(false);

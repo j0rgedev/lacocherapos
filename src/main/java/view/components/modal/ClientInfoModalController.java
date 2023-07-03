@@ -24,7 +24,7 @@ public class ClientInfoModalController extends ModalController {
     @Override
     public void showModal() {
         clientInfoPanel = new ClientInfoPanel();
-        setupModal(clientInfoPanel);
+        setupModal(clientInfoPanel, "icons/client.svg");
     }
 
     @Override
@@ -82,7 +82,6 @@ public class ClientInfoModalController extends ModalController {
 
         if (e.getSource() == customModal.btnCancel) {
             closeMessage();
-            modalListener.onClientInfoModalClose();
         }
     }
 }

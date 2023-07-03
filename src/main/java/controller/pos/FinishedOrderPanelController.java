@@ -2,11 +2,9 @@ package controller.pos;
 
 import view.pos.FinishedOrderPanel;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.InputStream;
 
 public class FinishedOrderPanelController extends AbstractController implements ActionListener {
 
@@ -19,8 +17,9 @@ public class FinishedOrderPanelController extends AbstractController implements 
     @Override
     protected void init() {
         int dimension = finishedOrderPanel.svgImage.getHeight();
-        finishedOrderPanel.svgImage.setImage("icons/done.svg", new Dimension(dimension, dimension));
+        finishedOrderPanel.svgImage.setImage("icons/check.svg", new Dimension(dimension, dimension));
 
+        finishedOrderPanel.lblOrderId.setText(orderInterface.getOrder().getId());
         finishedOrderPanel.btnNewOrder.addActionListener(this);
     }
 

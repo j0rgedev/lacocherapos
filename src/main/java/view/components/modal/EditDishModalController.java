@@ -34,8 +34,7 @@ public class EditDishModalController extends ModalController{
     public void showModal() {
         editDishPanel.btnDecrease.addActionListener(this);
         editDishPanel.btnIncrease.addActionListener(this);
-        setupModal(editDishPanel);
-        // Custom listeners
+        setupModal(editDishPanel, "icons/edit.svg");
     }
 
     @Override
@@ -68,7 +67,6 @@ public class EditDishModalController extends ModalController{
         }
 
         if(e.getSource()==customModal.btnCancel){
-            modalListener.onEditDishModalClose();
             closeMessage();
         }
     }
