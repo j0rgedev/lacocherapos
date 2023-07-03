@@ -1,5 +1,6 @@
 package controller.pos;
 
+import model.enums.PanelType;
 import view.pos.CashPanel;
 
 import java.awt.event.ActionEvent;
@@ -12,12 +13,13 @@ public class CashPanelController extends AbstractController implements ActionLis
 
     public CashPanelController(CashPanel cashPanel) {
         this.cashPanel = cashPanel;
-        this.totalOrderPanelController = new TotalOrderPanelController(cashPanel.totalOrderPanel1);
+        this.totalOrderPanelController = new TotalOrderPanelController(cashPanel.totalOrderPanel1, PanelType.CASH_PANEL);
     }
 
     @Override
     protected void init(){
         totalOrderPanelController.init();
+        totalOrderPanelController.setMainButtonText("Procesar");
     }
 
     @Override

@@ -31,6 +31,7 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
         orderConfirmationPanel = new view.pos.OrderConfirmationPanel();
         paymentMethodsPanel1 = new view.pos.PaymentMethodsPanel();
         cashPanel1 = new view.pos.CashPanel();
+        finishedOrderPanel1 = new view.pos.FinishedOrderPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -56,6 +57,9 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
         cashPanel1.setName("cashPanel"); // NOI18N
         mainPanel.add(cashPanel1, "cashPanel");
 
+        finishedOrderPanel1.setName("finishedOrderPanel"); // NOI18N
+        mainPanel.add(finishedOrderPanel1, "finishedOrderPanel");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,6 +80,7 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public view.pos.CashPanel cashPanel1;
+    public view.pos.FinishedOrderPanel finishedOrderPanel1;
     public javax.swing.JPanel mainPanel;
     public view.pos.OrderConfirmationPanel orderConfirmationPanel;
     public view.pos.OrderPanel orderPanel;

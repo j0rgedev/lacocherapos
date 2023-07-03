@@ -151,7 +151,7 @@ public class CashPanel extends javax.swing.JPanel {
         lblChangeAmount.setFont(new java.awt.Font("Iceland", 0, 60)); // NOI18N
         lblChangeAmount.setForeground(new java.awt.Color(255, 255, 255));
         lblChangeAmount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblChangeAmount.setText("S/00.00");
+        lblChangeAmount.setText("------");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

@@ -22,7 +22,7 @@ public abstract class ModalController extends JDialog implements ActionListener 
     private boolean show;
     protected final CustomModal customModal;
     private final JFrame jFrame;
-    private final ModalListener modalListener;
+    protected final ModalListener modalListener;
     protected final OrderInterface orderInterface = OrderManager.getInstance();
 
     public ModalController(CustomModal customModal, JFrame jFrame, ModalListener modalListener) {
@@ -91,7 +91,6 @@ public abstract class ModalController extends JDialog implements ActionListener 
 
     public void closeMessage() {
         startAnimator(false);
-        modalListener.onModalClose();
     }
 
     public abstract void showModal();
@@ -101,9 +100,5 @@ public abstract class ModalController extends JDialog implements ActionListener 
     @Override
     public void actionPerformed(ActionEvent e) {
         handleCustomModalAction(e);
-
-        if (e.getSource() == customModal.btnCancel) {
-            closeMessage();
-        }
     }
 }

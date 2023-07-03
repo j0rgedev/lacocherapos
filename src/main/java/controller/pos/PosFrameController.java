@@ -2,20 +2,15 @@ package controller.pos;
 
 import java.awt.*;
 
-import view.listeners.ModalListener;
-import view.pos.OrderConfirmationPanel;
-import view.pos.PointOfSaleFrame;
-
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class PosFrameController extends AbstractController implements ActionListener, ModalListener {
+public class PosFrameController extends AbstractController implements ActionListener {
 
-    public PosFrameController(PointOfSaleFrame puntoVenta) {
-    }
+    public PosFrameController() {}
 
     @Override
     public void init() {
@@ -42,9 +37,9 @@ public class PosFrameController extends AbstractController implements ActionList
     private void frameConfig() {
         pointOfSaleFrm.getContentPane().setBackground(Color.BLACK);
         // Initial panel: OrderPanel and CartPanel
-        CartPanelController cartPanelController = new CartPanelController(pointOfSaleFrm);
+        CartPanelController cartPanelController = new CartPanelController();
         cartPanelController.init();
-        OrderPanelController orderPanelController = new OrderPanelController(pointOfSaleFrm, cartPanelController);
+        OrderPanelController orderPanelController = new OrderPanelController(cartPanelController);
         orderPanelController.init();
     }
 
@@ -52,11 +47,4 @@ public class PosFrameController extends AbstractController implements ActionList
     public void actionPerformed(java.awt.event.ActionEvent e) {
     }
 
-    @Override
-    public void onModalClose() {
-        OrderConfirmationPanel orderConfirmationPanel = pointOfSaleFrm.orderConfirmationPanel;
-        ConfirmationPanelController confirmationPanelController = new ConfirmationPanelController(orderConfirmationPanel);
-        changePanel(orderConfirmationPanel, confirmationPanelController);
-        changeHeaderPanel("CONFIRMACIÓN DE ORDEN", false);
-    }
 }

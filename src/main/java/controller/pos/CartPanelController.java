@@ -3,9 +3,11 @@ package controller.pos;
 import model.models.CartDish;
 import model.models.Client;
 import model.models.Dish;
+import view.components.modal.ClientInfoModalController;
 import view.components.modal.CustomModal;
 import view.components.modal.EditDishModalController;
 import view.listeners.ModalListener;
+import view.pos.FinishedOrderPanel;
 import view.pos.OrderConfirmationPanel;
 import view.pos.OrderPanel;
 import view.pos.PointOfSaleFrame;
@@ -21,13 +23,11 @@ import java.util.List;
 
 public class CartPanelController extends AbstractController implements ActionListener, ModalListener {
 
-    private final JFrame frame;
     private DefaultTableModel model;
     private final OrderPanel orderPanel;
 
-    public CartPanelController(PointOfSaleFrame frame) {
-        this.frame = frame;
-        this.orderPanel = frame.orderPanel;
+    public CartPanelController() {
+        this.orderPanel = pointOfSaleFrm.orderPanel;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class CartPanelController extends AbstractController implements ActionLis
                     int selectedRow = orderPanel.tableDishes.getSelectedRow();
                     if (selectedRow != -1) {
                         CustomModal modal = new CustomModal();
-                        EditDishModalController editDishModalController = new EditDishModalController(modal, frame, CartPanelController.this);
+                        EditDishModalController editDishModalController = new EditDishModalController(modal, pointOfSaleFrm, CartPanelController.this);
                         CartDish cartDish = getSelectedDish(selectedRow);
                         editDishModalController.setOrderDish(cartDish);
                         editDishModalController.showModal();
@@ -132,14 +132,26 @@ public class CartPanelController extends AbstractController implements ActionLis
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == orderPanel.btnNext) {
-            OrderConfirmationPanel orderConfirmationPanel = pointOfSaleFrm.orderConfirmationPanel;
-            ConfirmationPanelController confirmationPanelController = new ConfirmationPanelController(orderConfirmationPanel);
-            changePanel(pointOfSaleFrm.orderConfirmationPanel,confirmationPanelController);
+//            CustomModal modal = new CustomModal();
+//            ClientInfoModalController clientInfoModalController = new ClientInfoModalController(modal, pointOfSaleFrm, CartPanelController.this);
+//            clientInfoModalController.showModal();
+            FinishedOrderPanel finishedOrderPanel = pointOfSaleFrm.finishedOrderPanel1;
+            FinishedOrderPanelController finishedOrderPanelController = new FinishedOrderPanelController(finishedOrderPanel);
+            changePanel(finishedOrderPanel, finishedOrderPanelController);
+            changeHeaderPanel("PEDIDO FINALIZADO", false);
         }
     }
 
     @Override
-    public void onModalClose() {
+    public void onEditDishModalClose() {
         refreshCart();
+    }
+
+    @Override
+    public void onClientInfoModalClose() {
+        OrderConfirmationPanel orderConfirmationPanel = pointOfSaleFrm.orderConfirmationPanel;
+        ConfirmationPanelController confirmationPanelController = new ConfirmationPanelController(orderConfirmationPanel);
+        changePanel(orderConfirmationPanel, confirmationPanelController);
+        changeHeaderPanel("CONFIRMACIÓN DE ORDEN", false);
     }
 }

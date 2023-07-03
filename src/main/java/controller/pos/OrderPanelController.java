@@ -12,25 +12,26 @@ import javax.swing.table.DefaultTableCellRenderer;
 import view.components.pos.DishPanel;
 import view.components.pos.Loading;
 import model.dao.impl.DishDAOImpl;
-import model.models.Category;
+import model.enums.Category;
 import model.models.Dish;
 import model.models.CartDish;
 import view.pos.OrderPanel;
 import view.pos.PointOfSaleFrame;
 
-public class OrderPanelController implements ActionListener {
+public class OrderPanelController extends AbstractController implements ActionListener {
 
     private final OrderPanel orderPanel;
     private DishDAOImpl dishDAO;
     private final Map<Category, List<Dish>> productCache = new HashMap<>();
     private final CartPanelController cartPanelController;
 
-    public OrderPanelController(PointOfSaleFrame pointOfSaleFrame, CartPanelController cartPanelController) {
-        this.orderPanel = pointOfSaleFrame.orderPanel;
+    public OrderPanelController(CartPanelController cartPanelController) {
+        this.orderPanel = pointOfSaleFrm.orderPanel;
         this.cartPanelController = cartPanelController;
     }
 
-    public void init() {
+    @Override
+    protected void init() {
         panelConfiguration();
         listeners();
         dishDAO = new DishDAOImpl();

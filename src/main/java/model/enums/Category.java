@@ -1,4 +1,4 @@
-package model.models;
+package model.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

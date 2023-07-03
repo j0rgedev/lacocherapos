@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ClientInfoModalController extends ModalController{
+public class ClientInfoModalController extends ModalController {
 
     private ClientInfoPanel clientInfoPanel;
 
@@ -52,7 +52,6 @@ public class ClientInfoModalController extends ModalController{
 
             ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-            customModal.btnEdit.setText("GUARDANDO");
             Timer timer = new Timer(500, new ActionListener() {
                 private int dotsCount = 0;
 
@@ -75,10 +74,15 @@ public class ClientInfoModalController extends ModalController{
                     timer.stop();
                     customModal.btnEdit.setText("GUARDANDO...");
                     closeMessage();
+                    modalListener.onClientInfoModalClose();
                 });
             });
-
             executorService.shutdown();
+        }
+
+        if (e.getSource() == customModal.btnCancel) {
+            closeMessage();
+            modalListener.onClientInfoModalClose();
         }
     }
 }

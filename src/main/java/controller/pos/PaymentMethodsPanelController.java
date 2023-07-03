@@ -27,6 +27,7 @@ public class PaymentMethodsPanelController extends AbstractController implements
             CashPanel cashPanel = pointOfSaleFrm.cashPanel1;
             CashPanelController cashPanelController = new CashPanelController(cashPanel);
             changePanel(cashPanel, cashPanelController);
+            changeHeaderPanel("PAGO EN EFECTIVO", false);
         }
     }
 }

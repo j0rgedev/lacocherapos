@@ -22,7 +22,7 @@ public abstract class AbstractController implements ActionListener {
     }
 
     protected void changeHeaderPanel(String title, boolean isMainHeader) {
-        CardLayout cardLayout = (CardLayout) pointOfSaleFrm.posHeader.getLayout();
+        CardLayout cardLayout = (CardLayout) pointOfSaleFrm.topPanel.getLayout();
         String cardLayoutName = isMainHeader ? "mainHeader" : "secondaryHeader";
         cardLayout.show(pointOfSaleFrm.posHeader, cardLayoutName);
         pointOfSaleFrm.posSecondaryHeader.lblPaymentTitle.setText(title);

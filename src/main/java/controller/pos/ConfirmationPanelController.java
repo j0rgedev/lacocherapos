@@ -1,5 +1,6 @@
 package controller.pos;
 
+import model.enums.PanelType;
 import view.pos.OrderConfirmationPanel;
 import view.pos.PointOfSaleFrame;
 
@@ -18,7 +19,7 @@ public class ConfirmationPanelController extends AbstractController implements A
 
     public ConfirmationPanelController(OrderConfirmationPanel orderConfirmationPanel) {
         this.orderConfirmationPanel = orderConfirmationPanel;
-        this.totalOrderPanelController = new TotalOrderPanelController(orderConfirmationPanel.totalOrderPanel1);
+        this.totalOrderPanelController = new TotalOrderPanelController(orderConfirmationPanel.totalOrderPanel1, PanelType.CONFIRMATION_PANEL);
     }
 
     @Override

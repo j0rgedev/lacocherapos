@@ -63,6 +63,12 @@ public class EditDishModalController extends ModalController{
                 cartDish.setNotes(notes);
             }
             orderInterface.updateDish(cartDish);
+            modalListener.onEditDishModalClose();
+            closeMessage();
+        }
+
+        if(e.getSource()==customModal.btnCancel){
+            modalListener.onEditDishModalClose();
             closeMessage();
         }
     }
