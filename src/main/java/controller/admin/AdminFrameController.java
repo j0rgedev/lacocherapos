@@ -53,7 +53,10 @@ public class AdminFrameController extends AdminAbstractController{
     // Method to change menu option
     private void changeMenuOption(int menu_index){
         switch (menu_index) {
-            case 0 -> showMenuPanel(new DashboardPanel());
+            case 0 -> {
+                DashboardPanel dashboardPanel = new DashboardPanel();
+                showMenuPanel(dashboardPanel, new DashboardPanelController(dashboardPanel));
+            }
             case 1 -> System.out.println("Analíticas");
             case 2 -> System.out.println("Menú (Carta)");
             case 3 -> System.out.println("Cerrar sesión");
@@ -62,10 +65,11 @@ public class AdminFrameController extends AdminAbstractController{
     }
 
     // Method to show menu panel
-    private void showMenuPanel(Component component){
+    private void showMenuPanel(Component component, AdminAbstractController controller){
         adminIntranetFrm.mainPanel.removeAll();
         adminIntranetFrm.mainPanel.add(component);
         adminIntranetFrm.mainPanel.revalidate();
         adminIntranetFrm.mainPanel.repaint();
+        controller.init();
     }
 }

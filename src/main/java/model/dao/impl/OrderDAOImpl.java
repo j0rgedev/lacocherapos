@@ -22,7 +22,7 @@ public class OrderDAOImpl implements OrderDAO, DishOrderDAO {
     private String getLastOrderId() {
         try {
             Statement statement = dbConnection.getConnection().createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT id FROM `order` ORDER BY id DESC LIMIT 1");
+            ResultSet resultSet = statement.executeQuery("SELECT id FROM orders ORDER BY id DESC LIMIT 1");
             return resultSet.next() ? resultSet.getString("id") : null;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -34,7 +34,7 @@ public class OrderDAOImpl implements OrderDAO, DishOrderDAO {
     public String createOrder(Order order) {
         String orderId = CodeGenerator.generateOrderId(Objects.requireNonNull(getLastOrderId()));
         try {
-            PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement("INSERT INTO `order` (id, date, total_amount, paid, client_dni) VALUES (?, ?, ?, ?, ?)");
+            PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement("INSERT INTO orders (id, date, total_amount, paid, client_dni) VALUES (?, ?, ?, ?, ?)");
             preparedStatement.setString(1, orderId);
             preparedStatement.setTimestamp(2, Timestamp.valueOf(order.getDate()));
             preparedStatement.setDouble(3, order.getTotalAmount());

@@ -1,11 +1,6 @@
 package view.components.admin.charts.lineChart.chart;
 
-import java.awt.BasicStroke;
-import java.awt.Cursor;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 
@@ -23,6 +18,7 @@ public class LegendItem extends JButton {
         this.index = index;
         setText(legend.getName());
         setContentAreaFilled(false);
+        setFont(new Font("Iceland", Font.PLAIN, 16));
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         setBorder(new EmptyBorder(2, 25, 2, 1));
     }

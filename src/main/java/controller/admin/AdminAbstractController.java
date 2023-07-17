@@ -10,5 +10,7 @@ public abstract class AdminAbstractController {
         this.adminIntranetFrm = adminIntranetFrm;
     }
 
+    public AdminAbstractController() {}
+
     public void init() {}
 }
