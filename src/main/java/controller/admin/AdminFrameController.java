@@ -15,14 +15,21 @@ public class AdminFrameController extends AdminAbstractController{
 
     @Override
     public void init() {
+        // Menu options layout
         adminIntranetFrm.navBarPanel.setLayout(new MigLayout("wrap, fillx, inset 2", "[fill]", "[]4[]"));
 
+        // Menu options
         setMenuOption("Dashboard", 0);
         setMenuOption("Analíticas", 1);
         setMenuOption("Menú (Carta)",2);
         setMenuOption("Cerrar sesión", 3);
+
+        // Default menu option
+        setMenuOptionSelected((ButtonMenu) adminIntranetFrm.navBarPanel.getComponent(0));
+        changeMenuOption(0);
     }
 
+    // Method to set menu options
     private void setMenuOption(String text, int menu_index){
         ButtonMenu buttonMenu = new ButtonMenu();
         buttonMenu.setText(text);
@@ -33,6 +40,7 @@ public class AdminFrameController extends AdminAbstractController{
         });
     }
 
+    // Method to set selected menu option
     private void setMenuOptionSelected(ButtonMenu buttonMenu){
         for(Component comp : adminIntranetFrm.navBarPanel.getComponents()){
             if(comp instanceof ButtonMenu){
@@ -42,15 +50,18 @@ public class AdminFrameController extends AdminAbstractController{
         buttonMenu.setSelected(true);
     }
 
+    // Method to change menu option
     private void changeMenuOption(int menu_index){
         switch (menu_index) {
             case 0 -> showMenuPanel(new DashboardPanel());
             case 1 -> System.out.println("Analíticas");
             case 2 -> System.out.println("Menú (Carta)");
             case 3 -> System.out.println("Cerrar sesión");
+            // Add more cases here
         }
     }
 
+    // Method to show menu panel
     private void showMenuPanel(Component component){
         adminIntranetFrm.mainPanel.removeAll();
         adminIntranetFrm.mainPanel.add(component);
