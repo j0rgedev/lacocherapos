@@ -3,11 +3,13 @@ package model.dao.impl;
 import model.dao.DishOrderDAO;
 import model.dao.OrderDAO;
 import model.db.DatabaseConnection;
-import model.models.CartDish;
-import model.models.Order;
+import model.dto.DashboardDTOS;
+import model.entity.CartDish;
+import model.entity.Order;
 import model.utils.CodeGenerator;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,7 +19,9 @@ public class OrderDAOImpl implements OrderDAO, DishOrderDAO {
     private final static String LAST_ORDER_ID = "SELECT id FROM orders ORDER BY id DESC LIMIT 1";
     private final static String CREATE_ORDER = "INSERT INTO orders (id, date, total_amount, paid, client_dni) VALUES (?, ?, ?, ?, ?)";
     private final static String CREATE_DISH_ORDER = "INSERT INTO dish_order (dish_id, quantity, unit_price, subtotal, notes, order_id) VALUES (?, ?, ?, ?, ?, ?)";
-
+    private final static String GET_ORDERS_TOTAL_AMOUNT_FOR_TODAY = "SELECT SUM(total_amount) from orders WHERE DAY(date) = DAY(now())";
+    private final static String GET_ORDERS_QUANTITY_FOR_TODAY = "SELECT COUNT(*) from orders WHERE DAY(date) = DAY(now())";
+    private final static String GET_ORDERS_QUANTITY_BY_PAYMENT_METHOD = "SELECT o.id AS Id, DATE_FORMAT(o.date, '%Y-%m') AS Mes, o.paid AS Pagado, p.method as Metodo FROM orders o LEFT JOIN payment p ON o.id = p.order_id WHERE o.date >= DATE_SUB(CURRENT_DATE(), INTERVAL 6 MONTH)";
 
     public OrderDAOImpl() {
         this.dbConnection = new DatabaseConnection();
@@ -66,6 +70,59 @@ public class OrderDAOImpl implements OrderDAO, DishOrderDAO {
     @Override
     public void deleteOrder() {
 
+    }
+
+    @Override
+    public double getOrdersTotalAmountForToday() {
+        try {
+            Statement statement = dbConnection.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_ORDERS_TOTAL_AMOUNT_FOR_TODAY);
+            if (resultSet.next()) {
+                return resultSet.getDouble(1);
+            }
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
+    }
+
+    @Override
+    public int getOrdersQuantityForToday() {
+        try {
+            Statement statement = dbConnection.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_ORDERS_QUANTITY_FOR_TODAY);
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
+    }
+
+    @Override
+    public List<DashboardDTOS.OrdersByPaymentMethod> getOrdersQuantityByPaymentMethod() {
+        try {
+            List<DashboardDTOS.OrdersByPaymentMethod> ordersByPaymentMethodList = new ArrayList<>();
+            Statement statement = dbConnection.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_ORDERS_QUANTITY_BY_PAYMENT_METHOD);
+            while (resultSet.next()) {
+                DashboardDTOS.OrdersByPaymentMethod ordersByPaymentMethod = new DashboardDTOS.OrdersByPaymentMethod(
+                        resultSet.getString("Id"),
+                        resultSet.getString("Mes"),
+                        resultSet.getBoolean("Pagado"),
+                        resultSet.getString("Metodo")
+                );
+                ordersByPaymentMethodList.add(ordersByPaymentMethod);
+            }
+            statement.close();
+            return ordersByPaymentMethodList;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     @Override

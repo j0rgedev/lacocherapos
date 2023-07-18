@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.models.Dish;
+import model.entity.Dish;
 
 import java.util.List;
 

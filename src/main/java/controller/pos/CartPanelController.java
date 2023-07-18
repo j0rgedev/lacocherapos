@@ -1,24 +1,19 @@
 package controller.pos;
 
-import model.models.CartDish;
-import model.models.Client;
-import model.models.Dish;
+import model.entity.CartDish;
 import view.components.modal.ClientInfoModalController;
 import view.components.modal.CustomModal;
 import view.components.modal.EditDishModalController;
 import view.listeners.ModalListener;
-import view.pos.FinishedOrderPanel;
 import view.pos.OrderConfirmationPanel;
 import view.pos.OrderPanel;
 import view.pos.PointOfSaleFrame;
 
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class CartPanelController extends AbstractController implements ActionListener, ModalListener {

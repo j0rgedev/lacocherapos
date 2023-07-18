@@ -2,7 +2,7 @@ package model.dao.impl;
 
 import model.dao.ClientDAO;
 import model.db.DatabaseConnection;
-import model.models.Client;
+import model.entity.Client;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

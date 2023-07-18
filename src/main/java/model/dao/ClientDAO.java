@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.models.Client;
+import model.entity.Client;
 
 public interface ClientDAO {
     void createClient(Client client);

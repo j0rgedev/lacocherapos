@@ -17,12 +17,13 @@ import java.util.List;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
+import view.components.admin.charts.common.ModelChart;
 
 public class Chart extends javax.swing.JPanel {
 
     DecimalFormat df = new DecimalFormat("#,##0.##");
     private List<ModelLegend> legends = new ArrayList<>();
-    private List<ModelBarChart> model = new ArrayList<>();
+    private List<ModelChart> model = new ArrayList<>();
     private final int seriesSize = 20;
     private final int seriesSpace = 10;
     private final Animator animator;
@@ -134,7 +135,7 @@ public class Chart extends javax.swing.JPanel {
         panelLegend.revalidate();
     }
 
-    public void addData(ModelBarChart data) {
+    public void addData(ModelChart data) {
         model.add(data);
         blankPlotChart.setLabelCount(model.size());
         double max = data.getMaxValues();

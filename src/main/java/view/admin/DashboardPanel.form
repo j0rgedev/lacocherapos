@@ -101,7 +101,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblProgress1" max="32767" attributes="0"/>
-                  <Component id="salesProgress" alignment="0" max="32767" attributes="0"/>
+                  <Component id="amountProgress" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -109,7 +109,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblProgress1" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="salesProgress" pref="168" max="32767" attributes="0"/>
+                      <Component id="amountProgress" pref="168" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -127,7 +127,7 @@
                 <Property name="text" type="java.lang.String" value="Monto vendido"/>
               </Properties>
             </Component>
-            <Component class="view.components.admin.Progress" name="salesProgress">
+            <Component class="view.components.admin.Progress" name="amountProgress">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="54" green="f6" red="42" type="rgb"/>
@@ -155,7 +155,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblProgress2" alignment="0" max="32767" attributes="0"/>
-                  <Component id="ordersProgress" alignment="0" max="32767" attributes="0"/>
+                  <Component id="quantityProgress" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -163,7 +163,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblProgress2" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="ordersProgress" max="32767" attributes="0"/>
+                      <Component id="quantityProgress" max="32767" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -182,7 +182,7 @@
                 <Property name="text" type="java.lang.String" value="Cantidad de pedidos"/>
               </Properties>
             </Component>
-            <Component class="view.components.admin.Progress" name="ordersProgress">
+            <Component class="view.components.admin.Progress" name="quantityProgress">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f6" green="42" red="84" type="rgb"/>

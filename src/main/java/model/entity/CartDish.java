@@ -1,4 +1,4 @@
-package model.models;
+package model.entity;
 
 import lombok.Data;
 import lombok.NonNull;

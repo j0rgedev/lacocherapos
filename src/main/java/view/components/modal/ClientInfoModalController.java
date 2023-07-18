@@ -2,8 +2,8 @@ package view.components.modal;
 
 import model.dao.impl.ClientDAOImpl;
 import model.dao.impl.OrderDAOImpl;
-import model.models.Client;
-import model.models.Order;
+import model.entity.Client;
+import model.entity.Order;
 import view.listeners.ModalListener;
 
 import javax.swing.*;

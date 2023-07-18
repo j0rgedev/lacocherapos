@@ -24,6 +24,7 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
+import view.components.admin.charts.common.ModelChart;
 import view.components.admin.charts.lineChart.chart.blankchart.BlankPlotChart;
 import view.components.admin.charts.lineChart.chart.blankchart.BlankPlotChatRender;
 import view.components.admin.charts.lineChart.spline.Spline;

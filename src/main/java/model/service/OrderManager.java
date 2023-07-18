@@ -1,9 +1,7 @@
 package model.service;
 
-import lombok.Getter;
-import lombok.Setter;
-import model.models.CartDish;
-import model.models.Order;
+import model.entity.CartDish;
+import model.entity.Order;
 
 import java.util.ArrayList;
 import java.util.List;

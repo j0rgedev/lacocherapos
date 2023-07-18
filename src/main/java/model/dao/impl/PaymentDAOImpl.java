@@ -2,7 +2,7 @@ package model.dao.impl;
 
 import model.dao.PaymentDao;
 import model.db.DatabaseConnection;
-import model.models.Payment;
+import model.entity.Payment;
 import model.utils.CodeGenerator;
 
 import java.sql.PreparedStatement;

@@ -1,7 +1,7 @@
 package model.service;
 
-import model.models.CartDish;
-import model.models.Order;
+import model.entity.CartDish;
+import model.entity.Order;
 
 import java.util.List;
 

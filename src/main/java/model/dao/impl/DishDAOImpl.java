@@ -2,7 +2,7 @@ package model.dao.impl;
 
 import model.dao.DishDAO;
 import model.db.DatabaseConnection;
-import model.models.Dish;
+import model.entity.Dish;
 
 import java.sql.*;
 import java.util.ArrayList;

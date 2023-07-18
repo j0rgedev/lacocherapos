@@ -1,6 +1,9 @@
 package model.dao;
 
-import model.models.Order;
+import model.dto.DashboardDTOS;
+import model.entity.Order;
+
+import java.util.List;
 
 public interface OrderDAO {
     // CRUD
@@ -10,5 +13,7 @@ public interface OrderDAO {
     void deleteOrder();
 
     // Other methods
-
+    double getOrdersTotalAmountForToday();
+    int getOrdersQuantityForToday();
+    List<DashboardDTOS.OrdersByPaymentMethod> getOrdersQuantityByPaymentMethod();
 }

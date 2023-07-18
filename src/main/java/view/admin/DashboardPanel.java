@@ -14,10 +14,10 @@ public class DashboardPanel extends javax.swing.JPanel {
         lblDate = new javax.swing.JLabel();
         progressPanel1 = new javax.swing.JPanel();
         lblProgress1 = new javax.swing.JLabel();
-        salesProgress = new view.components.admin.Progress();
+        amountProgress = new view.components.admin.Progress();
         progressPanel2 = new javax.swing.JPanel();
         lblProgress2 = new javax.swing.JLabel();
-        ordersProgress = new view.components.admin.Progress();
+        quantityProgress = new view.components.admin.Progress();
         lineChartPanel = new view.components.RoundPanel();
         lineChart = new view.components.admin.charts.lineChart.chart.CurveLineChart();
         barChartPanel = new view.components.RoundPanel();
@@ -36,24 +36,24 @@ public class DashboardPanel extends javax.swing.JPanel {
         lblProgress1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblProgress1.setText("Monto vendido");
 
-        salesProgress.setBackground(new java.awt.Color(66, 246, 84));
-        salesProgress.setForeground(new java.awt.Color(19, 153, 32));
-        salesProgress.setMaximum(1000);
-        salesProgress.setFont(new java.awt.Font("Iceland", 0, 24)); // NOI18N
+        amountProgress.setBackground(new java.awt.Color(66, 246, 84));
+        amountProgress.setForeground(new java.awt.Color(19, 153, 32));
+        amountProgress.setMaximum(1000);
+        amountProgress.setFont(new java.awt.Font("Iceland", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout progressPanel1Layout = new javax.swing.GroupLayout(progressPanel1);
         progressPanel1.setLayout(progressPanel1Layout);
         progressPanel1Layout.setHorizontalGroup(
             progressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblProgress1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(salesProgress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(amountProgress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         progressPanel1Layout.setVerticalGroup(
             progressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(progressPanel1Layout.createSequentialGroup()
                 .addComponent(lblProgress1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(salesProgress, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
+                .addComponent(amountProgress, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
         );
 
         progressPanel2.setOpaque(false);
@@ -63,23 +63,23 @@ public class DashboardPanel extends javax.swing.JPanel {
         lblProgress2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblProgress2.setText("Cantidad de pedidos");
 
-        ordersProgress.setBackground(new java.awt.Color(132, 66, 246));
-        ordersProgress.setForeground(new java.awt.Color(64, 18, 153));
-        ordersProgress.setFont(new java.awt.Font("Iceland", 0, 24)); // NOI18N
+        quantityProgress.setBackground(new java.awt.Color(132, 66, 246));
+        quantityProgress.setForeground(new java.awt.Color(64, 18, 153));
+        quantityProgress.setFont(new java.awt.Font("Iceland", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout progressPanel2Layout = new javax.swing.GroupLayout(progressPanel2);
         progressPanel2.setLayout(progressPanel2Layout);
         progressPanel2Layout.setHorizontalGroup(
             progressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblProgress2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(ordersProgress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(quantityProgress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         progressPanel2Layout.setVerticalGroup(
             progressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(progressPanel2Layout.createSequentialGroup()
                 .addComponent(lblProgress2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ordersProgress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(quantityProgress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -174,6 +174,7 @@ public class DashboardPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public view.components.admin.Progress amountProgress;
     public view.components.admin.charts.barChart.Chart barChart;
     private view.components.RoundPanel barChartPanel;
     public javax.swing.JLabel lblDate;
@@ -181,11 +182,10 @@ public class DashboardPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblProgress2;
     public view.components.admin.charts.lineChart.chart.CurveLineChart lineChart;
     private view.components.RoundPanel lineChartPanel;
-    public view.components.admin.Progress ordersProgress;
     private view.components.RoundPanel progressBarsPanel;
     private javax.swing.JPanel progressPanel1;
     private javax.swing.JPanel progressPanel2;
-    public view.components.admin.Progress salesProgress;
+    public view.components.admin.Progress quantityProgress;
     // End of variables declaration//GEN-END:variables
 
 }

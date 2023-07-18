@@ -14,8 +14,8 @@ import view.components.pos.DishPanel;
 import view.components.pos.Loading;
 import model.dao.impl.DishDAOImpl;
 import model.enums.Category;
-import model.models.Dish;
-import model.models.CartDish;
+import model.entity.Dish;
+import model.entity.CartDish;
 import view.pos.OrderPanel;
 import view.pos.PointOfSaleFrame;
 

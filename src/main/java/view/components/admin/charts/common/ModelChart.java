@@ -1,4 +1,4 @@
-package view.components.admin.charts.lineChart.chart;
+package view.components.admin.charts.common;
 
 public class ModelChart {
 

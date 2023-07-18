@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.models.CartDish;
+import model.entity.CartDish;
 
 import java.util.List;
 

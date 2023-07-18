@@ -1,8 +1,6 @@
 package view.components.modal;
 
-import model.models.CartDish;
-import model.service.OrderInterface;
-import model.service.OrderManager;
+import model.entity.CartDish;
 import view.listeners.ModalListener;
 
 import javax.swing.*;
