@@ -3,8 +3,12 @@ package model.dao;
 import model.models.Order;
 
 public interface OrderDAO {
-    public String createOrder(Order order);
-    public void readOrder();
-    public void updateOrder();
-    public void deleteOrder();
+    // CRUD
+    String createOrder(Order order);
+    void readOrder();
+    void updateOrder();
+    void deleteOrder();
+
+    // Other methods
+
 }

@@ -14,6 +14,10 @@ import java.util.Objects;
 public class OrderDAOImpl implements OrderDAO, DishOrderDAO {
 
     private final DatabaseConnection dbConnection;
+    private final static String LAST_ORDER_ID = "SELECT id FROM orders ORDER BY id DESC LIMIT 1";
+    private final static String CREATE_ORDER = "INSERT INTO orders (id, date, total_amount, paid, client_dni) VALUES (?, ?, ?, ?, ?)";
+    private final static String CREATE_DISH_ORDER = "INSERT INTO dish_order (dish_id, quantity, unit_price, subtotal, notes, order_id) VALUES (?, ?, ?, ?, ?, ?)";
+
 
     public OrderDAOImpl() {
         this.dbConnection = new DatabaseConnection();
@@ -22,7 +26,7 @@ public class OrderDAOImpl implements OrderDAO, DishOrderDAO {
     private String getLastOrderId() {
         try {
             Statement statement = dbConnection.getConnection().createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT id FROM orders ORDER BY id DESC LIMIT 1");
+            ResultSet resultSet = statement.executeQuery(LAST_ORDER_ID);
             return resultSet.next() ? resultSet.getString("id") : null;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -34,7 +38,7 @@ public class OrderDAOImpl implements OrderDAO, DishOrderDAO {
     public String createOrder(Order order) {
         String orderId = CodeGenerator.generateOrderId(Objects.requireNonNull(getLastOrderId()));
         try {
-            PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement("INSERT INTO orders (id, date, total_amount, paid, client_dni) VALUES (?, ?, ?, ?, ?)");
+            PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement(CREATE_ORDER);
             preparedStatement.setString(1, orderId);
             preparedStatement.setTimestamp(2, Timestamp.valueOf(order.getDate()));
             preparedStatement.setDouble(3, order.getTotalAmount());
@@ -67,7 +71,7 @@ public class OrderDAOImpl implements OrderDAO, DishOrderDAO {
     @Override
     public void createDishOrder(List<CartDish> cartDishes, String orderId) {
         try {
-            PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement("INSERT INTO dish_order (dish_id, quantity, unit_price, subtotal, notes, order_id) VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement(CREATE_DISH_ORDER);
             for (CartDish cartDish : cartDishes) {
                 preparedStatement.setString(1, cartDish.getDish().getId());
                 preparedStatement.setDouble(2, cartDish.getQuantity());

@@ -10,6 +10,7 @@ import java.sql.SQLException;
 public class ClientDAOImpl implements ClientDAO {
 
     private final DatabaseConnection databaseConnection;
+    private final static String CREATE_CLIENT = "INSERT INTO client (dni, name, last_name) VALUES (?, ?, ?)";
 
     public ClientDAOImpl() {
         this.databaseConnection = new DatabaseConnection();
@@ -18,7 +19,7 @@ public class ClientDAOImpl implements ClientDAO {
     @Override
     public void createClient(Client client) {
         try {
-            PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement("INSERT INTO client (dni, name, last_name) VALUES (?, ?, ?)");
+            PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement(CREATE_CLIENT);
             preparedStatement.setString(1, client.getDni());
             preparedStatement.setString(2, client.getName());
             preparedStatement.setString(3, client.getLastName());

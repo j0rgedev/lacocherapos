@@ -11,6 +11,8 @@ import java.util.List;
 public class DishDAOImpl implements DishDAO {
 
     private final DatabaseConnection dbConnection;
+    private final static String GET_ALL_DISHES = "SELECT * FROM dish";
+    private final static String GET_DISHES_BY_CATEGORY = "SELECT * FROM dish WHERE category_id = ?";
 
     public DishDAOImpl() {
         dbConnection = new DatabaseConnection();
@@ -21,7 +23,7 @@ public class DishDAOImpl implements DishDAO {
         List<Dish> dishes = new ArrayList<>();
         try {
             Statement statement = dbConnection.getConnection().createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM dish");
+            ResultSet resultSet = statement.executeQuery(GET_ALL_DISHES);
             while (resultSet.next()) {
                 Dish dish = new Dish();
                 dish.setId(resultSet.getString("id"));
@@ -40,7 +42,7 @@ public class DishDAOImpl implements DishDAO {
     public List<Dish> getDishesByCategory(String id) {
         List<Dish> dishes = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement("SELECT * FROM dish WHERE category_id = ?");
+            PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement(GET_DISHES_BY_CATEGORY);
             preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
