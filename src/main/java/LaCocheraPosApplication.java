@@ -10,6 +10,7 @@ public class LaCocheraPosApplication {
             // Frame theme
             FlatDarculaLaf.setup();
             testAdmin();
+            //testPos();
         }
 
         private static void testPos(){

@@ -4,17 +4,22 @@ import model.dao.impl.OrderDAOImpl;
 import model.dto.DashboardDTOS;
 import view.components.admin.charts.common.ModelChart;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdminCharts {
     private final OrderDAOImpl orderDAO;
     private final LineChartManager lineChartManager;
+    private final BarChartManager barChartManager;
     private final static int EXPECTED_QUANTITY_TODAY_GOAL = 100; // Change this value to modify the first progress bar
     private final static int EXPECTED_AMOUNT_TODAY_GOAL = 500; // Change this value to modify the second progress bar
 
     public AdminCharts() {
         this.orderDAO = new OrderDAOImpl();
         this.lineChartManager = new LineChartManager(orderDAO);
+        this.barChartManager = new BarChartManager(orderDAO);
     }
 
     public DashboardDTOS.AmountProgress getOrdersTotalAmountForToday() {
@@ -29,7 +34,21 @@ public class AdminCharts {
     }
 
     public List<ModelChart> getOrdersByMonthAndPaymentMethod() {
-        return lineChartManager.generateLineChartData();
+        return lineChartManager.generateLineChartData(getCustomLastMonths(6));
+    }
+
+    public List<ModelChart> getDishesQuantityByCategory() {
+        return barChartManager.generateBarChartData(getCustomLastMonths(3));
+    }
+
+    private List<YearMonth> getCustomLastMonths(int months) {
+        LocalDate currentDate = LocalDate.now();
+        List<YearMonth> yearMonthList = new ArrayList<>();
+        for (int i = months - 1; i >= 0; i--) {
+            YearMonth mes = YearMonth.from(currentDate.minusMonths(i));
+            yearMonthList.add(mes);
+        }
+        return yearMonthList;
     }
 }
 

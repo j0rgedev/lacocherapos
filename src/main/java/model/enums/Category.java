@@ -6,13 +6,14 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum Category {
-    CARTA("C01"),
-    ANTOJITOS("C02"),
-    BEBIDAS_CALIENTES("C03"),
-    BEBIDAS_FRIAS("C04"),
-    CERVEZA("C05"),
-    TRAGOS("C06"),
-    POSTRES("C07");
+    CARTA("Carta", "C01"),
+    ANTOJITOS("Antojitos","C02"),
+    BEBIDAS_CALIENTES("Bebidas calientes","C03"),
+    BEBIDAS_FRIAS("Bebidas frias","C04"),
+    TRAGOS("Tragos","C05"),
+    CERVEZAS("Cervezas","C06"),
+    POSTRES("Postres","C07");
 
+    private final String name;
     private final String id;
 }

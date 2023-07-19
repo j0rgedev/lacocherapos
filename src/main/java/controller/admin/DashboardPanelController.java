@@ -54,12 +54,16 @@ public class DashboardPanelController extends AdminAbstractController {
         int amountCurrentValue = adminCharts.getOrdersTotalAmountForToday().currentAmount();
         dashboardPanel.amountProgress.setMaximum(amountMaximumValue);
         dashboardPanel.amountProgress.setValue(amountCurrentValue);
+        dashboardPanel.amountProgress.start();
+        dashboardPanel.amountProgress.setType(new String[]{"S/.", ""});
 
         // Quantity progress
         int quantityMaximumValue = adminCharts.getOrdersPercentageForToday().goalQuantity();
         int quantityCurrentValue = adminCharts.getOrdersPercentageForToday().currentQuantity();
         dashboardPanel.quantityProgress.setMaximum(quantityMaximumValue);
         dashboardPanel.quantityProgress.setValue(quantityCurrentValue);
+        dashboardPanel.quantityProgress.start();
+        dashboardPanel.quantityProgress.setType(new String[]{"%", ""});
     }
 
     private void lineChartDefaults(){
@@ -79,20 +83,21 @@ public class DashboardPanelController extends AdminAbstractController {
     }
 
     private void barChartDefaults(){
-        dashboardPanel.barChart.addLegend("Income", new Color(12, 84, 175), new Color(0, 108, 247));
-        dashboardPanel.barChart.addLegend("Expense", new Color(54, 4, 143), new Color(104, 49, 200));
-        dashboardPanel.barChart.addLegend("Profit", new Color(5, 125, 0), new Color(95, 209, 69));
-        dashboardPanel.barChart.addLegend("Cost", new Color(186, 37, 37), new Color(241, 100, 120));
+        dashboardPanel.barChart.addLegend("Carta", new Color(12, 84, 175), new Color(0, 108, 247));
+        dashboardPanel.barChart.addLegend("Antojitos", new Color(54, 4, 143), new Color(104, 49, 200));
+        dashboardPanel.barChart.addLegend("Bebidas Calientes",  new Color(125, 5, 0), new Color(209, 69, 69));
+        dashboardPanel.barChart.addLegend("Bebidas Frias", new Color(0, 125, 115), new Color(69, 209, 193));
+        dashboardPanel.barChart.addLegend("Tragos", new Color(176, 186, 37, 255), new Color(232, 241, 100, 207));
+        dashboardPanel.barChart.addLegend("Cervezas", new Color(186, 151, 37), new Color(241, 196, 100));
+        dashboardPanel.barChart.addLegend("Postres", new Color(159, 37, 186), new Color(241, 100, 229));
     }
 
     private void showBarChartData(){
         dashboardPanel.barChart.clear();
-        dashboardPanel.barChart.addData(new ModelChart("January", new double[]{500, 200, 80, 89}));
-        dashboardPanel.barChart.addData(new ModelChart("February", new double[]{600, 750, 90, 150}));
-        dashboardPanel.barChart.addData(new ModelChart("March", new double[]{200, 350, 460, 900}));
-        dashboardPanel.barChart.addData(new ModelChart("April", new double[]{480, 150, 750, 700}));
-        dashboardPanel.barChart.addData(new ModelChart("May", new double[]{350, 540, 300, 150}));
-        dashboardPanel.barChart.addData(new ModelChart("June", new double[]{190, 280, 81, 200}));
+        List<ModelChart> dishesQuantityByCategory = adminCharts.getDishesQuantityByCategory();
+        for (ModelChart modelChart : dishesQuantityByCategory) {
+            dashboardPanel.barChart.addData(modelChart);
+        }
         dashboardPanel.barChart.start();
     }
 }

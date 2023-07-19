@@ -22,6 +22,17 @@ public class OrderDAOImpl implements OrderDAO, DishOrderDAO {
     private final static String GET_ORDERS_TOTAL_AMOUNT_FOR_TODAY = "SELECT SUM(total_amount) from orders WHERE DAY(date) = DAY(now())";
     private final static String GET_ORDERS_QUANTITY_FOR_TODAY = "SELECT COUNT(*) from orders WHERE DAY(date) = DAY(now())";
     private final static String GET_ORDERS_QUANTITY_BY_PAYMENT_METHOD = "SELECT o.id AS Id, DATE_FORMAT(o.date, '%Y-%m') AS Mes, o.paid AS Pagado, p.method as Metodo FROM orders o LEFT JOIN payment p ON o.id = p.order_id WHERE o.date >= DATE_SUB(CURRENT_DATE(), INTERVAL 6 MONTH)";
+    private final static String GET_DISHES_QUANTITY_BY_CATEGORY = """
+            SELECT DATE_FORMAT(o.date, '%Y-%m') as month,
+                   c.id                         AS category_id,
+                   c.name                       AS category_name,
+                   SUM(do.quantity)             AS total_quantity
+            FROM category c
+                     JOIN dish d ON c.id = d.category_id
+                     JOIN dish_order do ON d.id = do.dish_id
+                     JOIN orders o ON do.order_id = o.id
+            WHERE o.date >= DATE_SUB(NOW(), INTERVAL 3 MONTH)
+            GROUP BY month, category_id""";
 
     public OrderDAOImpl() {
         this.dbConnection = new DatabaseConnection();
@@ -119,6 +130,29 @@ public class OrderDAOImpl implements OrderDAO, DishOrderDAO {
             }
             statement.close();
             return ordersByPaymentMethodList;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<DashboardDTOS.DishesByCategory> getDishesQuantityByCategory() {
+        try {
+            List<DashboardDTOS.DishesByCategory> dishesByCategoryList = new ArrayList<>();
+            Statement statement = dbConnection.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_DISHES_QUANTITY_BY_CATEGORY);
+            while (resultSet.next()) {
+                DashboardDTOS.DishesByCategory dishesByCategory = new DashboardDTOS.DishesByCategory(
+                        resultSet.getString("month"),
+                        resultSet.getString("category_id"),
+                        resultSet.getString("category_name"),
+                        resultSet.getInt("total_quantity")
+                );
+                dishesByCategoryList.add(dishesByCategory);
+            }
+            statement.close();
+            return dishesByCategoryList;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;

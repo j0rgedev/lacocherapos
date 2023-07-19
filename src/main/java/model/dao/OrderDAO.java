@@ -16,4 +16,5 @@ public interface OrderDAO {
     double getOrdersTotalAmountForToday();
     int getOrdersQuantityForToday();
     List<DashboardDTOS.OrdersByPaymentMethod> getOrdersQuantityByPaymentMethod();
+    List<DashboardDTOS.DishesByCategory> getDishesQuantityByCategory();
 }

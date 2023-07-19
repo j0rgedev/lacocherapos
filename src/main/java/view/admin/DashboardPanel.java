@@ -22,6 +22,7 @@ public class DashboardPanel extends javax.swing.JPanel {
         lineChart = new view.components.admin.charts.lineChart.chart.CurveLineChart();
         barChartPanel = new view.components.RoundPanel();
         barChart = new view.components.admin.charts.barChart.Chart();
+        jLabel1 = new javax.swing.JLabel();
 
         progressBarsPanel.setBackground(new java.awt.Color(21, 22, 26));
 
@@ -121,33 +122,41 @@ public class DashboardPanel extends javax.swing.JPanel {
         lineChartPanelLayout.setHorizontalGroup(
             lineChartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lineChartPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addComponent(lineChart, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(20, 20, 20))
         );
         lineChartPanelLayout.setVerticalGroup(
             lineChartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lineChartPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addComponent(lineChart, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(20, 20, 20))
         );
 
         barChartPanel.setBackground(new java.awt.Color(21, 22, 26));
+
+        jLabel1.setFont(new java.awt.Font("Iceland", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(230, 230, 230));
+        jLabel1.setText("Cantidad de platos vendidos por categoría en los últimos 3 meses");
 
         javax.swing.GroupLayout barChartPanelLayout = new javax.swing.GroupLayout(barChartPanel);
         barChartPanel.setLayout(barChartPanelLayout);
         barChartPanelLayout.setHorizontalGroup(
             barChartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(barChartPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barChartPanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(barChart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(barChartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(barChart, javax.swing.GroupLayout.DEFAULT_SIZE, 1121, Short.MAX_VALUE))
                 .addGap(30, 30, 30))
         );
         barChartPanelLayout.setVerticalGroup(
             barChartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barChartPanelLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(barChart, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -177,6 +186,7 @@ public class DashboardPanel extends javax.swing.JPanel {
     public view.components.admin.Progress amountProgress;
     public view.components.admin.charts.barChart.Chart barChart;
     private view.components.RoundPanel barChartPanel;
+    private javax.swing.JLabel jLabel1;
     public javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblProgress1;
     private javax.swing.JLabel lblProgress2;

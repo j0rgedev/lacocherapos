@@ -191,10 +191,10 @@ public class OrderPanelController extends AbstractController implements ActionLi
             handleCategoryButton(Category.BEBIDAS_FRIAS);
         }
         if (e.getSource() == orderPanel.btnBeer) {
-            handleCategoryButton(Category.CERVEZA);
+            handleCategoryButton(Category.TRAGOS);
         }
         if (e.getSource() == orderPanel.btnDrinks) {
-            handleCategoryButton(Category.TRAGOS);
+            handleCategoryButton(Category.CERVEZAS);
         }
         if (e.getSource() == orderPanel.btnDesserts) {
             handleCategoryButton(Category.POSTRES);

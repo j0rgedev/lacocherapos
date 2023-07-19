@@ -5,6 +5,7 @@ import model.dto.DashboardDTOS;
 import view.components.admin.charts.common.ModelChart;
 
 import java.time.LocalDate;
+import java.time.Year;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -16,21 +17,10 @@ public class LineChartManager {
         this.orderDAO = orderDAO;
     }
 
-    public List<ModelChart> generateLineChartData() {
+    public List<ModelChart> generateLineChartData(List<YearMonth> yearMonthList) {
         List<DashboardDTOS.OrdersByPaymentMethod> orders = orderDAO.getOrdersQuantityByPaymentMethod();
-        LocalDate currentDate = LocalDate.now();
-        List<YearMonth> yearMonthList = getLastSixMonths(currentDate);
         Map<YearMonth, Map<String, Integer>> ordersByMonthAndPaymentMethod = getOrdersByMonthAndPaymentMethod(orders, yearMonthList);
         return calculateLineChartData(ordersByMonthAndPaymentMethod);
-    }
-
-    private List<YearMonth> getLastSixMonths(LocalDate currentDate) {
-        List<YearMonth> months = new ArrayList<>();
-        for (int i = 5; i >= 0; i--) {
-            YearMonth mes = YearMonth.from(currentDate.minusMonths(i));
-            months.add(mes);
-        }
-        return months;
     }
 
     private Map<YearMonth, Map<String, Integer>> getOrdersByMonthAndPaymentMethod(List<DashboardDTOS.OrdersByPaymentMethod> orders, List<YearMonth> yearMonthList
@@ -42,7 +32,7 @@ public class LineChartManager {
             for (DashboardDTOS.OrdersByPaymentMethod order : orders) {
                 YearMonth orderDate = YearMonth.parse(order.date(), DateTimeFormatter.ofPattern("yyyy-MM"));
                 if (orderDate.equals(yearMonth)) {
-                    String paymentMethod = order.paymentMethod()==null ? "Not paid" : order.paymentMethod();
+                    String paymentMethod = order.paymentMethod() == null ? "Not paid" : order.paymentMethod();
                     paymentMethodsCount.put(paymentMethod, paymentMethodsCount.getOrDefault(paymentMethod, 0) + 1);
                 }
             }
