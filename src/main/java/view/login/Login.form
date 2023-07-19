@@ -38,7 +38,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="components.RoundPanel" name="roundPanel1">
+    <Container class="view.components.RoundPanel" name="roundPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="1a" green="16" red="15" type="rgb"/>
@@ -66,7 +66,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="components.RoundPanel" name="roundPanel2">
+        <Container class="view.components.RoundPanel" name="roundPanel2">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -127,7 +127,7 @@
                 <Property name="text" type="java.lang.String" value="INICIAR SESI&#xd3;N"/>
               </Properties>
             </Component>
-            <Component class="components.TextField" name="txtUser">
+            <Component class="view.components.TextField" name="txtUser">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -142,6 +142,9 @@
                   <Font name="Poppins" size="18" style="0"/>
                 </Property>
                 <Property name="labelText" type="java.lang.String" value="Usuario"/>
+                <Property name="selectedTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="3c" green="3c" red="3c" type="rgb"/>
+                </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -162,12 +165,13 @@
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
-            <Component class="components.PasswordField" name="txtPassword">
+            <Component class="view.components.PasswordField" name="txtPassword">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -179,6 +183,9 @@
                   <Font name="Poppins" size="18" style="0"/>
                 </Property>
                 <Property name="labelText" type="java.lang.String" value="Contrase&#xf1;a"/>
+                <Property name="selectedTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="3c" green="3c" red="3c" type="rgb"/>
+                </Property>
                 <Property name="showAndHide" type="boolean" value="true"/>
               </Properties>
               <AuxValues>
@@ -195,6 +202,9 @@
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins" size="18" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="a" green="a" red="a" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Empleado"/>
                 <Property name="opaque" type="boolean" value="true"/>
@@ -213,6 +223,9 @@
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins" size="18" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="a" green="a" red="a" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Administrador"/>
                 <Property name="opaque" type="boolean" value="true"/>

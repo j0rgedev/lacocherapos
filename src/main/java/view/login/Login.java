@@ -1,6 +1,5 @@
 package view.login;
 
-import com.formdev.flatlaf.FlatLightLaf;
 import view.components.PasswordField;
 import view.components.RoundPanel;
 import view.components.TextField;
@@ -8,7 +7,6 @@ import view.components.TextField;
 public class Login extends javax.swing.JFrame {
 
     public Login() {
-        FlatLightLaf.setup();
         initComponents();
     }
 
@@ -17,12 +15,12 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         bgRoles = new javax.swing.ButtonGroup();
-        roundPanel1 = new RoundPanel();
-        roundPanel2 = new RoundPanel();
+        roundPanel1 = new view.components.RoundPanel();
+        roundPanel2 = new view.components.RoundPanel();
         lblTitle = new javax.swing.JLabel();
-        txtUser = new TextField();
+        txtUser = new view.components.TextField();
         btnLogin = new javax.swing.JButton();
-        txtPassword = new PasswordField();
+        txtPassword = new view.components.PasswordField();
         rbEmployee = new javax.swing.JRadioButton();
         rbAdmin = new javax.swing.JRadioButton();
 
@@ -43,28 +41,33 @@ public class Login extends javax.swing.JFrame {
         txtUser.setCaretColor(new java.awt.Color(150, 150, 150));
         txtUser.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
         txtUser.setLabelText("Usuario");
+        txtUser.setSelectedTextColor(new java.awt.Color(60, 60, 60));
 
         btnLogin.setBackground(new java.awt.Color(21, 22, 26));
         btnLogin.setFont(new java.awt.Font("Poppins", 1, 28)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
         btnLogin.setText("INICIAR SESIÓN");
         btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogin.setEnabled(false);
 
         txtPassword.setBackground(new java.awt.Color(204, 204, 204));
         txtPassword.setForeground(new java.awt.Color(0, 0, 0));
         txtPassword.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
         txtPassword.setLabelText("Contraseña");
+        txtPassword.setSelectedTextColor(new java.awt.Color(60, 60, 60));
         txtPassword.setShowAndHide(true);
 
         rbEmployee.setBackground(new java.awt.Color(204, 204, 204));
         bgRoles.add(rbEmployee);
         rbEmployee.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
+        rbEmployee.setForeground(new java.awt.Color(10, 10, 10));
         rbEmployee.setText("Empleado");
         rbEmployee.setOpaque(true);
 
         rbAdmin.setBackground(new java.awt.Color(204, 204, 204));
         bgRoles.add(rbAdmin);
         rbAdmin.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
+        rbAdmin.setForeground(new java.awt.Color(10, 10, 10));
         rbAdmin.setText("Administrador");
         rbAdmin.setOpaque(true);
 
@@ -141,9 +144,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitle;
     public javax.swing.JRadioButton rbAdmin;
     public javax.swing.JRadioButton rbEmployee;
-    private RoundPanel roundPanel1;
-    private RoundPanel roundPanel2;
-    public PasswordField txtPassword;
-    public TextField txtUser;
+    private view.components.RoundPanel roundPanel1;
+    private view.components.RoundPanel roundPanel2;
+    public view.components.PasswordField txtPassword;
+    public view.components.TextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

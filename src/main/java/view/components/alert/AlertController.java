@@ -34,7 +34,6 @@ public class AlertController implements ActionListener {
     private void setAlertInfo(AlertModel alertModel){
         switch (alertModel.getErrorType()) {
             case ERROR -> {
-                alert.lblIcon.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/error.png"))));
                 alert.lblTitle.setForeground(errorColor);
                 alert.lblTitle.setText(alertModel.getTitle());
                 alert.lblDescription.setText(alertModel.getDescription());
@@ -43,7 +42,6 @@ public class AlertController implements ActionListener {
                 alert.btnConfirm.setText("CERRAR");
             }
             case WARNING -> {
-                alert.lblIcon.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/warning.png"))));
                 alert.lblTitle.setForeground(warningColor);
                 alert.lblTitle.setText(alertModel.getTitle());
                 alert.lblDescription.setText(alertModel.getDescription());
@@ -52,7 +50,6 @@ public class AlertController implements ActionListener {
                 alert.btnConfirm.setText("CONTINUAR");
             }
             case SUCCESS -> {
-                alert.lblIcon.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/success.png"))));
                 alert.lblTitle.setForeground(successColor);
                 alert.lblTitle.setText(alertModel.getTitle());
                 alert.lblDescription.setText(alertModel.getDescription());

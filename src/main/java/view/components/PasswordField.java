@@ -18,6 +18,8 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
+
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
@@ -131,8 +133,8 @@ public class PasswordField extends JPasswordField {
             }
 
         };
-        eye = new ImageIcon(getClass().getResource("/icons/eye.png")).getImage();
-        eye_hide = new ImageIcon(getClass().getResource("/icons/eye_hide.png")).getImage();
+        eye = new FlatSVGIcon("icons/eye.svg", 20, 20).getImage();
+        eye_hide = new FlatSVGIcon("icons/eye_closed.svg", 20, 20).getImage();
         animator = new Animator(300, target);
         animator.setResolution(0);
         animator.setAcceleration(0.5f);
