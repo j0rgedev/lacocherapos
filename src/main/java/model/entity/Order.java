@@ -19,4 +19,12 @@ public class Order {
     private boolean paid;
     @NonNull
     private Client client;
+
+    public double getIgv() {
+        return Math.round(totalAmount * 0.18 * 100.0) / 100.0;
+    }
+
+    public double getSubtotal() {
+        return Math.round((totalAmount - getIgv()) * 100.0) / 100.0;
+    }
 }
