@@ -13,25 +13,24 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 
 public class ReceiptGenerator {
-
-
     public static void generateReceipt(Order order, List<CartDish> orderDishes) throws DocumentException, FileNotFoundException {
 
         String receiptHeader = receiptHeader(order);
         String lineSeparator = """           
                 ==================================
                 """;
-        String receiptSummary = """  
-                Subtotal:\t""" + order.getSubtotal() + """     
+        String receiptSummary = """
+                Subtotal:   \s""" + order.getSubtotal() + """
                     
-                IGV:\t""" + order.getIgv() + """
+                IGV:        \s""" + order.getIgv() + """
                 
-                Total:\t""" + order.getTotalAmount() + """
+                Total:      \s""" + order.getTotalAmount() + """
                 """;
         String receiptFooter = """
               
@@ -41,8 +40,15 @@ public class ReceiptGenerator {
                 ==================================
                 """;
 
-        String desktopPath = System.getProperty("user.home") + File.separator + "Desktop" + File.separator;
-        String pdfFilePath = desktopPath + "receipt.pdf";
+        String currentWorkingDir = System.getProperty("user.dir");
+
+        File receiptsFolder = new File(currentWorkingDir, "receipts");
+
+        if (!receiptsFolder.exists()) {
+            receiptsFolder.mkdir();
+        }
+
+        String pdfFilePath = receiptsFolder.getAbsolutePath() + File.separator + "recibo_" + order.getId() + ".pdf";
 
         Font font = new Font(Font.FontFamily.HELVETICA, 9, Font.NORMAL);
         Font headerFont = new Font(Font.FontFamily.HELVETICA, 9, Font.BOLD);
@@ -91,14 +97,13 @@ public class ReceiptGenerator {
         Paragraph footer = new Paragraph(receiptFooter, font);
         footer.setAlignment(1);
         document.add(footer);
-        System.out.println("tableHeight: " + tableHeight);
         document.close();
         System.out.println("PDF generado en: " + pdfFilePath);
     }
 
     private static String receiptHeader(Order order){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d 'de' MMMM 'de' yyyy", new Locale("es", "ES"));
-        String formattedDate = LocalDate.now().format(formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d 'de' MMMM 'de' yyyy 'a las' HH:mm:ss", new Locale("es", "ES"));
+        String formattedDate = LocalDateTime.now().format(formatter);
         Client client = order.getClient();
         return """
                 ============ RECIBO ==============

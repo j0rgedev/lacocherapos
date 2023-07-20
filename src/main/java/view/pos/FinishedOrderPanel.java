@@ -19,6 +19,7 @@ public class FinishedOrderPanel extends javax.swing.JPanel {
         lblTitle = new javax.swing.JLabel();
         btnNewOrder = new javax.swing.JButton();
         svgImage = new view.components.SVGImage();
+        btnReceipt = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(45, 52, 63));
 
@@ -41,25 +42,40 @@ public class FinishedOrderPanel extends javax.swing.JPanel {
 
         svgImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        btnReceipt.setBackground(new java.awt.Color(45, 52, 63));
+        btnReceipt.setFont(new java.awt.Font("Iceland", 1, 42)); // NOI18N
+        btnReceipt.setForeground(new java.awt.Color(240, 240, 240));
+        btnReceipt.setText("<html><u>GENERAR RECIBO</u></html>");
+        btnReceipt.setBorder(null);
+        btnReceipt.setBorderPainted(false);
+        btnReceipt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReceipt.setOpaque(true);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblOrderId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnNewOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
-            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnNewOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
             .addComponent(svgImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnReceipt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(73, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(svgImage, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblOrderId)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(btnReceipt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(btnNewOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -67,6 +83,7 @@ public class FinishedOrderPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnNewOrder;
+    public javax.swing.JButton btnReceipt;
     public javax.swing.JLabel lblOrderId;
     private javax.swing.JLabel lblTitle;
     public view.components.SVGImage svgImage;
