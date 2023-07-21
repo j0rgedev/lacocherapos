@@ -3,6 +3,7 @@ package controller.admin;
 import net.miginfocom.swing.MigLayout;
 import view.admin.AdminIntranetFrame;
 import view.admin.DashboardPanel;
+import view.admin.MenuPanel;
 import view.components.admin.ButtonMenu;
 
 import java.awt.*;
@@ -25,8 +26,8 @@ public class AdminFrameController extends AdminAbstractController{
         setMenuOption("Cerrar sesión", 3);
 
         // Default menu option
-        setMenuOptionSelected((ButtonMenu) adminIntranetFrm.navBarPanel.getComponent(0));
-        changeMenuOption(0);
+        setMenuOptionSelected((ButtonMenu) adminIntranetFrm.navBarPanel.getComponent(2));
+        changeMenuOption(2);
     }
 
     // Method to set menu options
@@ -58,7 +59,10 @@ public class AdminFrameController extends AdminAbstractController{
                 showMenuPanel(dashboardPanel, new DashboardPanelController(dashboardPanel));
             }
             case 1 -> System.out.println("Analíticas");
-            case 2 -> System.out.println("Menú (Carta)");
+            case 2 -> {
+                MenuPanel menuPanel = new MenuPanel();
+                showMenuPanel(menuPanel, new MenuPanelController(menuPanel));
+            }
             case 3 -> System.out.println("Cerrar sesión");
             // Add more cases here
         }

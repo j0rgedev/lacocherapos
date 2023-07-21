@@ -13,5 +13,5 @@ public abstract class AdminAbstractController {
 
     public AdminAbstractController() {}
 
-    public void init() {}
+    public abstract void init();
 }

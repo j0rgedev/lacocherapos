@@ -1,4 +1,5 @@
 import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatLaf;
 import controller.admin.AdminFrameController;
 import controller.login.LoginController;
 import controller.pos.PosFrameController;
@@ -12,8 +13,8 @@ public class LaCocheraPosApplication {
             // Frame theme
             FlatDarculaLaf.setup();
             //testWholeApp();
-//            testAdmin();
-            testPos();
+            testAdmin();
+//            testPos();
         }
 
         private static void testWholeApp(){

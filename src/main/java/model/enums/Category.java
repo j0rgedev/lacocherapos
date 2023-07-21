@@ -16,4 +16,13 @@ public enum Category {
 
     private final String name;
     private final String id;
+
+    public static Category getCategoryById(String id){
+        for (Category category : Category.values()) {
+            if(category.getId().equals(id)){
+                return category;
+            }
+        }
+        return null;
+    }
 }

@@ -39,10 +39,6 @@ public class DashboardPanelController extends AdminAbstractController {
             // Charts
             showLineChartData();
             showBarChartData();
-
-            SwingUtilities.invokeLater(() -> {
-
-            });
         });
 
         executorService.shutdown();
