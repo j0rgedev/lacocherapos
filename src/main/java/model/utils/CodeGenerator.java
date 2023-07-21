@@ -16,6 +16,13 @@ public class CodeGenerator {
         return prefix + suffix;
     }
 
+    public static String generateDishId(String lastDishId){
+        String prefix = "DS";
+        int lastId = Integer.parseInt(lastDishId.substring(2));
+        String suffix = String.format("%03d", lastId + 1);
+        return prefix + suffix;
+    }
+
     public static int generateTransactionNumber() {
         return (int) (Math.random() * 1000000);
     }

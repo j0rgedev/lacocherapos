@@ -3,12 +3,19 @@ package controller.admin;
 import model.dao.impl.DishDAOImpl;
 import model.entity.Dish;
 import model.enums.Category;
+import model.enums.DishAction;
+import view.admin.AdminIntranetFrame;
 import view.admin.MenuPanel;
+import view.components.modal.CustomModal;
+import view.components.modal.DishActionModalController;
+import view.listeners.ModalListener;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,20 +23,26 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class MenuPanelController extends AdminAbstractController {
+public class MenuPanelController extends AdminAbstractController implements ActionListener, ModalListener {
 
     private final MenuPanel menuPanel;
     private final DishDAOImpl dishDAO;
     private DefaultTableModel tableModel;
     List<Dish> cachedDishes = new ArrayList<>();
 
-    public MenuPanelController(MenuPanel menuPanel) {
+    public MenuPanelController(AdminIntranetFrame adminIntranetFrm, MenuPanel menuPanel) {
+        super(adminIntranetFrm);
         this.menuPanel = menuPanel;
         this.dishDAO = new DishDAOImpl();
     }
 
     @Override
     public void init() {
+        // Listeners
+        menuPanel.btnAdd.addActionListener(this);
+        menuPanel.btnEdit.addActionListener(this);
+        menuPanel.btnDelete.addActionListener(this);
+
         // Table header configuration
         tableModel = (DefaultTableModel) menuPanel.dishesTable.getModel();
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
@@ -39,7 +52,7 @@ public class MenuPanelController extends AdminAbstractController {
         menuPanel.dishesTable.getTableHeader().setDefaultRenderer(renderer);
         menuPanel.dishesTable.getTableHeader().setPreferredSize(new Dimension(0, 50));
 
-        loadDishes();
+//        loadDishes();
     }
 
     private void loadDishes() {
@@ -84,5 +97,33 @@ public class MenuPanelController extends AdminAbstractController {
     private void changePanel(Component panel){
         CardLayout cardLayout = (CardLayout) menuPanel.mainPanel.getLayout();
         cardLayout.show(menuPanel.mainPanel, panel.getName());
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == menuPanel.btnAdd){
+            DishActionModalController dishActionModalController = new DishActionModalController(
+                    new CustomModal(),
+                    adminIntranetFrm,
+                    MenuPanelController.this,
+                    DishAction.ADD
+            );
+            dishActionModalController.showModal();
+        }
+    }
+
+    @Override
+    public void onEditDishModalClose() {
+
+    }
+
+    @Override
+    public void onClientInfoModalClose() {
+
+    }
+
+    @Override
+    public void onDishActionModalClose() {
+
     }
 }

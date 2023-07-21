@@ -1,6 +1,7 @@
 package controller.admin;
 
 import model.service.AdminCharts;
+import view.admin.AdminIntranetFrame;
 import view.admin.DashboardPanel;
 import view.components.admin.charts.common.ModelChart;
 
@@ -18,7 +19,8 @@ public class DashboardPanelController extends AdminAbstractController {
     private final DashboardPanel dashboardPanel;
     private final AdminCharts adminCharts = new AdminCharts();
 
-    public DashboardPanelController(DashboardPanel dashboardPanel) {
+    public DashboardPanelController(AdminIntranetFrame adminIntranetFrm, DashboardPanel dashboardPanel) {
+        super(adminIntranetFrm);
         this.dashboardPanel = dashboardPanel;
     }
 

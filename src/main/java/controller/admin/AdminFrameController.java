@@ -56,12 +56,12 @@ public class AdminFrameController extends AdminAbstractController{
         switch (menu_index) {
             case 0 -> {
                 DashboardPanel dashboardPanel = new DashboardPanel();
-                showMenuPanel(dashboardPanel, new DashboardPanelController(dashboardPanel));
+                showMenuPanel(dashboardPanel, new DashboardPanelController(adminIntranetFrm, dashboardPanel));
             }
             case 1 -> System.out.println("Analíticas");
             case 2 -> {
                 MenuPanel menuPanel = new MenuPanel();
-                showMenuPanel(menuPanel, new MenuPanelController(menuPanel));
+                showMenuPanel(menuPanel, new MenuPanelController(adminIntranetFrm, menuPanel));
             }
             case 3 -> System.out.println("Cerrar sesión");
             // Add more cases here

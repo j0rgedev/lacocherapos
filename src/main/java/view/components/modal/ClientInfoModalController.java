@@ -27,6 +27,7 @@ public class ClientInfoModalController extends ModalController {
         setupModal(clientInfoPanel, "icons/client.svg");
     }
 
+
     @Override
     protected void handleCustomModalAction(ActionEvent e) {
         if (e.getSource() == customModal.btnEdit) {
