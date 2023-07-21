@@ -13,7 +13,7 @@ import java.util.Objects;
 public class DishDAOImpl implements DishDAO {
 
     private final DatabaseConnection dbConnection;
-    private final static String GET_ALL_DISHES = "SELECT * FROM dish";
+    private final static String GET_ALL_DISHES = "SELECT * FROM dish ORDER BY category_id,id";
     private final static String GET_DISHES_BY_CATEGORY = "SELECT * FROM dish WHERE category_id = ?";
     private final static String GET_LAST_DISH_ID = "SELECT id FROM dish ORDER BY id DESC LIMIT 1";
     private final static String CREATE_DISH = "INSERT INTO dish (id, name, price, category_id) VALUES (?, ?, ?, ?)";

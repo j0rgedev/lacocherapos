@@ -1,6 +1,8 @@
 package controller.pos;
 
 import model.entity.CartDish;
+import model.entity.Dish;
+import model.enums.DishAction;
 import view.components.modal.ClientInfoModalController;
 import view.components.modal.CustomModal;
 import view.components.modal.EditDishModalController;
@@ -148,7 +150,7 @@ public class CartPanelController extends AbstractController implements ActionLis
     }
 
     @Override
-    public void onDishActionModalClose() {
+    public void onDishActionModalClose(Dish dish, DishAction dishAction) {
 
     }
 }

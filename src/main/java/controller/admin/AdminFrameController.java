@@ -1,11 +1,14 @@
 package controller.admin;
 
+import controller.login.LoginController;
 import net.miginfocom.swing.MigLayout;
 import view.admin.AdminIntranetFrame;
 import view.admin.DashboardPanel;
 import view.admin.MenuPanel;
 import view.components.admin.ButtonMenu;
+import view.login.Login;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class AdminFrameController extends AdminAbstractController{
@@ -63,7 +66,22 @@ public class AdminFrameController extends AdminAbstractController{
                 MenuPanel menuPanel = new MenuPanel();
                 showMenuPanel(menuPanel, new MenuPanelController(adminIntranetFrm, menuPanel));
             }
-            case 3 -> System.out.println("Cerrar sesión");
+            case 3 -> {
+                int option = JOptionPane.showConfirmDialog(
+                        adminIntranetFrm,
+                        "¿Está seguro que desea cerrar sesión?",
+                        "Cerrar sesión",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE
+                );
+                if(option == JOptionPane.YES_OPTION){
+                    adminIntranetFrm.dispose();
+                    Login login = new Login();
+                    LoginController loginController = new LoginController(login);
+                    loginController.init();
+                    login.setVisible(true);
+                }
+            }
             // Add more cases here
         }
     }

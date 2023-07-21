@@ -8,8 +8,8 @@ import lombok.Getter;
 public enum Category {
     CARTA("Carta", "C01"),
     ANTOJITOS("Antojitos","C02"),
-    BEBIDAS_CALIENTES("Bebidas calientes","C03"),
-    BEBIDAS_FRIAS("Bebidas frias","C04"),
+    BEBIDAS_CALIENTES("Bebidas Calientes","C03"),
+    BEBIDAS_FRIAS("Bebidas Frias","C04"),
     TRAGOS("Tragos","C05"),
     CERVEZAS("Cervezas","C06"),
     POSTRES("Postres","C07");
