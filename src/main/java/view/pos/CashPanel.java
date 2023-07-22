@@ -206,7 +206,7 @@ public class CashPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblChange;
-    private javax.swing.JLabel lblChangeAmount;
+    public javax.swing.JLabel lblChangeAmount;
     public view.pos.TotalOrderPanel totalOrderPanel1;
     public javax.swing.JTextField txtAmount;
     // End of variables declaration//GEN-END:variables

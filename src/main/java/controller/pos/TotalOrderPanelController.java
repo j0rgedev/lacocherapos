@@ -53,6 +53,9 @@ public class TotalOrderPanelController extends AbstractController implements Act
     public void setMainButtonText(String text){
         totalOrderPanel.btnPay.setText(text);
     }
+    public void setMainButtonEnabled(boolean enabled){
+        totalOrderPanel.btnPay.setEnabled(enabled);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
