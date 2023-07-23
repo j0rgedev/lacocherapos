@@ -8,6 +8,7 @@ import java.util.List;
 public interface OrderDAO {
     // CRUD
     String createOrder(Order order);
+    void updatePaymentStatus(String id);
     void readOrder();
     void updateOrder();
     void deleteOrder();

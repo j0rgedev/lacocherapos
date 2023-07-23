@@ -1,5 +1,6 @@
 package controller.pos;
 
+import model.dao.impl.OrderDAOImpl;
 import model.dao.impl.PaymentDAOImpl;
 import model.enums.PanelType;
 import model.enums.PaymentMethods;
@@ -7,6 +8,7 @@ import model.enums.PaymentStatus;
 import model.entity.Order;
 import model.entity.Payment;
 import model.utils.CodeGenerator;
+import view.listeners.PayButtonListener;
 import view.pos.FinishedOrderPanel;
 import view.pos.PaymentMethodsPanel;
 import view.pos.PointOfSaleFrame;
@@ -23,11 +25,20 @@ public class TotalOrderPanelController extends AbstractController implements Act
 
     private final TotalOrderPanel totalOrderPanel;
     private final PanelType panelType;
+    private PayButtonListener payButtonListener;
+    private Timer timer;
 
     public TotalOrderPanelController(PointOfSaleFrame pointOfSaleFrame, TotalOrderPanel totalOrderPanel, PanelType panelType) {
         super(pointOfSaleFrame);
         this.totalOrderPanel = totalOrderPanel;
         this.panelType = panelType;
+    }
+
+    public TotalOrderPanelController(PointOfSaleFrame pointOfSaleFrame, TotalOrderPanel totalOrderPanel, PanelType panelType, PayButtonListener payButtonListener) {
+        super(pointOfSaleFrame);
+        this.totalOrderPanel = totalOrderPanel;
+        this.panelType = panelType;
+        this.payButtonListener = payButtonListener;
     }
 
     @Override
@@ -57,6 +68,51 @@ public class TotalOrderPanelController extends AbstractController implements Act
         totalOrderPanel.btnPay.setEnabled(enabled);
     }
 
+    private void setPayButtonWaiter(){
+        Timer timer = new Timer(500, new ActionListener() {
+            private int dotsCount = 0;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dotsCount = (dotsCount + 1) % 4;
+                totalOrderPanel.btnPay.setText("Procesando" + ".".repeat(Math.max(0, dotsCount)));
+            }
+        });
+        timer.start();
+    }
+
+    public void generatePayment(PaymentMethods paymentMethods){
+        totalOrderPanel.btnPay.setEnabled(false);
+        totalOrderPanel.btnEdit.setEnabled(false);
+
+        PaymentDAOImpl paymentDAO = new PaymentDAOImpl();
+        OrderDAOImpl orderDAO = new OrderDAOImpl();
+        Order order = orderInterface.getOrder();
+
+        PaymentStatus paymentStatus = PaymentStatus.PAID;
+        int transactionNumber = CodeGenerator.generateTransactionNumber();
+        Payment payment = new Payment(null, paymentStatus, paymentMethods, transactionNumber, order);
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+        setPayButtonWaiter();
+        executorService.submit(() -> {
+            paymentDAO.createPayment(payment);
+            orderDAO.updatePaymentStatus(order.getId());
+
+            SwingUtilities.invokeLater(() -> {
+                timer.stop();
+                totalOrderPanel.btnPay.setText("Procesando...");
+                FinishedOrderPanel finishedOrderPanel = pointOfSaleFrm.finishedOrderPanel1;
+                FinishedOrderPanelController finishedOrderPanelController = new FinishedOrderPanelController(pointOfSaleFrm,finishedOrderPanel);
+                changePanel(finishedOrderPanel, finishedOrderPanelController);
+                changeHeaderPanel("PEDIDO FINALIZADO");
+            });
+        });
+
+        executorService.shutdown();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == totalOrderPanel.btnPay){
@@ -64,45 +120,13 @@ public class TotalOrderPanelController extends AbstractController implements Act
                 PaymentMethodsPanel paymentMethodsPanel = pointOfSaleFrm.paymentMethodsPanel1;
                 PaymentMethodsPanelController paymentMethodsPanelController = new PaymentMethodsPanelController(pointOfSaleFrm, paymentMethodsPanel);
                 changePanel(paymentMethodsPanel, paymentMethodsPanelController);
-                changeHeaderPanel("MÉTODOS DE PAGO", false);
+                changeHeaderPanel("MÉTODOS DE PAGO");
             }
-            else if(panelType == PanelType.CASH_PANEL){
-                totalOrderPanel.btnPay.setEnabled(false);
-                totalOrderPanel.btnEdit.setEnabled(false);
-
-                PaymentDAOImpl paymentDAO = new PaymentDAOImpl();
-
-                PaymentMethods paymentMethods = PaymentMethods.CASH;
-                PaymentStatus paymentStatus = PaymentStatus.PAID;
-                int transactionNumber = CodeGenerator.generateTransactionNumber();
-                Order order = orderInterface.getOrder();
-                Payment payment = new Payment(null, paymentStatus, paymentMethods, transactionNumber, order);
-
-                ExecutorService executorService = Executors.newSingleThreadExecutor();
-                Timer timer = new Timer(500, new ActionListener() {
-                    private int dotsCount = 0;
-
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        dotsCount = (dotsCount + 1) % 4;
-                        totalOrderPanel.btnPay.setText("Procesando" + ".".repeat(Math.max(0, dotsCount)));
-                    }
-                });
-                timer.start();
-
-                executorService.submit(() -> {
-                    paymentDAO.createPayment(payment);
-                    SwingUtilities.invokeLater(() -> {
-                        timer.stop();
-                        totalOrderPanel.btnPay.setText("Procesando...");
-                        FinishedOrderPanel finishedOrderPanel = pointOfSaleFrm.finishedOrderPanel1;
-                        FinishedOrderPanelController finishedOrderPanelController = new FinishedOrderPanelController(pointOfSaleFrm,finishedOrderPanel);
-                        changePanel(finishedOrderPanel, finishedOrderPanelController);
-                        changeHeaderPanel("PEDIDO FINALIZADO", false);
-                    });
-                });
-
-                executorService.shutdown();
+            if(panelType == PanelType.CASH_PANEL){
+                generatePayment(PaymentMethods.CASH);
+            }
+            if(panelType == PanelType.CARD_PANEL){
+                payButtonListener.onPayButtonClicked();
             }
         }
     }

@@ -1,6 +1,7 @@
 package controller.pos;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import view.pos.CardPanel;
 import view.pos.CashPanel;
 import view.pos.PaymentMethodsPanel;
 import view.pos.PointOfSaleFrame;
@@ -40,7 +41,13 @@ public class PaymentMethodsPanelController extends AbstractController implements
             CashPanel cashPanel = pointOfSaleFrm.cashPanel1;
             CashPanelController cashPanelController = new CashPanelController(pointOfSaleFrm, cashPanel);
             changePanel(cashPanel, cashPanelController);
-            changeHeaderPanel("PAGO EN EFECTIVO", false);
+            changeHeaderPanel("PAGO EN EFECTIVO");
+        }
+        if(e.getSource()==paymentMethodsPanel.btnCard){
+            CardPanel cardPanel = pointOfSaleFrm.cardPanel1;
+            CardPanelController cardPanelController = new CardPanelController(pointOfSaleFrm, cardPanel);
+            changePanel(cardPanel, cardPanelController);
+            changeHeaderPanel("PAGO CON TARJETA");
         }
     }
 }

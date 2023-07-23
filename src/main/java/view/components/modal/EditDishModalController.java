@@ -2,6 +2,7 @@ package view.components.modal;
 
 import model.entity.CartDish;
 import view.listeners.ModalListener;
+import view.listeners.PayButtonListener;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +12,6 @@ public class EditDishModalController extends ModalController{
     private EditDishPanel editDishPanel;
     public CartDish cartDish;
     private static int quantity;
-
 
     public EditDishModalController(CustomModal customModal, JFrame jFrame, ModalListener modalListener) {
         super(customModal, jFrame, modalListener);

@@ -34,6 +34,8 @@ public class OrderDAOImpl implements OrderDAO, DishOrderDAO {
             WHERE o.date >= DATE_SUB(NOW(), INTERVAL 3 MONTH)
             GROUP BY month, category_id""";
 
+    private final static String UPDATE_PAYMENT_STATUS = "UPDATE orders SET paid = ? WHERE id = ?";
+
     public OrderDAOImpl() {
         this.dbConnection = new DatabaseConnection();
     }
@@ -65,6 +67,19 @@ public class OrderDAOImpl implements OrderDAO, DishOrderDAO {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
+        }
+    }
+
+    @Override
+    public void updatePaymentStatus(String id) {
+        try {
+            PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement(UPDATE_PAYMENT_STATUS);
+            preparedStatement.setBoolean(1, true);
+            preparedStatement.setString(2, id);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 

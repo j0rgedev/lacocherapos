@@ -25,9 +25,9 @@ public abstract class AbstractController implements ActionListener {
         controller.init();
     }
 
-    protected void changeHeaderPanel(String title, boolean isMainHeader) {
+    protected void changeHeaderPanel(String title) {
         CardLayout cardLayout = (CardLayout) pointOfSaleFrm.topPanel.getLayout();
-        String cardLayoutName = isMainHeader ? "mainHeader" : "secondaryHeader";
+        String cardLayoutName = "secondaryHeader";
         cardLayout.show(pointOfSaleFrm.topPanel, cardLayoutName);
         pointOfSaleFrm.posSecondaryHeader.lblPaymentTitle.setText(title);
     }
