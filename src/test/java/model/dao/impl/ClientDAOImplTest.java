@@ -28,18 +28,16 @@ class ClientDAOImplTest {
         connectionMock = mock(Connection.class);
         preparedStatementMock = mock(PreparedStatement.class);
 
-        PowerMockito.whenNew(DatabaseConnection.class).withNoArguments().thenReturn(databaseConnectionMock);
-
         when(databaseConnectionMock.getConnection()).thenReturn(connectionMock);
         when(connectionMock.prepareStatement(anyString())).thenReturn(preparedStatementMock);
 
-        clientDAO = new ClientDAOImpl();
+        clientDAO = new ClientDAOImpl(databaseConnectionMock);
     }
 
     @Test
     void createClient() throws SQLException {
         Client client = new Client(
-                "12345678",
+                12345678,
                 "Juan",
                 "Perez"
         );
@@ -47,7 +45,7 @@ class ClientDAOImplTest {
         clientDAO.createClient(client);
         verify(databaseConnectionMock, times(1)).getConnection();
         verify(connectionMock, times(1)).prepareStatement(query);
-        verify(preparedStatementMock, times(1)).setString(1, client.getDni());
+        verify(preparedStatementMock, times(1)).setInt(1, client.getDni());
         verify(preparedStatementMock, times(1)).setString(2, client.getName());
         verify(preparedStatementMock, times(1)).setString(3, client.getLastName());
         verify(preparedStatementMock, times(1)).executeUpdate();
