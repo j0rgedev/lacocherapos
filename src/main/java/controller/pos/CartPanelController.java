@@ -5,6 +5,7 @@ import model.entity.Client;
 import model.entity.Dish;
 import model.entity.Order;
 import model.enums.DishAction;
+import view.components.modal.ClientInfoModalController;
 import view.components.modal.CustomModal;
 import view.components.modal.EditDishModalController;
 import view.listeners.ModalListener;
@@ -35,8 +36,6 @@ public class CartPanelController extends AbstractController implements ActionLis
     protected void init() {
         listeners();
         model = (DefaultTableModel) orderPanel.tableDishes.getModel();
-        addDishToCart(new CartDish(new Dish("1", "Hamburguesa", 100.0, "C01"), 1, "Sin cebolla"));
-        orderInterface.setOrder(new Order(LocalDateTime.now(), 100.0, new Client("1", "Juan","Perez")));
     }
 
     private void listeners() {
@@ -133,17 +132,9 @@ public class CartPanelController extends AbstractController implements ActionLis
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == orderPanel.btnNext) {
-//            CustomModal modal = new CustomModal();
-//            ClientInfoModalController clientInfoModalController = new ClientInfoModalController(modal, pointOfSaleFrm, CartPanelController.this);
-//            clientInfoModalController.showModal();
-//            CashPanel cashPanel = pointOfSaleFrm.cashPanel1;
-//            CashPanelController cashPanelController = new CashPanelController(pointOfSaleFrm, cashPanel);
-//            changePanel(cashPanel, cashPanelController);
-//            changeHeaderPanel("PAGO EN EFECTIVO", false);
-            CardPanel cardPanel = pointOfSaleFrm.cardPanel1;
-            CardPanelController cardPanelController = new CardPanelController(pointOfSaleFrm, cardPanel);
-            changePanel(cardPanel, cardPanelController);
-            changeHeaderPanel("PAGO CON TARJETA");
+            CustomModal modal = new CustomModal();
+            ClientInfoModalController clientInfoModalController = new ClientInfoModalController(modal, pointOfSaleFrm, CartPanelController.this);
+            clientInfoModalController.showModal();
         }
     }
 
