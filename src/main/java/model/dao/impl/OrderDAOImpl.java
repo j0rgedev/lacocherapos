@@ -60,7 +60,7 @@ public class OrderDAOImpl implements OrderDAO, DishOrderDAO {
             preparedStatement.setTimestamp(2, Timestamp.valueOf(order.getDate()));
             preparedStatement.setDouble(3, order.getTotalAmount());
             preparedStatement.setBoolean(4, false);
-            preparedStatement.setString(5, order.getClient().getDni());
+            preparedStatement.setInt(5, order.getClient().getDni());
             preparedStatement.executeUpdate();
             preparedStatement.close();
             return orderId;
