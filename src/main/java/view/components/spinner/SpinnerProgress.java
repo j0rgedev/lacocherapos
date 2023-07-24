@@ -8,11 +8,13 @@ import javax.swing.JProgressBar;
  */
 public class SpinnerProgress extends JProgressBar {
 
+    private final int DEFAULT_SIZE = 12;
+
     public SpinnerProgress() {
         init();
     }
 
     private void init() {
-        setUI(new SpinnerProgressUI());
+        setUI(new SpinnerProgressUI(DEFAULT_SIZE));
     }
 }

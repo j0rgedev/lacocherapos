@@ -28,11 +28,16 @@ public class SpinnerProgressUI extends FlatProgressBarUI {
     private float lastAnimator;
     private float animateFrame;
     private boolean moreAnimation;
+    private int size;
+
+    public SpinnerProgressUI(int size) {
+        this.size = size;
+    }
 
     @Override
     protected void installDefaults() {
         super.installDefaults();
-        render = new RingSpinner(12);
+        render = new RingSpinner(size);
     }
 
     @Override
