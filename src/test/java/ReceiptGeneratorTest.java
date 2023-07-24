@@ -20,7 +20,7 @@ public class ReceiptGeneratorTest {
         order.setDate(LocalDateTime.now());
         order.setTotalAmount(100.00);
         order.setPaid(true);
-        order.setClient(new Client("74847426", "Juan", "Perez"));
+        order.setClient(new Client(74847426, "Juan", "Perez"));
         List<CartDish> orderDishes = new ArrayList<>();
         for ( int i=0;i<5;i++){
             orderDishes.add(new CartDish(
