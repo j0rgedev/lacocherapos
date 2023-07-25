@@ -34,8 +34,8 @@ public class AdminFrameController extends AdminAbstractController{
         setMenuOption("Cerrar sesión", 3);
 
         // Default menu option
-        setMenuOptionSelected((ButtonMenu) adminIntranetFrm.navBarPanel.getComponent(2));
-        changeMenuOption(2);
+        setMenuOptionSelected((ButtonMenu) adminIntranetFrm.navBarPanel.getComponent(0));
+        changeMenuOption(0);
     }
 
     // Method to set menu options
@@ -96,7 +96,11 @@ public class AdminFrameController extends AdminAbstractController{
 
     // Method to show menu panel
     private void showMenuPanel(Component component, AdminAbstractController controller){
-        adminIntranetFrm.mainPanel.removeAll();
+        if (adminIntranetFrm.mainPanel.getComponentCount() > 0) {
+            Component lastPanel = adminIntranetFrm.mainPanel.getComponent(0);
+            adminIntranetFrm.mainPanel.remove(lastPanel);
+        }
+
         adminIntranetFrm.mainPanel.add(component);
         adminIntranetFrm.mainPanel.revalidate();
         adminIntranetFrm.mainPanel.repaint();
