@@ -4,7 +4,6 @@ import model.db.DatabaseConnection;
 import model.entity.Client;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.powermock.api.mockito.PowerMockito;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -12,8 +11,6 @@ import static org.mockito.Mockito.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ClientDAOImplTest {
 

@@ -19,6 +19,7 @@ public class ClientDAOImpl implements ClientDAO {
         this.databaseConnection = new DatabaseConnection();
     }
 
+    // Constructor for testing purposes
     public ClientDAOImpl(DatabaseConnection databaseConnection) {
         this.databaseConnection = databaseConnection;
     }
