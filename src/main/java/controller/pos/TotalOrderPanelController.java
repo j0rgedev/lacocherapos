@@ -69,7 +69,7 @@ public class TotalOrderPanelController extends AbstractController implements Act
     }
 
     private void setPayButtonWaiter(){
-        Timer timer = new Timer(500, new ActionListener() {
+        timer = new Timer(500, new ActionListener() {
             private int dotsCount = 0;
 
             @Override
