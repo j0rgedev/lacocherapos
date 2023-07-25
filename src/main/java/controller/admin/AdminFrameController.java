@@ -1,8 +1,10 @@
 package controller.admin;
 
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import controller.login.LoginController;
 import net.miginfocom.swing.MigLayout;
 import view.admin.AdminIntranetFrame;
+import view.admin.AnalyticsPanel;
 import view.admin.DashboardPanel;
 import view.admin.MenuPanel;
 import view.components.admin.ButtonMenu;
@@ -21,6 +23,9 @@ public class AdminFrameController extends AdminAbstractController{
     public void init() {
         // Menu options layout
         adminIntranetFrm.navBarPanel.setLayout(new MigLayout("wrap, fillx, inset 2", "[fill]", "[]4[]"));
+
+        // Admin icon
+        adminIntranetFrm.adminAvatar.setIcon(new FlatSVGIcon("icons/admin.svg", 130, 130));
 
         // Menu options
         setMenuOption("Dashboard", 0);
@@ -61,7 +66,10 @@ public class AdminFrameController extends AdminAbstractController{
                 DashboardPanel dashboardPanel = new DashboardPanel();
                 showMenuPanel(dashboardPanel, new DashboardPanelController(adminIntranetFrm, dashboardPanel));
             }
-            case 1 -> System.out.println("Analíticas");
+            case 1 -> {
+                AnalyticsPanel analyticsPanel = new AnalyticsPanel();
+                showMenuPanel(analyticsPanel, new AnalyticsPanelController(adminIntranetFrm, analyticsPanel));
+            }
             case 2 -> {
                 MenuPanel menuPanel = new MenuPanel();
                 showMenuPanel(menuPanel, new MenuPanelController(adminIntranetFrm, menuPanel));

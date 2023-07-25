@@ -28,6 +28,7 @@ public class ClientInfoModalController extends ModalController {
     private ClientInfoPanel clientInfoPanel;
     private String lastDniValue = "";
     private ScheduledExecutorService executorService;
+    private boolean isClientFound = false;
 
     public ClientInfoModalController(CustomModal customModal, JFrame jFrame, ModalListener modalListener) {
         super(customModal, jFrame, modalListener);
@@ -105,10 +106,12 @@ public class ClientInfoModalController extends ModalController {
                         clientInfoPanel.spinnerPanel.revalidate();
                         clientInfoPanel.spinnerPanel.repaint();
                         if (client != null) {
+                            this.isClientFound = true;
                             clientInfoPanel.txtNames.setText(client.getName());
                             clientInfoPanel.txtLastNames.setText(client.getLastName());
                             customModal.btnEdit.setEnabled(true);
                         } else {
+                            this.isClientFound = false;
                             JOptionPane.showMessageDialog(
                                     null,
                                     "No se encontró ningún cliente con el DNI " + dniText + ".\n"
@@ -187,7 +190,9 @@ public class ClientInfoModalController extends ModalController {
             timer.start();
 
             executorService.submit(() -> {
-                clientDAO.createClient(client);
+                if (!isClientFound) {
+                    clientDAO.createClient(client);
+                }
                 String orderId = orderDAO.createOrder(order);
                 order.setId(orderId);
                 orderInterface.setOrder(order);

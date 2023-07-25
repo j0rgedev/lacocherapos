@@ -5,6 +5,7 @@ public class DashboardDTOS {
     public record QuantityProgress(int goalQuantity, int currentQuantity){}
     public record OrdersByPaymentMethod(String orderId, String date, boolean paid, String paymentMethod){}
     public record DishesByCategory(String date, String categoryId, String categoryName, int totalQuantity){}
+    public record TopFiveDishes(String dishName, int totalQuantity){}
 }
 
 

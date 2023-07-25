@@ -1,5 +1,6 @@
 package model.service;
 
+import model.dao.impl.DishDAOImpl;
 import model.dao.impl.OrderDAOImpl;
 import model.dto.DashboardDTOS;
 import view.components.admin.charts.common.ModelChart;
@@ -11,6 +12,7 @@ import java.util.List;
 
 public class AdminCharts {
     private final OrderDAOImpl orderDAO;
+    private final DishDAOImpl dishDAO;
     private final LineChartManager lineChartManager;
     private final BarChartManager barChartManager;
     private final static int EXPECTED_QUANTITY_TODAY_GOAL = 100; // Change this value to modify the first progress bar
@@ -20,6 +22,7 @@ public class AdminCharts {
         this.orderDAO = new OrderDAOImpl();
         this.lineChartManager = new LineChartManager(orderDAO);
         this.barChartManager = new BarChartManager(orderDAO);
+        this.dishDAO = new DishDAOImpl();
     }
 
     public DashboardDTOS.AmountProgress getOrdersTotalAmountForToday() {
@@ -39,6 +42,18 @@ public class AdminCharts {
 
     public List<ModelChart> getDishesQuantityByCategory() {
         return barChartManager.generateBarChartData(getCustomLastMonths(3));
+    }
+
+    public List<DashboardDTOS.TopFiveDishes> getTopFiveDishes() {
+        return dishDAO.getTopFiveDishes();
+    }
+
+    public List<DashboardDTOS.TopFiveDishes> getTopFiveDishesByCategory(String categoryId) {
+        return dishDAO.getTopFiveDishesByCategory(categoryId);
+    }
+
+    public List<DashboardDTOS.TopFiveDishes> getTopFiveDishesByMonth(int month) {
+        return dishDAO.getTopFiveDishesByMonth(month);
     }
 
     private List<YearMonth> getCustomLastMonths(int months) {

@@ -53,23 +53,23 @@ public class MenuPanel extends javax.swing.JPanel {
         spinnerPanel.setName("spinnerPanel"); // NOI18N
 
         spinnerProgress.setFont(new java.awt.Font("Iceland", 0, 36)); // NOI18N
-        spinnerProgress.setStringPainted(true);
+        spinnerProgress.setIndeterminate(true);
 
         javax.swing.GroupLayout spinnerPanelLayout = new javax.swing.GroupLayout(spinnerPanel);
         spinnerPanel.setLayout(spinnerPanelLayout);
         spinnerPanelLayout.setHorizontalGroup(
             spinnerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(spinnerPanelLayout.createSequentialGroup()
-                .addGap(214, 214, 214)
-                .addComponent(spinnerProgress, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                .addGap(248, 248, 248))
+                .addGap(259, 259, 259)
+                .addComponent(spinnerProgress, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                .addGap(294, 294, 294))
         );
         spinnerPanelLayout.setVerticalGroup(
             spinnerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(spinnerPanelLayout.createSequentialGroup()
-                .addContainerGap(137, Short.MAX_VALUE)
-                .addComponent(spinnerProgress, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(190, Short.MAX_VALUE)
+                .addComponent(spinnerProgress, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(190, Short.MAX_VALUE))
         );
 
         mainPanel.add(spinnerPanel, "spinnerPanel");

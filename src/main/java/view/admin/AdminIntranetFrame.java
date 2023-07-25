@@ -13,6 +13,7 @@ public class AdminIntranetFrame extends javax.swing.JFrame {
 
         bgPanel = new javax.swing.JPanel();
         photoPanel = new view.components.RoundPanel();
+        adminAvatar = new javax.swing.JLabel();
         navBarPanel = new view.components.RoundPanel();
         mainPanel = new javax.swing.JPanel();
 
@@ -20,15 +21,24 @@ public class AdminIntranetFrame extends javax.swing.JFrame {
 
         photoPanel.setBackground(new java.awt.Color(21, 22, 26));
 
+        adminAvatar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        adminAvatar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout photoPanelLayout = new javax.swing.GroupLayout(photoPanel);
         photoPanel.setLayout(photoPanelLayout);
         photoPanelLayout.setHorizontalGroup(
             photoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
+            .addGroup(photoPanelLayout.createSequentialGroup()
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addComponent(adminAvatar, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         photoPanelLayout.setVerticalGroup(
             photoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 129, Short.MAX_VALUE)
+            .addGroup(photoPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(adminAvatar, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         navBarPanel.setBackground(new java.awt.Color(21, 22, 26));
@@ -88,6 +98,7 @@ public class AdminIntranetFrame extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel adminAvatar;
     private javax.swing.JPanel bgPanel;
     public javax.swing.JPanel mainPanel;
     public view.components.RoundPanel navBarPanel;

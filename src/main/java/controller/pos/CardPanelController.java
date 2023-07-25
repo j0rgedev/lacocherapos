@@ -55,6 +55,7 @@ public class CardPanelController extends AbstractController implements PayButton
 
     @Override
     public void onPayButtonClicked() {
+        totalOrderPanelController.setMainButtonEnabled(false);
         initProgressBar();
     }
 

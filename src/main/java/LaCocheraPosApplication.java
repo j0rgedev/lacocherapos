@@ -13,8 +13,8 @@ public class LaCocheraPosApplication {
             // Frame theme
             FlatDarculaLaf.setup();
 //            testWholeApp();
-//            testAdmin();
-            testPos();
+            testAdmin();
+//            testPos();
         }
 
         private static void testWholeApp(){

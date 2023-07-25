@@ -68,18 +68,6 @@ public class MenuPanelController extends AdminAbstractController implements Acti
     private void loadDishes() {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-        Timer timer = new Timer(10, e -> {
-            // Aquí actualizamos la barra de progreso y mostramos el porcentaje
-            int progress = menuPanel.spinnerProgress.getValue();
-            if (progress < 100) {
-                progress++;
-                menuPanel.spinnerProgress.setValue(progress);
-                menuPanel.spinnerProgress.setString(progress + "%");
-            }
-        });
-
-        timer.start(); // Iniciamos el temporizador
-
         executorService.submit(() -> {
             cachedDishes = dishDAO.getAllDishes();
 
@@ -94,9 +82,7 @@ public class MenuPanelController extends AdminAbstractController implements Acti
                 });
             }
 
-            timer.stop();
             menuPanel.spinnerProgress.setValue(100);
-            menuPanel.spinnerProgress.setString("100%");
         });
 
         executorService.shutdown();
