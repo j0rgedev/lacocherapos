@@ -1,5 +1,6 @@
 package model.dao;
 
+import model.dto.DashboardDTOS;
 import model.entity.Dish;
 
 import java.util.List;
@@ -11,4 +12,9 @@ public interface DishDAO {
 
     List<Dish> getAllDishes();
     List<Dish> getDishesByCategory(String category);
+
+    // Other methods
+    List<DashboardDTOS.TopFiveDishes> getTopFiveDishes();
+    List<DashboardDTOS.TopFiveDishes> getTopFiveDishesByCategory(String categoryId);
+    List<DashboardDTOS.TopFiveDishes> getTopFiveDishesByMonth(int month);
 }
