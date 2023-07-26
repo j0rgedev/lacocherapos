@@ -19,8 +19,8 @@ public class OrderDAOImpl implements OrderDAO, DishOrderDAO {
     private final static String LAST_ORDER_ID = "SELECT id FROM orders ORDER BY id DESC LIMIT 1";
     private final static String CREATE_ORDER = "INSERT INTO orders (id, date, total_amount, paid, client_dni) VALUES (?, ?, ?, ?, ?)";
     private final static String CREATE_DISH_ORDER = "INSERT INTO dish_order (dish_id, quantity, unit_price, subtotal, notes, order_id) VALUES (?, ?, ?, ?, ?, ?)";
-    private final static String GET_ORDERS_TOTAL_AMOUNT_FOR_TODAY = "SELECT SUM(total_amount) from orders WHERE DAY(date) = DAY(now())";
-    private final static String GET_ORDERS_QUANTITY_FOR_TODAY = "SELECT COUNT(*) from orders WHERE DAY(date) = DAY(now())";
+    private final static String GET_ORDERS_TOTAL_AMOUNT_FOR_TODAY = "SELECT SUM(total_amount) from orders WHERE DAY(date) = DAY(CONVERT_TZ(NOW(), 'UTC', 'America/Lima'))";
+    private final static String GET_ORDERS_QUANTITY_FOR_TODAY = "SELECT COUNT(*) from orders WHERE DAY(date) = DAY(CONVERT_TZ(NOW(), 'UTC', 'America/Lima'))";
     private final static String GET_ORDERS_QUANTITY_BY_PAYMENT_METHOD = "SELECT o.id AS Id, DATE_FORMAT(o.date, '%Y-%m') AS Mes, o.paid AS Pagado, p.method as Metodo FROM orders o LEFT JOIN payment p ON o.id = p.order_id WHERE o.date >= DATE_SUB(CURRENT_DATE(), INTERVAL 6 MONTH)";
     private final static String GET_DISHES_QUANTITY_BY_CATEGORY = """
             SELECT DATE_FORMAT(o.date, '%Y-%m') as month,
