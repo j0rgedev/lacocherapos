@@ -7,14 +7,20 @@ import java.util.Base64;
 public class PasswordEncryption {
     private static final String HASH_ALGORITHM = "SHA-256";
 
-    public static HashedPassword hashPassword(String password) throws NoSuchAlgorithmException {
-        byte[] salt = generateSalt();
+    public static HashedPassword hashPassword(String password){
+        try {
+            byte[] salt = generateSalt();
 
-        byte[] combinedBytes = concatBytes(password.getBytes(StandardCharsets.UTF_8), salt);
+            byte[] combinedBytes = concatBytes(password.getBytes(StandardCharsets.UTF_8), salt);
 
-        byte[] hashedBytes = calculateHash(combinedBytes);
+            byte[] hashedBytes = calculateHash(combinedBytes);
 
-        return new HashedPassword(Base64.getEncoder().encodeToString(hashedBytes), Base64.getEncoder().encodeToString(salt));
+            return new HashedPassword(Base64.getEncoder().encodeToString(hashedBytes), Base64.getEncoder().encodeToString(salt));
+
+        } catch (NoSuchAlgorithmException e) {
+            System.err.println("Error al generar el hash de la contraseña");
+            return null;
+        }
     }
 
     public static boolean verifyCredentials(String password, String saltValue, String hashedPassword) {

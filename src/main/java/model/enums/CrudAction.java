@@ -1,6 +1,6 @@
 package model.enums;
 
-public enum DishAction {
+public enum CrudAction {
     ADD,
     EDIT,
     DELETE

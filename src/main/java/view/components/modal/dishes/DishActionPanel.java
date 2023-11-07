@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 
-package view.components.modal;
+package view.components.modal.dishes;
 
 public class DishActionPanel extends javax.swing.JPanel {
 

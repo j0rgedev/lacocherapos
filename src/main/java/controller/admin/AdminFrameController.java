@@ -3,10 +3,7 @@ package controller.admin;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import controller.login.LoginController;
 import net.miginfocom.swing.MigLayout;
-import view.admin.AdminIntranetFrame;
-import view.admin.AnalyticsPanel;
-import view.admin.DashboardPanel;
-import view.admin.MenuPanel;
+import view.admin.*;
 import view.components.admin.ButtonMenu;
 import view.login.Login;
 
@@ -31,7 +28,8 @@ public class AdminFrameController extends AdminAbstractController{
         setMenuOption("Dashboard", 0);
         setMenuOption("Analíticas", 1);
         setMenuOption("Menú (Carta)",2);
-        setMenuOption("Cerrar sesión", 3);
+        setMenuOption("Empleados",3);
+        setMenuOption("Cerrar sesión", 4);
 
         // Default menu option
         setMenuOptionSelected((ButtonMenu) adminIntranetFrm.navBarPanel.getComponent(0));
@@ -75,6 +73,10 @@ public class AdminFrameController extends AdminAbstractController{
                 showMenuPanel(menuPanel, new MenuPanelController(adminIntranetFrm, menuPanel));
             }
             case 3 -> {
+                EmployeesPanel employeesPanel = new EmployeesPanel();
+                showMenuPanel(employeesPanel, new EmployeesPanelController(adminIntranetFrm, employeesPanel));
+            }
+            case 4 -> {
                 int option = JOptionPane.showConfirmDialog(
                         adminIntranetFrm,
                         "¿Está seguro que desea cerrar sesión?",

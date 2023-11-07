@@ -3,8 +3,8 @@ package controller.login;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import controller.admin.AdminFrameController;
 import controller.pos.PosFrameController;
-import model.dao.impl.UserDAOImpl;
-import model.entity.User;
+import model.dao.impl.EmployeeDAOImpl;
+import model.entity.Employee;
 import model.enums.Roles;
 import model.utils.PasswordEncryption;
 import view.admin.AdminIntranetFrame;
@@ -22,11 +22,11 @@ import java.util.concurrent.Executors;
 public class LoginController implements ActionListener {
 
     private final Login login;
-    private final UserDAOImpl userDAO;
+    private final EmployeeDAOImpl userDAO;
 
     public LoginController(Login login) {
         this.login = login;
-        this.userDAO = new UserDAOImpl();
+        this.userDAO = new EmployeeDAOImpl();
     }
 
     // Init login controller
@@ -106,15 +106,15 @@ public class LoginController implements ActionListener {
             timer.start();
 
             executorService.execute(() -> {
-                User user = userDAO.getUser(userId);
+                Employee employee = userDAO.getUser(userId);
                 timer.stop();
                 login.btnLogin.setText("INICIAR SESIÓN");
                 login.btnLogin.setEnabled(true);
-                if (user != null) {
+                if (employee != null) {
                     if (login.rbAdmin.isSelected()) {
-                        if (user.getRole() == Roles.MANAGER) {
-                            if (PasswordEncryption.verifyCredentials(password, user.getSalt(), user.getPassword())) {
-                                showMessage("Bienvenido " + user.getNames(), "Inicio de sesión exitoso", "icons/success.svg");
+                        if (employee.getRole() == Roles.MANAGER) {
+                            if (PasswordEncryption.verifyCredentials(password, employee.getSalt(), employee.getPassword())) {
+                                showMessage("Bienvenido " + employee.getNames(), "Inicio de sesión exitoso", "icons/success.svg");
                                 // Admin view
                                 AdminIntranetFrame adminIntranetFrame = new AdminIntranetFrame();
                                 // Admin controller
@@ -128,8 +128,8 @@ public class LoginController implements ActionListener {
                         } else {
                             showMessage("El usuario no tiene permisos de administrador", "Error", "icons/error.svg");
                         }
-                    } else if (PasswordEncryption.verifyCredentials(password, user.getSalt(), user.getPassword())) {
-                        showMessage("Bienvenido " + user.getNames(), "Inicio de sesión exitoso", "icons/check.svg");
+                    } else if (PasswordEncryption.verifyCredentials(password, employee.getSalt(), employee.getPassword())) {
+                        showMessage("Bienvenido " + employee.getNames(), "Inicio de sesión exitoso", "icons/check.svg");
                         // POS view
                         PointOfSaleFrame pointOfSaleFrame = new PointOfSaleFrame();
                         // POS controller

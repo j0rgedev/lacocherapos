@@ -8,7 +8,7 @@ import model.enums.Roles;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Employee {
     private String id;
     private String names;
     private String lastNames;

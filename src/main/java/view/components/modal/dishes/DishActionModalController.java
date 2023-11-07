@@ -1,11 +1,11 @@
-package view.components.modal;
+package view.components.modal.dishes;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import model.dao.impl.DishDAOImpl;
 import model.entity.Dish;
 import model.enums.Category;
-import model.enums.DishAction;
-import view.listeners.ModalListener;
+import model.enums.CrudAction;
+import view.listeners.ModalListeners;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,24 +14,27 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import view.components.modal.CustomModal;
+import view.components.modal.DeleteWarningPanel;
+import view.components.modal.ModalController;
 
 public class DishActionModalController extends ModalController {
 
     private DishActionPanel dishActionPanel;
     private DeleteWarningPanel deleteDishModal;
-    private final DishAction dishAction;
+    private final CrudAction crudAction;
     private Dish dish;
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
     private Timer timer;
 
-    public DishActionModalController(CustomModal customModal, JFrame jFrame, ModalListener modalListener, DishAction dishAction) {
-        super(customModal, jFrame, modalListener);
-        this.dishAction = dishAction;
+    public DishActionModalController(CustomModal customModal, JFrame jFrame, ModalListeners modalListeners, CrudAction crudAction) {
+        super(customModal, jFrame, modalListeners);
+        this.crudAction = crudAction;
     }
 
-    public DishActionModalController(CustomModal customModal, JFrame jFrame, ModalListener modalListener, DishAction dishAction, Dish dish) {
-        super(customModal, jFrame, modalListener);
-        this.dishAction = dishAction;
+    public DishActionModalController(CustomModal customModal, JFrame jFrame, ModalListeners modalListeners, CrudAction crudAction, Dish dish) {
+        super(customModal, jFrame, modalListeners);
+        this.crudAction = crudAction;
         this.dish = dish;
     }
 
@@ -40,12 +43,12 @@ public class DishActionModalController extends ModalController {
         dishActionPanel = new DishActionPanel();
         deleteDishModal = new DeleteWarningPanel();
         init();
-        if(dishAction==DishAction.DELETE) setupModal(deleteDishModal, "icons/trash.svg");
+        if(crudAction == CrudAction.DELETE) setupModal(deleteDishModal, "icons/trash.svg");
         else setupModal(dishActionPanel, "icons/edit.svg");
     }
 
     private void init() {
-        switch (dishAction) {
+        switch (crudAction) {
             case ADD -> {
                 dishActionPanel.lbTitle.setText("Agregando nuevo plato");
                 customModal.btnEdit.setText("AGREGAR");
@@ -91,7 +94,7 @@ public class DishActionModalController extends ModalController {
         if (e.getSource() == customModal.btnCancel) {
             closeMessage();
         }
-        if (e.getSource() == customModal.btnEdit && dishAction == DishAction.ADD) {
+        if (e.getSource() == customModal.btnEdit && crudAction == CrudAction.ADD) {
             String name = dishActionPanel.txtName.getText();
             String price = dishActionPanel.txtPrice.getText();
             int categoryIndex = dishActionPanel.cbCategories.getSelectedIndex();
@@ -126,7 +129,7 @@ public class DishActionModalController extends ModalController {
                                     new FlatSVGIcon("icons/success.svg", 20, 20)
                             );
                             closeMessage();
-                            modalListener.onDishActionModalClose(newDish, dishAction);
+                            modalListeners.onDishActionModalClose(newDish, crudAction);
                         });
                     });
                 } catch (Exception ex) {
@@ -140,7 +143,7 @@ public class DishActionModalController extends ModalController {
                 }
             }
         }
-        if (e.getSource() == customModal.btnEdit && dishAction == DishAction.EDIT) {
+        if (e.getSource() == customModal.btnEdit && crudAction == CrudAction.EDIT) {
             String name = dishActionPanel.txtName.getText();
             String price = dishActionPanel.txtPrice.getText();
             int categoryIndex = dishActionPanel.cbCategories.getSelectedIndex();
@@ -174,12 +177,12 @@ public class DishActionModalController extends ModalController {
                                 new FlatSVGIcon("icons/success.svg", 20, 20)
                         );
                         closeMessage();
-                        modalListener.onDishActionModalClose(updatedDish, dishAction);
+                        modalListeners.onDishActionModalClose(updatedDish, crudAction);
                     });
                 });
             }
         }
-        if (e.getSource() == customModal.btnEdit && dishAction == DishAction.DELETE) {
+        if (e.getSource() == customModal.btnEdit && crudAction == CrudAction.DELETE) {
             customModal.btnEdit.setEnabled(false);
             buttonWait("ELIMINANDO");
             executorService.execute(() -> {
@@ -198,7 +201,7 @@ public class DishActionModalController extends ModalController {
                             new FlatSVGIcon("icons/success.svg", 20, 20)
                     );
                     closeMessage();
-                    modalListener.onDishActionModalClose(dish, dishAction);
+                    modalListeners.onDishActionModalClose(dish, crudAction);
                 });
             });
         }

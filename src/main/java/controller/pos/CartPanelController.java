@@ -1,15 +1,13 @@
 package controller.pos;
 
 import model.entity.CartDish;
-import model.entity.Client;
 import model.entity.Dish;
-import model.entity.Order;
-import model.enums.DishAction;
+import model.entity.Employee;
+import model.enums.CrudAction;
 import view.components.modal.ClientInfoModalController;
 import view.components.modal.CustomModal;
 import view.components.modal.EditDishModalController;
-import view.listeners.ModalListener;
-import view.pos.CardPanel;
+import view.listeners.ModalListeners;
 import view.pos.OrderConfirmationPanel;
 import view.pos.OrderPanel;
 import view.pos.PointOfSaleFrame;
@@ -19,10 +17,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.time.LocalDateTime;
 import java.util.List;
 
-public class CartPanelController extends AbstractController implements ActionListener, ModalListener {
+public class CartPanelController extends AbstractController implements ActionListener, ModalListeners {
 
     private DefaultTableModel model;
     private final OrderPanel orderPanel;
@@ -152,7 +149,12 @@ public class CartPanelController extends AbstractController implements ActionLis
     }
 
     @Override
-    public void onDishActionModalClose(Dish dish, DishAction dishAction) {
+    public void onDishActionModalClose(Dish dish, CrudAction crudAction) {
+
+    }
+
+    @Override
+    public void onEmployeeActionModalClose(Employee employee, CrudAction crudAction) {
 
     }
 }

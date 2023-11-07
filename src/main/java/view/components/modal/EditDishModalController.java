@@ -1,8 +1,7 @@
 package view.components.modal;
 
 import model.entity.CartDish;
-import view.listeners.ModalListener;
-import view.listeners.PayButtonListener;
+import view.listeners.ModalListeners;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,8 +12,8 @@ public class EditDishModalController extends ModalController{
     public CartDish cartDish;
     private static int quantity;
 
-    public EditDishModalController(CustomModal customModal, JFrame jFrame, ModalListener modalListener) {
-        super(customModal, jFrame, modalListener);
+    public EditDishModalController(CustomModal customModal, JFrame jFrame, ModalListeners modalListeners) {
+        super(customModal, jFrame, modalListeners);
         editDishPanel = new EditDishPanel();
     }
 
@@ -60,7 +59,7 @@ public class EditDishModalController extends ModalController{
                 cartDish.setNotes(notes);
             }
             orderInterface.updateDish(cartDish);
-            modalListener.onEditDishModalClose();
+            modalListeners.onEditDishModalClose();
             closeMessage();
         }
 

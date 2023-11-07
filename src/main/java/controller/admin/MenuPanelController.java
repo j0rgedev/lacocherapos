@@ -1,17 +1,16 @@
 package controller.admin;
 
 import model.dao.impl.DishDAOImpl;
-import model.entity.CartDish;
 import model.entity.Dish;
+import model.entity.Employee;
 import model.enums.Category;
-import model.enums.DishAction;
+import model.enums.CrudAction;
 import view.admin.AdminIntranetFrame;
 import view.admin.MenuPanel;
 import view.components.modal.CustomModal;
-import view.components.modal.DishActionModalController;
-import view.listeners.ModalListener;
+import view.components.modal.dishes.DishActionModalController;
+import view.listeners.ModalListeners;
 
-import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -23,9 +22,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-public class MenuPanelController extends AdminAbstractController implements ActionListener, ModalListener {
+public class MenuPanelController extends AdminAbstractController implements ActionListener, ModalListeners {
 
     private final MenuPanel menuPanel;
     private final DishDAOImpl dishDAO;
@@ -131,7 +129,7 @@ public class MenuPanelController extends AdminAbstractController implements Acti
                     new CustomModal(),
                     adminIntranetFrm,
                     MenuPanelController.this,
-                    DishAction.ADD
+                    CrudAction.ADD
             );
             dishActionModalController.showModal();
         }
@@ -140,7 +138,7 @@ public class MenuPanelController extends AdminAbstractController implements Acti
                     new CustomModal(),
                     adminIntranetFrm,
                     MenuPanelController.this,
-                    DishAction.EDIT,
+                    CrudAction.EDIT,
                     selectedDish
             );
             dishActionModalController.showModal();
@@ -150,7 +148,7 @@ public class MenuPanelController extends AdminAbstractController implements Acti
                     new CustomModal(),
                     adminIntranetFrm,
                     MenuPanelController.this,
-                    DishAction.DELETE,
+                    CrudAction.DELETE,
                     selectedDish
             );
             dishActionModalController.showModal();
@@ -168,8 +166,8 @@ public class MenuPanelController extends AdminAbstractController implements Acti
     }
 
     @Override
-    public void onDishActionModalClose(Dish dish, DishAction dishAction) {
-        switch (dishAction){
+    public void onDishActionModalClose(Dish dish, CrudAction crudAction) {
+        switch (crudAction){
             case ADD -> {
                 cachedDishes.add(0, dish);
                 updateTable();
@@ -202,5 +200,10 @@ public class MenuPanelController extends AdminAbstractController implements Acti
                 menuPanel.btnDelete.setEnabled(false);
             }
         }
+    }
+
+    @Override
+    public void onEmployeeActionModalClose(Employee employee, CrudAction crudAction) {
+
     }
 }

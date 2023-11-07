@@ -23,6 +23,13 @@ public class CodeGenerator {
         return prefix + suffix;
     }
 
+    public static String generateEmployeeId(String lastEmployeeId){
+        String prefix = "U";
+        int lastId = Integer.parseInt(lastEmployeeId.substring(1));
+        String suffix = String.format("%04d", lastId + 1);
+        return prefix + suffix;
+    }
+
     public static int generateTransactionNumber() {
         return (int) (Math.random() * 1000000);
     }

@@ -7,7 +7,7 @@ import model.entity.Client;
 import model.entity.Order;
 import view.components.spinner.SpinnerProgress;
 import view.components.spinner.SpinnerProgressUI;
-import view.listeners.ModalListener;
+import view.listeners.ModalListeners;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -15,8 +15,6 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.time.LocalDateTime;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -30,8 +28,8 @@ public class ClientInfoModalController extends ModalController {
     private ScheduledExecutorService executorService;
     private boolean isClientFound = false;
 
-    public ClientInfoModalController(CustomModal customModal, JFrame jFrame, ModalListener modalListener) {
-        super(customModal, jFrame, modalListener);
+    public ClientInfoModalController(CustomModal customModal, JFrame jFrame, ModalListeners modalListeners) {
+        super(customModal, jFrame, modalListeners);
         executorService = Executors.newSingleThreadScheduledExecutor();
     }
 
@@ -202,7 +200,7 @@ public class ClientInfoModalController extends ModalController {
                     timer.stop();
                     customModal.btnEdit.setText("GUARDANDO...");
                     closeMessage();
-                    modalListener.onClientInfoModalClose();
+                    modalListeners.onClientInfoModalClose();
                 });
             });
             executorService.shutdown();

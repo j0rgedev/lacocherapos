@@ -6,15 +6,13 @@ import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import model.service.OrderInterface;
 import model.service.OrderManager;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
-import view.listeners.ModalListener;
+import view.listeners.ModalListeners;
 
 public abstract class ModalController extends JDialog implements ActionListener {
 
@@ -23,14 +21,14 @@ public abstract class ModalController extends JDialog implements ActionListener 
     private boolean show;
     protected final CustomModal customModal;
     private final JFrame jFrame;
-    protected final ModalListener modalListener;
+    protected ModalListeners modalListeners;
     protected final OrderInterface orderInterface = OrderManager.getInstance();
 
-    public ModalController(CustomModal customModal, JFrame jFrame, ModalListener modalListener) {
+    public ModalController(CustomModal customModal, JFrame jFrame, ModalListeners modalListeners) {
         super(jFrame, true);
         this.jFrame = jFrame;
         this.customModal = customModal;
-        this.modalListener = modalListener;
+        this.modalListeners = modalListeners;
         init();
         // General listeners
         this.customModal.btnEdit.addActionListener(this);
