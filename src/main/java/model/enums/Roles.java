@@ -6,9 +6,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum Roles {
-    MANAGER("manager"),
-    CASHIER("cashier"),
-    WAITER("waiter"),
+    MANAGER("administrador"),
+    CASHIER("cajero"),
+    WAITER("mozo"),
     CHEF("chef");
 
     private final String roleName;
